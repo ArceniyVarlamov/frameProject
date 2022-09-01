@@ -1,9 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@200;300;400;500&display=swap');
+
 body {
   margin: 0;
-}
-
-input {
-  border: none
+  font-family: 'Noto Sans', sans-serif;
+  input {
+    border: none
+  }
 }
 
 .header {
@@ -20,7 +22,11 @@ input {
   & *:hover {
     background-color: rgb(204, 201, 201);
   }
+  &__logo, &__messages, &__notifications {
+    cursor: pointer;
+  }
   &__create {
+    cursor: pointer;
     width: 15%;
     border-radius: 20px;
     font-size: 20px;
@@ -42,10 +48,12 @@ input {
     }
   }
   &__account {
+    cursor: pointer;
     height: 24px;
     width: 24px;
   }
   &__accounts {
+    cursor: pointer;
     height: 24px;
     width: 24px;
   }
@@ -76,14 +84,14 @@ input {
       height: 100%;
       margin: 0 5px 15px 5px;
       background-color: aliceblue;
-      & img {
-        width: 100%;
-        height: 100%;
-        border-radius: 15px;
-        object-fit: cover;
-        object-position: center;
-        margin-bottom: 200px;
-      }
+    }
+    &__img {
+      width: 100%;
+      height: 100%;
+      border-radius: 15px;
+      object-fit: cover;
+      object-position: center;
+      margin-bottom: 200px;
     }
     @keyframes loading {
       0% {
@@ -109,4 +117,8 @@ input {
       }
     }
   }
+}
+
+.frame {
+  
 }

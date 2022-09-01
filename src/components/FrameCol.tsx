@@ -1,6 +1,7 @@
-import { useFrames } from "../hooks/useFrames";
+import { useFramesList } from "../hooks/useFramesList";
+import { Link } from "react-router-dom";
 export function FrameCol({ num, col }: { num: number; col: number }) {
-  const frames = useFrames(num, col);
+  const frames = useFramesList(num, col);
 
   return (
     <div className="main">
@@ -11,8 +12,14 @@ export function FrameCol({ num, col }: { num: number; col: number }) {
 
       {!frames.load.current &&
         frames.frames.map((item) => (
-          <div className="main__frame">
-            <img src={`${item.download_url}`} alt="" />
+          <div
+            className="main__frame"
+            style={{ height: item.height * 0.1 }}
+            key={item.id}
+          >
+            <Link to={`frame/${item.id}`}>
+              <img src={item.download_url} alt="../images/loaing.gif" className="main__img"/>
+            </Link>
           </div>
         ))}
     </div>

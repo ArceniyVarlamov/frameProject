@@ -1,11 +1,9 @@
-import { useMemo, useRef } from "react";
-import { Frames } from "./Frames";
 import { FrameCol } from './FrameCol';
 
 export function Main() {
   return (
-
-    <FrameCol num={6} col={6}/>
-
+    <div className="col">
+      {Array(6).fill('').map((item, i) => <FrameCol num={6} col={++i}/>)}
+    </div>
   );
 }

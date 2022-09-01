@@ -1,4 +1,3 @@
-import React from "react";
 import ReactDOM from "react-dom/client";
 import "./css/main.css";
 import App from "./App";
@@ -13,3 +12,5 @@ root.render(
     <App />
   </Provider>
 );
+
+// b5d3153 - "work one HookError"

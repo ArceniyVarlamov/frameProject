@@ -1,9 +1,7 @@
 import axios, { AxiosError } from "axios";
 import { useState, useEffect, useRef } from "react";
 import { IData } from "../interface";
-import { useDispatch, useSelector } from 'react-redux';
-import { newIdAction, setIdAction } from '../store/framesReduser';
-import { IFramesReducer } from '../interface';
+import { useDispatch } from 'react-redux';;
 
 //! Интерфейс даты которая приходит
 
@@ -32,7 +30,7 @@ export function useFrames(num: number, id: number) {
 
   useEffect(() => {
     getInfo();
-  }, [getInfo]);
+  }, []);
   
   return { frames, error, load };
 }

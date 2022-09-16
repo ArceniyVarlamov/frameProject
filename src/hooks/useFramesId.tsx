@@ -1,17 +1,16 @@
 import axios, { AxiosError } from "axios";
 import { useRef, useState } from "react";
-import { IData } from "../interface";
-import { useEffect } from "react";
+import { useEffect, useCallback } from "react";
 
 export function useFramesId(id: string) {
   const error = useRef("");
   const load = useRef(true);
-  const [data, setData] = useState<IData>();
-  const getInfo = async () => {
+  const [data, setData] = useState<any>();
+  const getInfo = useCallback(async () => {
     try {
       setData(
         await (
-          await axios.get(`https://picsum.photos/id/${id}/info`)
+          await axios.get(`https://api.unsplash.com/photos/${id}?client_id=zmLIgleoUKB20K9gwruTbK0AtQ7zOciZQtlAKlPI-8Q`)
         ).data
       );
     } catch (err) {
@@ -20,7 +19,7 @@ export function useFramesId(id: string) {
     } finally {
       load.current = !load.current;
     }
-  };
+  }, [id])
 
   useEffect(() => {
     getInfo()

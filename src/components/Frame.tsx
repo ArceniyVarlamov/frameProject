@@ -10,7 +10,7 @@ export function Frame() {
       <div
         className="board"
       >
-        <img src={data?.download_url} alt="../images/loaing.gif" className="board__img"/>
+        <img className="board__img"/>
         <div className="board__info"></div>
       </div>
     </>

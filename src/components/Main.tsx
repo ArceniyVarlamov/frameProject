@@ -6,7 +6,7 @@ export function Main() {
       {Array(6)
         .fill("")
         .map((item, i) => (
-          <FrameCol num={8} col={++i} />
+          <FrameCol num={2} col={++i} />
         ))}
     </div>
   );

@@ -67,6 +67,10 @@ body {
   justify-content: space-evenly;
   .main {
     position: relative;
+    display: flex;
+    flex-direction: column;
+    width: 226px;
+    margin: 0 5px 0 5px;
     &__load {
       background-color: rgb(219, 219, 219);
       border-radius: 15px;
@@ -74,16 +78,13 @@ body {
       top: 0;
       animation: 1.5s infinite alternate loading linear;
     }
-    display: flex;
-    flex-direction: column;
-    width: 226px;
-    margin: 0 5px 0 5px;
     &__frame {
       border-radius: 15px;
       width: 226px;
       height: 100%;
       margin: 0 5px 15px 5px;
       background-color: aliceblue;
+      border-radius: 15px;
     }
     &__img {
       width: 100%;
@@ -91,7 +92,6 @@ body {
       border-radius: 15px;
       object-fit: cover;
       object-position: center;
-      margin-bottom: 200px;
     }
     @keyframes loading {
       0% {

@@ -65,12 +65,17 @@ body {
   margin: 0 5px;
   width: calc(100% - 10px);
   justify-content: space-evenly;
+  height: auto;
   .main {
     position: relative;
     display: flex;
     flex-direction: column;
     width: 226px;
     margin: 0 5px 0 5px;
+    &__error {
+      z-index: 1;
+      border-radius: 15px;
+    }
     &__load {
       background-color: rgb(219, 219, 219);
       border-radius: 15px;
@@ -81,7 +86,6 @@ body {
     &__frame {
       border-radius: 15px;
       width: 226px;
-      height: 100%;
       margin: 0 5px 15px 5px;
       background-color: aliceblue;
       border-radius: 15px;

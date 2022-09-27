@@ -8,10 +8,10 @@ export function Frame() {
   return (
     <>
       <div
-        className="board"
+        className="frame"
       >
-        <img className="board__img"/>
-        <div className="board__info"></div>
+        <img className="frame__img" src={data.urls}/>
+        <div className="frame__info"></div>
       </div>
     </>
   );

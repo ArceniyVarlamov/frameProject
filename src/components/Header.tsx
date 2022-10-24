@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 
 //! main - изменение цвета "Главная" или нет

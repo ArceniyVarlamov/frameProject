@@ -1,7 +1,6 @@
 import axios, { AxiosError } from "axios";
 import { useState, useEffect, useRef, useCallback } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import { addId } from "../store/framesReduser";
+import { IData } from "../interface";
 
 // Хук, который загружает массив из информации о картинках в зависимости от номера страницы(id) и кол-ва картинок(num)
 export function useFramesList(num: number, id: number) {
@@ -11,7 +10,7 @@ export function useFramesList(num: number, id: number) {
   // Загрузка
   const load = useRef(true);
   // Массив из информации
-  const [frames, setFrames] = useState<any[]>([]);
+  const [frames, setFrames] = useState<IData[]>([]);
 
   const getInfo = useCallback(async () => {
     try {
@@ -20,17 +19,16 @@ export function useFramesList(num: number, id: number) {
       );
       setFrames(await info.data);
     } catch (err: AxiosError | any) {
-      error.current = err.message;
+      error.current = await err.message;
     } finally {
       load.current = !load.current;
     }
   }, []);
 
   // Когда пользователь достигнет границы страницы загружется информация
-  // TODO Решить проблему с изменением id, сделать высоту блока адаптивной
   useEffect(() => {
     getInfo();
-  }, [getInfo]);
+  }, []);
 
   return { frames, error, load };
 }

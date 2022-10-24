@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import { useState } from "react";
 
 export function Main() {
-  const width = document.body.clientWidth;
+  const width = window.innerWidth;
   const [fetching, setFetching] = useState(false);
   let id = useSelector<{ frames: { id: number } }, number>(
     (state) => state.frames.id
@@ -36,13 +36,14 @@ export function Main() {
   };
 
   useEffect(() => {
+    setFetching(false);
     if (fetching) {
       dispatch({ type: "ADD_COL" });
       dispatch({ type: "ADD_ID" });
     }
   }, [fetching]);
 
-  const listId = [id, id + 1, id + 2, id + 3, id + 4, id + 5]
+  const listId = [id, id + 1, id + 2, id + 3, id + 4, id + 5];
 
   return (
     <div className='col'>
@@ -50,10 +51,9 @@ export function Main() {
         .fill("")
         .map(() => (
           <>
-            {listId
-              .map((id) => (
-                <FrameCol num={2} id={id} />
-              ))}
+            {listId.map((id) => (
+              <FrameCol num={2} id={id} />
+            ))}
           </>
         ))}
     </div>

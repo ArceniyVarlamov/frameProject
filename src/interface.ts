@@ -27,6 +27,8 @@ export interface IData {
     updated_at: string,
     username: string,
     location: string | null,
+    portfolio_url: string,
+    bio: string,
     profile_image: {
       small: string,
       medium: string,

@@ -1,12 +1,8 @@
-import { useParams } from "react-router-dom";
-import { useFramesId } from "../hooks/useFramesId";
-import { IData } from "../interface";
+import { useFramesId } from "../hooks/get/useFramesId";
 
-export function Frame() {
-  const { id = "" } = useParams();
+export function Frame({id}: {id: string}) {
+  
   const { data, error, load } = useFramesId(id);
-
-  console.log(data);
 
   return (
     <>

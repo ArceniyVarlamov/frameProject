@@ -1,7 +1,7 @@
 import axios, { AxiosError } from "axios";
 import { useRef, useState } from "react";
 import { useEffect, useCallback } from "react";
-import { IData } from "../interface";
+import { IData } from "../../interface";
 
 export function useFramesId(id: string) {
   const error = useRef<string>("");

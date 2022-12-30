@@ -9,7 +9,7 @@ export interface IData {
   width: number,
   height: number,
   color: string,
-  description: string | null,
+  description: string | '',
   urls: {
     raw: string,
     full: string,

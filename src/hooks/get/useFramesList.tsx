@@ -1,6 +1,6 @@
 import axios, { AxiosError } from "axios";
 import { useState, useEffect, useRef, useCallback } from "react";
-import { IData } from "../interface";
+import { IData } from "../../interface";
 
 // Хук, который загружает массив из информации о картинках в зависимости от номера страницы(id) и кол-ва картинок(num)
 export function useFramesList(num: number, id: number) {
@@ -29,6 +29,6 @@ export function useFramesList(num: number, id: number) {
   useEffect(() => {
     getInfo();
   }, []);
-
+  
   return { frames, error, load };
 }

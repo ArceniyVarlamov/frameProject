@@ -2,7 +2,7 @@ import { FrameCol } from "./FrameCol";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { useState } from "react";
-import { useFetchByScroll } from "../hooks/functions/useFetchByScroll";
+import { useFetchByScroll } from "../../hooks/functions/useFetchByScroll";
 
 export function Main() {
 

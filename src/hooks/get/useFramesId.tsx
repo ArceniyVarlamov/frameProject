@@ -27,7 +27,7 @@ export function useFramesId(id: string) {
 
   useEffect(() => {
     getInfo();
-  }, [getInfo]);
+  }, [id]);
   
   return { data, error: error.current, load: load.current };
 }

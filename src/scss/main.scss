@@ -89,6 +89,18 @@ p {
   }
 }
 
+.error {
+  z-index: 1;
+  border-radius: 15px;
+}
+.loading {
+  background-color: $main-color;
+  border-radius: 15px;
+  position: absolute;
+  top: 0;
+  animation: 1.5s infinite alternate loading linear;
+}
+
 .main {
   display: flex;
   flex-wrap: wrap;
@@ -102,17 +114,6 @@ p {
     flex-direction: column;
     width: 226px;
     margin: 0 5px 0 5px;
-    .main__error {
-      z-index: 1;
-      border-radius: 15px;
-    }
-    .main__load {
-      background-color: $main-color;
-      border-radius: 15px;
-      position: absolute;
-      top: 0;
-      animation: 1.5s infinite alternate loading linear;
-    }
     .main__frame {
       border-radius: 15px;
       width: 226px;

@@ -1,12 +1,17 @@
-import { useFramesId } from "../hooks/get/useFramesId";
+import { useFramesId } from "../../hooks/get/useFramesId";
+import { useEffect } from 'react';
 
 export function Frame({id}: {id: string}) {
   
   const { data, error, load } = useFramesId(id);
 
+  useEffect(() => {
+    console.log(error, load);
+  }, [])
   return (
     <>
-      <div className='frame'>
+    
+      {!load && !error && <div className='frame'>
         <img className='frame__img' src={`${data?.urls.full}`} alt='' />
         <div className='frame__info' style={{ backgroundColor: data?.color }}>
           <div className='frame__links'>
@@ -35,7 +40,7 @@ export function Frame({id}: {id: string}) {
           </div>
           <div className='frame__comments'></div>
         </div>
-      </div>
+      </div>}
     </>
   );
 }

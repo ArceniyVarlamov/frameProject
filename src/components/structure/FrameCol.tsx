@@ -1,6 +1,8 @@
-import { useFramesList } from "../hooks/get/useFramesList";
-import { useRandomHeight } from "../hooks/functions/useRandomHeight";
+import { useFramesList } from "../../hooks/get/useFramesList";
+import { useRandomHeight } from "../../hooks/functions/useRandomHeight";
 import { Link } from "react-router-dom";
+import { Loading } from './../animation/Loading';
+import { Error } from './../animation/Error';
 export function FrameCol({ num, id }: { num: number; id: number }) {
   const { frames, error, load } = useFramesList(num, id);
 
@@ -9,11 +11,8 @@ export function FrameCol({ num, id }: { num: number; id: number }) {
 
   return (
     <div className='main__col'>
-      {error.current && (
-        <div className='main__frame main_error'>{error.current}</div>
-      )}
-      {load.current && <div className='main__load'></div>}
-
+      {error.current && <Error err={error.current}/>}
+      {load.current && <Loading/>}
       {!load.current &&
         frames!.map((item, i) => {
           return (
@@ -25,7 +24,7 @@ export function FrameCol({ num, id }: { num: number; id: number }) {
               }}
               key={item.id}
             >
-              <Link to={`frame/${item.id}`}>
+              <Link to={`/frame/${item.id}`}>
                 <img src={item.urls.regular} className='main__img'/>
               </Link>
             </div>

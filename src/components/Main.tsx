@@ -11,7 +11,7 @@ export function Main() {
   const {listId, col} = useFetchByScroll()
 
   return (
-    <div className='col'>
+    <div className='main'>
       {Array(col)
         .fill("")
         .map(() => (

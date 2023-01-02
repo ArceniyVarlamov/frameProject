@@ -8,7 +8,7 @@ export function FrameCol({ num, id }: { num: number; id: number }) {
   const heights = useRandomHeight(num)
 
   return (
-    <div className='main'>
+    <div className='main__col'>
       {error.current && (
         <div className='main__frame main_error'>{error.current}</div>
       )}
@@ -26,7 +26,7 @@ export function FrameCol({ num, id }: { num: number; id: number }) {
               key={item.id}
             >
               <Link to={`frame/${item.id}`}>
-                <img src={item.urls.full} className='main__img'/>
+                <img src={item.urls.regular} className='main__img'/>
               </Link>
             </div>
           );

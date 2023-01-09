@@ -14,10 +14,13 @@ export function useFramesList(num: number, id: number) {
 
   const getInfo = useCallback(async () => {
     try {
-      const info = await axios.get(
-        `https://api.unsplash.com/photos/?client_id=zmLIgleoUKB20K9gwruTbK0AtQ7zOciZQtlAKlPI-8Q;page=${id};per_page=${num}`
+      setFrames(
+        await (
+          await axios.get(
+            `https://api.unsplash.com/photos/?client_id=zmLIgleoUKB20K9gwruTbK0AtQ7zOciZQtlAKlPI-8Q;page=${id};per_page=${num}`
+          )
+        ).data
       );
-      setFrames(await info.data);
     } catch (err: AxiosError | any) {
       error.current = await err.message;
     } finally {
@@ -29,6 +32,6 @@ export function useFramesList(num: number, id: number) {
   useEffect(() => {
     getInfo();
   }, []);
-  
-  return { frames, error, load };
+
+  return { frames, error: error.current, load: load.current };
 }

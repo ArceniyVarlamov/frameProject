@@ -16,10 +16,8 @@ export function useFramesId(id: string) {
           )
         ).data
       );
-      
-    } catch (err) {
-      const e = err as AxiosError;
-      error.current = e.message;
+    } catch (err: AxiosError | any) {
+      error.current = await err.message;
     } finally {
       load.current = !load.current;
     }
@@ -28,6 +26,6 @@ export function useFramesId(id: string) {
   useEffect(() => {
     getInfo();
   }, [id]);
-  
+
   return { data, error: error.current, load: load.current };
 }

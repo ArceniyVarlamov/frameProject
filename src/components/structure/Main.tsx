@@ -17,7 +17,7 @@ export function Main() {
         .map(() => (
           <>
             {listId.map((id) => (
-              <FrameCol num={2} id={id} />
+              <FrameCol num={2} id={id}/>
             ))}
           </>
         ))}

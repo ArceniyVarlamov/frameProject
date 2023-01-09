@@ -9,7 +9,6 @@ export function FramePage() {
     <>
       <Header/>
       <Frame id={id}/>
-      <Main/>
     </>
   )
 }

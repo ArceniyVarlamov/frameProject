@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
+import { addId, addCol } from "../../store/framesReduser";
 
 export function useFetchByScroll() {
   const id = useSelector<{ frames: { id: number } }, number>(
@@ -18,13 +19,12 @@ export function useFetchByScroll() {
     if (
       e.target.documentElement.scrollHeight -
         (e.target.documentElement.scrollTop + window.innerHeight) <
-        200 &&
+        50 &&
       !fetching
     ) {
-      setFetching(true)
-      console.log(fetching);
+      setFetching(true);
     } else {
-      setFetching(false)
+      setFetching(false);
     }
   };
 
@@ -42,11 +42,10 @@ export function useFetchByScroll() {
 
   useEffect(() => {
     if (fetching) {
-      dispatch({ type: "ADD_COL" });
-      dispatch({ type: "ADD_ID" });
-      setFetching(false)
+      dispatch(addId());
+      dispatch(addCol());
+      setFetching(false);
     }
-    console.log(fetching);
   }, [fetching]);
 
   return { listId, col };

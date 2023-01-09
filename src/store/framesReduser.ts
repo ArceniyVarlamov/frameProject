@@ -12,8 +12,10 @@ export const framesReducer = (
     case ADD_FRAMES:
       return {...state, frames: [...state.frames, ...action.frames]}
     case ADD_ID:
-      return {...state, id: state.id + 6}
+      // Добавляем 12 к id, потому что в общем сначала подгружается 12 картинок
+      return {...state, id: state.id + 12}
     case ADD_COL:
+      // Добавляем 1 к col, то есть увеличиваем счётчик подгрузок
       return {...state, col: state.col + 1}
     default:
       return state;
@@ -21,3 +23,4 @@ export const framesReducer = (
 };
 
 export const addId = () => ({type: ADD_ID})
+export const addCol = () => ({type: ADD_COL})

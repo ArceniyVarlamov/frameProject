@@ -1,6 +1,7 @@
 export function Error({ err }: { err: string }) {
-
-  return (
-    <div className='main__frame error'>{err}</div>
-  );
+  if (err) {
+    return <div className='error'>{err}</div>;
+  } else {
+    return <></>;
+  }
 }

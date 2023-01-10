@@ -38,6 +38,11 @@ export interface IData {
       large: string;
     };
   };
+  location: {
+    name: string;
+    city: string;
+    country: string;
+  };
   views: number;
   downloads: number;
   topics: string[];

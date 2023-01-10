@@ -184,7 +184,7 @@ p {
     object-fit: cover;
   }
   &__info {
-    box-shadow: inset 0px 0px 10px -5px $header-color;
+    box-shadow: inset 0px 0px 8px 0 rgba($help-color, 0.3);;
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
     width: 50%;
@@ -194,35 +194,30 @@ p {
   &__links {
     display: flex;
     align-items: center;
-    margin-left: 10%;
+    justify-content: space-around;
     height: 10%;
-    & p {
-      display: flex;
-      align-items: center;
-      width: 100px;
-      height: 100%;
-      justify-content: center;
-    }
+    width: 95%;
+    margin: auto;
     & div {
-      height: 40px;
       width: 40px;
-      border-radius: 50%;
-      margin: auto 5px;
-      transition: 0.2s;
+      height: 40px;
       display: flex;
       align-items: center;
       justify-content: center;
       &:hover {
-        background-color: rgba($help-color, 0.1);
+        background-color: rgba($header-color, 1);
       }
-      & img {
-        height: 25px;
-        width: 25px;
-      }
+    }
+    & img {
+      width: 20px;
+      height: 20px;
+    }
+    & p {
+      text-align: center;
     }
   }
   &__author {
-    box-shadow: 0px 0px 10px -8px $help-color;
+    box-shadow: 0px 0px 10px 0px rgba($help-color, 0.2);
     width: 80%;
     flex-direction: column;
     margin: auto;
@@ -276,7 +271,11 @@ p {
     user-select: none;
     & img {
       cursor: pointer;
-      margin-right: 10px;
+    }
+    & div {
+      display: flex;
+      align-items: center;
+      grid-gap: 10px;
     }
   }
 }

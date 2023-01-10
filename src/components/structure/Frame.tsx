@@ -22,7 +22,7 @@ export function Frame({ id }: { id: string }) {
     <>
       <Error err={error} />
       <Loading loading={load} />
-      {!load && (
+      {!load && !error && (
         <div className='frame'>
           <img className='frame__img' src={`${data?.urls.full}`} alt='' />
           <div className='frame__info'>
@@ -59,12 +59,21 @@ export function Frame({ id }: { id: string }) {
               </div>
             </div>
             <div className='frame__likes'>
-              <img
-                src={like ? likeActive : likeUnactive}
-                alt='heart'
-                onClick={liked}
-              />
-              {data?.likes}
+              <div>
+                {data?.likes && (
+                  <>
+                    <img
+                      src={like ? likeActive : likeUnactive}
+                      alt='heart'
+                      onClick={liked}
+                    />
+                    <p>{data?.likes}</p>
+                  </>
+                )}
+              </div>
+              <div>
+                {data?.location.name && <p>location: {data?.location.name}</p>}
+              </div>
             </div>
             <div className='frame__comments'></div>
           </div>

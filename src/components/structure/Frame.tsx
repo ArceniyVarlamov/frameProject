@@ -1,5 +1,5 @@
 import { useFramesId } from "../../hooks/get/useFramesId";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Loading } from "./../animation/Loading";
 import { Error } from "./../animation/Error";
 import useColor from "./../../hooks/functions/useColor";
@@ -15,16 +15,24 @@ export function Frame({ id }: { id: string }) {
   const liked = () => {
     setLike((curr) => !curr);
   };
-
+  
   const [like, setLike] = useState(data?.liked_by_user);
-
+  
   return (
     <>
-      <Error err={error} />
+      <Error err={error}></Error>
       <Loading loading={load} />
-      {!load && !error && (
+      {!load && (
         <div className='frame'>
-          <img className='frame__img' src={`${data?.urls.full}`} alt='' />
+          <img
+            className='frame__img'
+            src={
+              data?.urls.full
+                ? `${data?.urls.full}`
+                : `https://via.placeholder.com/300x900/${color}/-`
+            }
+            alt='frame'
+          />
           <div className='frame__info'>
             <div className='frame__links'>
               <div>
@@ -48,28 +56,22 @@ export function Frame({ id }: { id: string }) {
                     {data?.user.username}
                   </p>
                   <p className='frame__total-photos'>
-                    {data?.user.total_photos} photos
+                    {data?.user.total_photos ? data?.user.total_photos : ""}
                   </p>
                 </div>
               </div>
               <div className='frame__description'>
-                {`${
-                  data?.description != null ? data?.description.slice(40) : ""
-                }`}
+                {data?.description ? data?.description.slice(40) : ""}
               </div>
             </div>
             <div className='frame__likes'>
               <div>
-                {data?.likes && (
-                  <>
-                    <img
-                      src={like ? likeActive : likeUnactive}
-                      alt='heart'
-                      onClick={liked}
-                    />
-                    <p>{data?.likes}</p>
-                  </>
-                )}
+                <img
+                  src={like ? likeActive : likeUnactive}
+                  alt='heart'
+                  onClick={liked}
+                />
+                <p>{data?.likes ? data?.likes : ""}</p>
               </div>
               <div>
                 {data?.location.name && <p>location: {data?.location.name}</p>}

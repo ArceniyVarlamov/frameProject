@@ -5,12 +5,13 @@ import { IData } from "../../interface";
 // Хук, который загружает массив из информации о картинках в зависимости от номера страницы(id) и кол-ва картинок(num)
 export function useFramesList(num: number, id: number) {
   // id = page, num = per_page
-  // Ошибка
-  const error = useRef("");
-  // Загрузка
-  const load = useRef(true);
   // Массив из информации
   const [frames, setFrames] = useState<IData[]>([]);
+  // Ошибка
+  const [error, setError] = useState<string>("");
+  // Загрузка
+  const [load, setLoad] = useState<boolean>(true);
+  
 
   const getInfo = useCallback(async () => {
     try {
@@ -22,9 +23,9 @@ export function useFramesList(num: number, id: number) {
         ).data
       );
     } catch (err: AxiosError | any) {
-      error.current = await err.message;
+      setError(await err.message)
     } finally {
-      load.current = !load.current;
+      setLoad(false)
     }
   }, []);
 
@@ -33,5 +34,5 @@ export function useFramesList(num: number, id: number) {
     getInfo();
   }, []);
 
-  return { frames, error: error.current, load: load.current };
+  return { frames, error, load};
 }

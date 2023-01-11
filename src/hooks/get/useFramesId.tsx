@@ -1,12 +1,12 @@
 import axios, { AxiosError } from "axios";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { useEffect, useCallback } from "react";
 import { IData } from "../../interface";
 
 export function useFramesId(id: string) {
-  const error = useRef<string>("");
-  const load = useRef<boolean>(true);
   const [data, setData] = useState<IData>();
+  const [error, setError] = useState<string>("");
+  const [load, setLoad] = useState<boolean>(false);
   const getInfo = useCallback(async () => {
     try {
       setData(
@@ -17,15 +17,15 @@ export function useFramesId(id: string) {
         ).data
       );
     } catch (err: AxiosError | any) {
-      error.current = await err.message;
+      setError(err.message)
     } finally {
-      load.current = !load.current;
+      setLoad(false)
     }
-  }, [id]);
+  }, []);
 
   useEffect(() => {
     getInfo();
   }, [id]);
 
-  return { data, error: error.current, load: load.current };
+  return { data, error, load };
 }

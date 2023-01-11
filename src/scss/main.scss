@@ -182,9 +182,10 @@ p {
     height: 100%;
     width: 50%;
     object-fit: cover;
+    object-position: center;
   }
   &__info {
-    box-shadow: inset 0px 0px 8px 0 rgba($help-color, 0.3);;
+    box-shadow: inset 0px 0px 8px 0 rgba($help-color, 0.3);
     border-top-right-radius: 15px;
     border-bottom-right-radius: 15px;
     width: 50%;

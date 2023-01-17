@@ -1,10 +1,10 @@
-import { useFramesList } from "../../hooks/get/useFramesList";
-import { useRandomHeight } from "../../hooks/functions/useRandomHeight";
 import { Link } from "react-router-dom";
 import { Loading } from "./../animation/Loading";
 import { Error } from "./../animation/Error";
+import useRandomHeight from "../../hooks/functions/useRandomHeight";
+import useFramesList from "../../hooks/get/useFramesList";
 
-export function FrameCol({ num, id }: { num: number; id: number }) {
+export default function FrameCol({ num, id }: { num: number; id: number }) {
   const { frames, error, load } = useFramesList(num, id);
 
   //TODO рандомные высоты ДВУХ картинок в столбце

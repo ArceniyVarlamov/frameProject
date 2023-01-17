@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-export function useRandomHeight(num: number) {
+export default function useRandomHeight(num: number) {
   //TODO Глобальная константа начальной высоты картинки при подгрузке
   const [height, setHeight] = useState([400, 400]);
 

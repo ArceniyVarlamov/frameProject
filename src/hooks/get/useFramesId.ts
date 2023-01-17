@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useEffect, useCallback } from "react";
 import { IData } from "../../interface";
 
-export function useFramesId(id: string) {
+export default function useFramesId(id: string) {
   const [data, setData] = useState<IData>();
   const [error, setError] = useState<string>("");
   const [load, setLoad] = useState<boolean>(false);
@@ -12,14 +12,20 @@ export function useFramesId(id: string) {
       setData(
         await (
           await axios.get(
-            `https://api.unsplash.com/photos/${id}?client_id=zmLIgleoUKB20K9gwruTbK0AtQ7zOciZQtlAKlPI-8Q`
+            `https://api.unsplash.com/photos/${id}`,
+            {
+              headers: {
+                Authorization:
+                  "Client-ID zmLIgleoUKB20K9gwruTbK0AtQ7zOciZQtlAKlPI-8Q",
+              },
+            }
           )
         ).data
       );
     } catch (err: AxiosError | any) {
-      setError(err.message)
+      setError(err.message);
     } finally {
-      setLoad(false)
+      setLoad(false);
     }
   }, []);
 

@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { addId, addCol } from "../../store/framesReduser";
 
-export function useFetchByScroll() {
+export default function useFetchByScroll() {
   const id = useSelector<{ frames: { id: number } }, number>(
     (state) => state.frames.id
   );

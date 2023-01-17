@@ -174,7 +174,7 @@ p {
 .frame {
   margin: 2vh auto;
   height: 900px;
-  width: 70%;
+  width: 90%;
   display: flex;
   &__img {
     border-top-left-radius: 15px;
@@ -183,6 +183,7 @@ p {
     width: 50%;
     object-fit: cover;
     object-position: center;
+    user-select: none;
   }
   &__info {
     box-shadow: inset 0px 0px 8px 0 rgba($help-color, 0.3);
@@ -197,7 +198,7 @@ p {
     align-items: center;
     justify-content: space-around;
     height: 10%;
-    width: 95%;
+    width: 90%;
     margin: auto;
     & div {
       width: 40px;
@@ -212,10 +213,16 @@ p {
     & img {
       width: 20px;
       height: 20px;
+      user-select: none;
     }
-    & p {
-      text-align: center;
-    }
+  }
+  &__views,
+  &__downloads {
+    text-align: center;
+    font-size: 20px;
+    font-weight: 600;
+    border-radius: 5px;
+    padding: 0 1%;
   }
   &__author {
     box-shadow: 0px 0px 10px 0px rgba($help-color, 0.2);
@@ -233,9 +240,10 @@ p {
     height: 100px;
   }
   &__icon {
-    border-radius: 5px;
+    border-radius: 50%;
     width: 45px;
     height: 45px;
+    user-select: none;
   }
   &__user-goal {
     display: flex;
@@ -267,11 +275,13 @@ p {
     font-size: 20px;
     font-weight: 600;
     display: flex;
+    justify-content: space-between;
     align-items: center;
     margin: 15px 0 0 65px;
-    user-select: none;
+    width: 80%;
     & img {
       cursor: pointer;
+      user-select: none;
     }
     & div {
       display: flex;
@@ -279,13 +289,15 @@ p {
       grid-gap: 10px;
     }
   }
+  &__location {
+    height: 50px;
+  }
 }
 
 @media (max-width: 867px) {
   .frame {
     height: 900px;
     flex-direction: column;
-    width: 90%;
     &__img {
       border-radius: 0;
       border-top-left-radius: 15px;

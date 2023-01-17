@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
 export default function useColor(hex: string | undefined ) {
-  const [color, setColor] = useState("");
+  const [color, setColor] = useState("white");
   useEffect(() => {
     if (hex) {
       let r = parseInt(hex[1] + hex[2], 16);

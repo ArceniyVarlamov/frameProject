@@ -17,7 +17,7 @@ export default function useFramesList(num: number, id: number) {
       setFrames(
         await (
           await axios.get(
-            `https://api.unsplash.com/photos/?page=${id};per_page=${num}`,
+            `https://api.unsplash.com/photos/?page=${id}&per_page=${num}`,
             {
               headers: {
                 Authorization:

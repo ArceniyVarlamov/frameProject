@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 
 //! main - изменение цвета "Главная" или нет
 //! plofile - изменение цвета "Профиль" или нет
-export function Header({ profile = false }: { profile?: boolean }) {
+export default function Header({ profile = false }: { profile?: boolean }) {
   const prof = profile ? "dark" : "white";
   return (
     <div

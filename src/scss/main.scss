@@ -4,6 +4,7 @@ $main-color: rgba(178, 178, 178, 0.771);
 $pre-main-color: rgba(158, 158, 158, 0.71);
 $page-color: rgba(255, 255, 255, 0.618);
 $header-color: rgba(211, 211, 211, 0.2);
+// rgb(162, 26, 26);
 $logo-color: rgba(80, 26, 162);
 $help-color: black;
 $helpfull-color: aliceblue;
@@ -20,6 +21,37 @@ body {
 
 p {
   margin: 0;
+}
+
+.error {
+  transition: 0.5 linear;
+  z-index: 1;
+  border-radius: 5px;
+  width: 60%;
+  height: 50px;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: aliceblue;
+  font-weight: 700;
+  position: fixed;
+  top: 95px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    135deg,
+    rgba($logo-color, 0.8) 10%,
+    rgba($logo-color, 0.3) 20%
+  );
+}
+
+.loading {
+  background-color: $main-color;
+  border-radius: 15px;
+  position: absolute;
+  top: 0;
+  animation: 1.5s infinite alternate loading linear;
 }
 
 .header {
@@ -72,12 +104,12 @@ p {
   }
   & input {
     width: 40%;
-    border-radius: 50px;
+    border-radius: 15px;
     padding-left: 20px;
     background-color: $main-color;
     &:focus {
       background-color: $pre-main-color;
-      border: 0;
+      outline-color: $logo-color;
     }
   }
   &__account {
@@ -90,33 +122,6 @@ p {
     height: 24px;
     width: 24px;
   }
-}
-
-.error {
-  z-index: 1;
-  border-radius: 5px;
-  width: 90%;
-  margin: 5px auto;
-  height: 50px;
-  text-align: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: aliceblue;
-  font-weight: 700;
-  background: linear-gradient(
-    35deg,
-    $logo-color 0%,
-    rgba(255, 255, 255, 0) 95%
-  );
-}
-
-.loading {
-  background-color: $main-color;
-  border-radius: 15px;
-  position: absolute;
-  top: 0;
-  animation: 1.5s infinite alternate loading linear;
 }
 
 .main {
@@ -291,6 +296,51 @@ p {
   }
   &__location {
     height: 50px;
+  }
+}
+
+.registration {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 650px;
+  &__form {
+    width: 80%;
+    height: 90%;
+    border-radius: 15px;
+    box-shadow: 0px 0px 8px 0 rgba($help-color, 0.3);
+  }
+  &__head {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: 65px 0 35px;
+    font-size: 24px;
+    font-weight: 600;
+  }
+  &__unsplash {
+    cursor: pointer;
+    transition: 0.5s linear;
+    margin: 5px 0;
+    border: 2px solid rgba($header-color, 0.2);
+    background-color: rgba($header-color, 0.05);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    grid-gap: 25px;
+    width: 80%;
+    margin: auto;
+    height: 60px;
+    user-select: none;
+    color: rgba($help-color, 0.9);
+    font-size: 24px;
+    &:hover {
+      color: rgba($help-color, 1);
+      background-color: rgba($header-color, 0.2);
+      border: 2px solid rgba($header-color, 0.5);
+    }
   }
 }
 

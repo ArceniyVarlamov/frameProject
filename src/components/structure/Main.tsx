@@ -4,7 +4,7 @@ import { useState } from "react";
 import FrameCol from "./FrameCol";
 import useFetchByScroll from "../../hooks/functions/useFetchByScroll";
 
-export function Main() {
+export default function Main() {
 
   const width = window.innerWidth;
 

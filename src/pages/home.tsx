@@ -1,7 +1,7 @@
-import { Main } from "../components/structure/Main"
-import { Header } from '../components/structure/Header';
+import Main from "../components/structure/Main"
+import Header from '../components/structure/Header';
 
-export function HomePage() {
+export default function HomePage() {
   return (
     <>
       <Header/>

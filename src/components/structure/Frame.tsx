@@ -5,11 +5,11 @@ import useFramesId  from "../../hooks/get/useFramesId";
 import useColor from "./../../hooks/functions/useColor";
 import download from "../../images/download.png";
 import share from "../../images/share.png";
-import likeUnactive from "../../images/like-black.svg";
-import likeActive from "../../images/like-red.svg";
+import likeUnactive from "../../images/like_unactive.svg";
+import likeActive from "../../images/like_active.svg";
 import axios, { AxiosError } from "axios";
 
-export function Frame({ id }: { id: string }) {
+export default function Frame({ id }: { id: string }) {
   // own hooks
   const { data, error, load } = useFramesId(id);
   const color = useColor(data?.color);

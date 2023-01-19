@@ -1,9 +1,3 @@
-export interface IFramesReducer {
-  frames: string[];
-  id: number;
-  col: number;
-}
-
 export interface IData {
   id: string;
   width: number;

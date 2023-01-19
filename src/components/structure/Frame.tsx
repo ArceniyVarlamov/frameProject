@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
-import { Loading } from "./../animation/Loading";
-import { Error } from "./../animation/Error";
+import Loading from "./../animation/Loading";
+import Error from "./../animation/Error";
 import useFramesId  from "../../hooks/get/useFramesId";
 import useColor from "./../../hooks/functions/useColor";
 import download from "../../images/download.png";

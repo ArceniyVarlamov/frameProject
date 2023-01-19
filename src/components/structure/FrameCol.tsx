@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
-import { Loading } from "./../animation/Loading";
-import { Error } from "./../animation/Error";
+import Loading from "./../animation/Loading";
+import Error from "./../animation/Error";
 import useRandomHeight from "../../hooks/functions/useRandomHeight";
 import useFramesList from "../../hooks/get/useFramesList";
 

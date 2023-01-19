@@ -1,9 +1,20 @@
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { Link, useParams } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { setCode } from "../../store/accountSlice";
 
-//! main - изменение цвета "Главная" или нет
-//! plofile - изменение цвета "Профиль" или нет
-export default function Header({ profile = false }: { profile?: boolean }) {
-  const prof = profile ? "dark" : "white";
+export default function Header() {
+
+  const dispatch = useDispatch()
+
+  const { code } = useParams()
+
+  useEffect(() => {
+    if (code) {
+      dispatch(setCode(code))
+    }
+  }, [code]);
+
   return (
     <div
       style={{
@@ -13,16 +24,28 @@ export default function Header({ profile = false }: { profile?: boolean }) {
         height: "80px",
       }}
     >
-      <div className="header">
-        <Link to="/">
-          <div className="header__logo"></div>
-        </Link>
-        <div className="header__create">Create</div>
-        <input type="text" placeholder="Search" />
-        <div className="header__notifications"></div>
-        <div className="header__messages"></div>
-        <div className="header__account"></div>
-        <div className="header__accounts"></div>
+      <div className='header'>
+        <Link to='/' className='header__logo'></Link>
+        <div className='header__create'>Create</div>
+        <input type='text' placeholder='Search' />
+        {!code && (
+          <>
+            <Link to='/registration' className='header__register'>
+              Register
+            </Link>
+            <Link to='/' className='header__login'>
+              Login
+            </Link>
+          </>
+        )}
+        {code && (
+          <>
+            <div className='header__notifications'></div>
+            <div className='header__messages'></div>
+            <div className='header__account'></div>
+            <div className='header__accounts'></div>
+          </>
+        )}
       </div>
     </div>
   );

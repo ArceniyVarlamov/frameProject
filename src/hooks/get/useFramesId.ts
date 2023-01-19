@@ -11,15 +11,12 @@ export default function useFramesId(id: string) {
     try {
       setData(
         await (
-          await axios.get(
-            `https://api.unsplash.com/photos/${id}`,
-            {
-              headers: {
-                Authorization:
-                  "Client-ID zmLIgleoUKB20K9gwruTbK0AtQ7zOciZQtlAKlPI-8Q",
-              },
-            }
-          )
+          await axios.get(`https://api.unsplash.com/photos/${id}`, {
+            headers: {
+              Authorization:
+                "Client-ID zmLIgleoUKB20K9gwruTbK0AtQ7zOciZQtlAKlPI-8Q",
+            },
+          })
         ).data
       );
     } catch (err: AxiosError | any) {

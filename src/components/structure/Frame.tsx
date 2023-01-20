@@ -1,18 +1,23 @@
 import { useState, useEffect } from "react";
 import Loading from "./../animation/Loading";
 import Error from "./../animation/Error";
-import useFramesId  from "../../hooks/get/useFramesId";
+import useFramesId from "../../hooks/get/useFramesId";
 import useColor from "./../../hooks/functions/useColor";
 import download from "../../images/download.png";
 import share from "../../images/share.png";
 import likeUnactive from "../../images/like_unactive.svg";
 import likeActive from "../../images/like_active.svg";
-import axios, { AxiosError } from "axios";
+import useAccountInfo from "../../hooks/info/useAccountInfo";
+import useRegisterUnsplash from './../../hooks/post/useRegisterUnsplash';
 
 export default function Frame({ id }: { id: string }) {
+  const { code } = useAccountInfo()
+
   // own hooks
   const { data, error, load } = useFramesId(id);
   const color = useColor(data?.color);
+
+  const [like, setLike] = useState(data?.liked_by_user);
 
   // component functions
   const liked = () => {
@@ -39,7 +44,7 @@ export default function Frame({ id }: { id: string }) {
     return src ? addStart + slicing + addEnd : slicing;
   };
 
-  const [like, setLike] = useState(data?.liked_by_user);
+  
 
   return (
     <>
@@ -111,7 +116,7 @@ export default function Frame({ id }: { id: string }) {
                   {conditional({
                     src: data?.location.name,
                     addStart: "location: ",
-                    slice: 30
+                    slice: 30,
                   })}
                 </p>
               </div>

@@ -20,8 +20,7 @@ export default function useFramesList(num: number, id: number) {
             `https://api.unsplash.com/photos/?page=${id}&per_page=${num}`,
             {
               headers: {
-                Authorization:
-                  "Client-ID zmLIgleoUKB20K9gwruTbK0AtQ7zOciZQtlAKlPI-8Q",
+                Authorization: `Client-ID ${process.env.REACT_APP_UNSPLASH_API_ACCESS_KEY}`,
               },
             }
           )

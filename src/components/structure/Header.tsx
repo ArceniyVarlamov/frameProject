@@ -1,19 +1,12 @@
-import { useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
-import { useDispatch } from 'react-redux';
+import { useEffect, useState } from "react";
+import { Link, useSearchParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 import { setCode } from "../../store/accountSlice";
+import { IAccountState } from "./../../store/accountSlice";
+import useAccountInfo from "../../hooks/info/useAccountInfo";
 
 export default function Header() {
-
-  const dispatch = useDispatch()
-
-  const { code } = useParams()
-
-  useEffect(() => {
-    if (code) {
-      dispatch(setCode(code))
-    }
-  }, [code]);
+  const { code: isRegistered } = useAccountInfo();
 
   return (
     <div
@@ -28,7 +21,7 @@ export default function Header() {
         <Link to='/' className='header__logo'></Link>
         <div className='header__create'>Create</div>
         <input type='text' placeholder='Search' />
-        {!code && (
+        {!isRegistered && (
           <>
             <Link to='/registration' className='header__register'>
               Register
@@ -38,7 +31,7 @@ export default function Header() {
             </Link>
           </>
         )}
-        {code && (
+        {isRegistered && (
           <>
             <div className='header__notifications'></div>
             <div className='header__messages'></div>

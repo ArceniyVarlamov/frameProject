@@ -13,8 +13,7 @@ export default function useFramesId(id: string) {
         await (
           await axios.get(`https://api.unsplash.com/photos/${id}`, {
             headers: {
-              Authorization:
-                "Client-ID zmLIgleoUKB20K9gwruTbK0AtQ7zOciZQtlAKlPI-8Q",
+              Authorization: `Client-ID ${process.env.REACT_APP_UNSPLASH_API_ACCESS_KEY}`,
             },
           })
         ).data

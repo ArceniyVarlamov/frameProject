@@ -16,7 +16,7 @@ export default function FrameCol({ num, id }: { num: number; id: number }) {
       <Loading loading={load} />
       {frames!.map((item, i) => {
         return (
-          <div key={item.id}>
+          <div key={item.urls.raw}>
             {!load && (
               <div
                 className='main__frame'
@@ -24,7 +24,6 @@ export default function FrameCol({ num, id }: { num: number; id: number }) {
                   backgroundColor: item.color,
                   height: `${heights[i]}px`,
                 }}
-                key={item.id}
               >
                 <Link to={`/frame/${item.id}`}>
                   <img src={item.urls.regular} className='main__img' />

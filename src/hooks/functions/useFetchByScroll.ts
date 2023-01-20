@@ -1,14 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { addId, addCol } from "../../store/framesSlice";
+import { IFramesState } from "./../../store/framesSlice";
+import useFramesInfo from "../info/useFramesInfo";
 
 export default function useFetchByScroll() {
-  const id = useSelector<{ frames: { id: number } }, number>(
-    (state) => state.frames.id
-  );
-  const col = useSelector<{ frames: { col: number } }, number>(
-    (state) => state.frames.col
-  );
+  const { id, col } = useFramesInfo();
 
   const [fetching, setFetching] = useState<boolean>(false);
 

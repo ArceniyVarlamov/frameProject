@@ -1,8 +1,12 @@
-import { configureStore } from '@reduxjs/toolkit';
-import framesReducer from './framesSlice';
+import { configureStore } from "@reduxjs/toolkit";
+import accountReducer from "./accountSlice";
+import framesReducer from "./framesSlice";
 
-export default configureStore({
+const store = configureStore({
   reducer: {
-    frames: framesReducer
-  }
-})
+    frames: framesReducer,
+    account: accountReducer,
+  },
+});
+
+export default store;

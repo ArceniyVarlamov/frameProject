@@ -1,14 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+export interface IAccountState {
+  code: string;
+}
+
+const accountState: IAccountState = {
+  code: "",
+};
 
 const accountSlice = createSlice({
-  name: "frames",
-  initialState: {
-    code: ""
-  },
+  name: "account",
+  initialState: accountState,
   reducers: {
     setCode(state, action) {
-      state.code = action.payload.code;
+      state.code = action.payload;
     },
   },
 });

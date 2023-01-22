@@ -15,7 +15,7 @@ $helpfull-color: aliceblue;
   --header-color: rgba(211, 211, 211, 0.2);
   --logo-color: rgba(80, 26, 162);
   --help-color: black;
-  --helpfull-color: aliceblue
+  --helpfull-color: aliceblue;
 }
 
 body {
@@ -47,7 +47,7 @@ p {
   top: 95px;
   left: 50%;
   transform: translateX(-50%);
-  background-color: rgba($logo-color, 0.7)
+  background-color: rgba($logo-color, 0.7);
 }
 
 .loading {
@@ -124,7 +124,8 @@ p {
     height: 24px;
     width: 24px;
   }
-  &__register, &__login {
+  &__register,
+  &__login {
     border-radius: 15px;
     display: flex;
     align-items: center;
@@ -135,13 +136,12 @@ p {
     text-decoration: none;
     &:hover {
       color: $helpfull-color;
-      background-color: rgba($logo-color, 0.9)
+      background-color: rgba($logo-color, 0.9);
     }
   }
   &__register {
     width: 15%;
     color: $logo-color;
-
   }
   &__login {
     width: 12%;
@@ -350,12 +350,11 @@ p {
     font-size: 24px;
     font-weight: 600;
   }
-  &__unsplash {
+  & a {
     text-decoration: none;
     border: none;
     cursor: pointer;
     transition: 0.2s linear;
-    margin: 5px 0;
     background-color: rgba($header-color, 0.2);
     border-radius: 10px;
     display: flex;
@@ -363,13 +362,59 @@ p {
     justify-content: center;
     gap: 25px;
     width: 80%;
-    margin: auto;
+    margin: 15px auto;
     height: 70px;
     user-select: none;
     color: rgba($help-color, 0.9);
     font-size: 24px;
     &:hover {
       background-color: rgba($header-color, 0.7);
+    }
+  }
+}
+
+.form {
+  width: 400px;
+  height: 400px;
+  position: absolute;
+  left: 50%;
+  top: calc(50% + 35px);
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+  border-radius: 15px;
+  input {
+    width: 70%;
+    height: 35px;
+    background-color: rgba($logo-color, 0.1);
+    padding-left: 10px;
+    border-radius: 5px;
+    outline: 1px solid $logo-color;
+    &::placeholder {
+      color: $logo-color;
+      font-size: 15px;
+    }
+  }
+  &__register {
+    margin-top: 15px;
+    transition: 0.5s ease-in-out;
+    cursor: pointer;
+    border: $logo-color solid 2px;
+    border-radius: 5px;
+    color: $logo-color;
+    font-weight: 600;
+    font-size: 20px;
+    width: 30%;
+    height: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:hover {
+      background-color: $logo-color;
+      color: $helpfull-color;
     }
   }
 }

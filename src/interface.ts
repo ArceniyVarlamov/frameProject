@@ -41,3 +41,15 @@ export interface IData {
   downloads: number;
   topics: string[];
 }
+
+export interface IFirebaseUser {
+  accessToken: string;
+  email: string;
+  emailVerified: boolean;
+  phoneNumber: string;
+  stsTokenManager: {
+    accessToken: string;
+    refreshToken: string;
+  };
+  uid: string;
+}

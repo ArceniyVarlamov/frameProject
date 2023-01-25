@@ -1,24 +1,28 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export interface IAccountState {
-  code: string;
+  isRegistered: boolean;
+  accessToken: string;
 }
 
 const accountState: IAccountState = {
-  code: "",
+  isRegistered: false,
+  accessToken: "",
 };
 
 const accountSlice = createSlice({
   name: "account",
   initialState: accountState,
   reducers: {
-    setCode(state, action) {
-      state.code = action.payload;
+    setIsRegistered(state, action) {
+      state.isRegistered = action.payload
+    },
+    setAccessToken(state, action) {
+      state.accessToken = action.payload
     },
   },
 });
 
-export const { setCode } = accountSlice.actions;
+export const { setIsRegistered, setAccessToken } = accountSlice.actions;
 
 export default accountSlice.reducer;
-

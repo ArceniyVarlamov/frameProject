@@ -1,17 +1,17 @@
 import { useState, useEffect } from "react";
-import Loading from "./../animation/Loading";
-import Error from "./../animation/Error";
+import Loading from "../functional/Loading";
+import Error from "../functional/Error";
 import useFramesId from "../../hooks/get/useFramesId";
 import useColor from "./../../hooks/functions/useColor";
 import download from "../../images/download.png";
 import share from "../../images/share.png";
 import likeUnactive from "../../images/like_unactive.svg";
 import likeActive from "../../images/like_active.svg";
-import useAccountInfo from "../../hooks/info/useAccountInfo";
-import useRegisterUnsplash from './../../hooks/post/useRegisterUnsplash';
+import useAccountInfo from "../../utils/info/useAccountInfo";
+import useRegisterUnsplash from '../../utils/registration/useRegisterUnsplash';
+import useLike from "../../hooks/post/useLike";
 
 export default function Frame({ id }: { id: string }) {
-  const { code } = useAccountInfo()
 
   // own hooks
   const { data, error, load } = useFramesId(id);
@@ -44,8 +44,8 @@ export default function Frame({ id }: { id: string }) {
     return src ? addStart + slicing + addEnd : slicing;
   };
 
+  const {frameData, frameError, frameLoading} = useLike(id, like)
   
-
   return (
     <>
       <Error err={error}></Error>

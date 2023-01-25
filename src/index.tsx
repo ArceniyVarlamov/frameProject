@@ -13,6 +13,3 @@ root.render(
     <App />
   </Provider>
 );
-
-// b5d3153 - "work one HookError"
-// cd870de - "work app with hook rools"

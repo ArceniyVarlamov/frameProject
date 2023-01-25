@@ -1,18 +1,19 @@
 import Main from "../components/structure/Main";
 import Header from "../components/structure/Header";
-import { useDispatch } from "react-redux";
-import { useEffect } from "react";
-import { setCode } from "../store/accountSlice";
 import { useSearchParams } from "react-router-dom";
-import useRegisterUnsplash from "./../hooks/post/useRegisterUnsplash";
+import useRegisterUnsplash from "../utils/registration/useRegisterUnsplash";
+import Loading from "../components/functional/Loading";
 
 export default function HomePage() {
-  
 
-  return (
+  const [params, setParams] = useSearchParams()
+
+  const {accountData, accountError, accountLoading} = useRegisterUnsplash(params.get("code"))
+
+  return  (
     <>
       <Header />
       {/* <Main /> */}
     </>
-  );
+  )
 }

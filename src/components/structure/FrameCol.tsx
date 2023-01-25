@@ -1,14 +1,12 @@
 import { Link } from "react-router-dom";
-import Loading from "./../animation/Loading";
-import Error from "./../animation/Error";
+import Loading from "../functional/Loading";
+import Error from "../functional/Error";
 import useRandomHeight from "../../hooks/functions/useRandomHeight";
 import useFramesList from "../../hooks/get/useFramesList";
-import useFramesInfo from "../../hooks/info/useFramesInfo";
+import useFramesInfo from "../../utils/info/useFramesInfo";
 
 export default function FrameCol({ num, id }: { num: number; id: number }) {
   const { frames, error, load } = useFramesList(num, id);
-
-  console.log(id, '-124124');
 
   //TODO рандомные высоты ДВУХ картинок в столбце
   const heights = useRandomHeight(num);

@@ -33,6 +33,7 @@ p {
 }
 
 .error {
+  cursor: pointer;
   z-index: 1;
   border-radius: 5px;
   width: 60%;
@@ -47,7 +48,7 @@ p {
   top: 95px;
   left: 50%;
   transform: translateX(-50%);
-  background-color: rgba($logo-color, 0.7);
+  background-color: rgba($logo-color, 0.9);
 }
 
 .loading {
@@ -58,24 +59,61 @@ p {
   animation: 1.5s infinite alternate loading linear;
 }
 
-.header {
-  background-color: $header-color;
-  width: 100%;
-  display: flex;
+.correct {
   position: fixed;
-  justify-content: space-evenly;
+  display: flex;
   align-items: center;
-  top: 0;
-  left: 0;
-  height: 70px;
-  z-index: 1;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 10px;
+  mix-blend-mode: overlay;
+  top: 90px;
+  left: 20px;
+  width: 200px;
+  height: 60px;
+  background-color: $main-color;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
   & * {
     height: 48px;
     width: 48px;
     transition: 0.3s linear;
   }
-  & *:hover {
-    background-color: $pre-main-color;
+  &__account {
+    height: 24px;
+    width: 24px;
+  }
+  &__accounts {
+    height: 24px;
+    width: 24px;
+  }
+  &__register,
+  &__login {
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 500;
+    text-decoration: none;
+    &:hover {
+      color: $helpfull-color;
+      background-color: rgba($logo-color, 0.9);
+    }
+  }
+  &__register {
+    width: 15%;
+    color: $logo-color;
+  }
+  &__login {
+    width: 12%;
+    color: $logo-color;
   }
   &__logo {
     background-color: $logo-color;
@@ -85,6 +123,14 @@ p {
       background-color: $logo-color;
       opacity: 0.7;
     }
+  }
+  &__messages,
+  &__notifications,
+  &__account,
+  &__accounts {
+    background-color: $main-color;
+    border-radius: 50%;
+    cursor: pointer;
   }
   &__logo,
   &__messages,
@@ -104,48 +150,30 @@ p {
       background-color: $pre-main-color;
     }
   }
-  & input {
-    width: 40%;
-    border-radius: 15px;
-    padding-left: 20px;
-    background-color: $main-color;
-    &:focus {
-      background-color: $pre-main-color;
-      outline-color: $logo-color;
-    }
-  }
-  &__account {
-    cursor: pointer;
-    height: 24px;
-    width: 24px;
-  }
-  &__accounts {
-    cursor: pointer;
-    height: 24px;
-    width: 24px;
-  }
-  &__register,
-  &__login {
-    border-radius: 15px;
+  &__container {
+    background-color: $header-color;
+    width: 100%;
     display: flex;
+    position: fixed;
+    justify-content: space-evenly;
     align-items: center;
-    justify-content: center;
-    font-size: 20px;
-    font-weight: 500;
-    cursor: pointer;
-    text-decoration: none;
-    &:hover {
-      color: $helpfull-color;
-      background-color: rgba($logo-color, 0.9);
+    top: 0;
+    left: 0;
+    height: 70px;
+    z-index: 1;
+    & input {
+      width: 40%;
+      border-radius: 15px;
+      padding-left: 20px;
+      background-color: $main-color;
+      &:focus {
+        background-color: $pre-main-color;
+        outline-color: $logo-color;
+      }
     }
-  }
-  &__register {
-    width: 15%;
-    color: $logo-color;
-  }
-  &__login {
-    width: 12%;
-    color: $logo-color;
+    & *:hover {
+      background-color: $pre-main-color;
+    }
   }
 }
 
@@ -330,17 +358,18 @@ p {
   }
 }
 
-.registration {
+.sign {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  margin: auto;
+  width: 70%;
   height: 650px;
+  flex-direction: column;
   &__form {
     width: 80%;
     height: 90%;
     border-radius: 15px;
-    background-color: rgba($help-color, 0.05);
   }
   &__head {
     width: 100%;
@@ -350,7 +379,7 @@ p {
     font-size: 24px;
     font-weight: 600;
   }
-  & a {
+  &__support {
     text-decoration: none;
     border: none;
     cursor: pointer;
@@ -360,7 +389,7 @@ p {
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 25px;
+    gap: 10px;
     width: 80%;
     margin: 15px auto;
     height: 70px;
@@ -371,21 +400,30 @@ p {
       background-color: rgba($header-color, 0.7);
     }
   }
+  &__except {
+    font-size: 16px;
+    position: relative;
+    color: $logo-color;
+    top: 5px;
+    left: calc(10% + 15px);
+    text-decoration: none;
+    background-position: 0% 100%;
+    background-repeat: no-repeat;
+    background-image: linear-gradient($logo-color, $logo-color);
+    background-size: 0% 1px;
+    transition: background-size 0.2s ease-in;
+    &:hover {
+      background-size: 100% 1px;
+    }
+  }
 }
 
 .form {
-  width: 400px;
-  height: 400px;
-  position: absolute;
-  left: 50%;
-  top: calc(50% + 35px);
-  transform: translate(-50%, -50%);
+  width: 100%;
+  min-height: 656px;
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 40px;
-  border-radius: 15px;
   input {
     width: 70%;
     height: 35px;
@@ -398,10 +436,21 @@ p {
       font-size: 15px;
     }
   }
+  &__container {
+    width: 400px;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    border-radius: 15px;
+  }
   &__register {
     margin-top: 15px;
     transition: 0.5s ease-in-out;
     cursor: pointer;
+    padding: 5px 10px;
     border: $logo-color solid 2px;
     border-radius: 5px;
     color: $logo-color;

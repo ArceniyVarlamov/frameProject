@@ -53,3 +53,11 @@ export interface IFirebaseUser {
   };
   uid: string;
 }
+
+export interface IUnsplashUser {
+  access_token: string;
+  token_type: string;
+  scope: string;
+  created_at: number;
+  refresh_token: string;
+}

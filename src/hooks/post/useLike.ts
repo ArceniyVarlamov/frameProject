@@ -1,15 +1,32 @@
-import axios from "axios";
-import { useCallback, useEffect } from "react";
+import axios, { AxiosError } from "axios";
+import { useCallback, useEffect, useState } from "react";
+import useAccountInfo from "../../utils/info/useAccountInfo";
+import useMetaData from "../../utils/info/useMetaData";
 export default function useLike(id: string, like: boolean | undefined) {
-  const postLike = useCallback(async (frameId: string) => {
+  const { accessToken } = useAccountInfo();
+
+  const [frameData, setFrameData] = useState();
+  const [frameError, setFrameError] = useState();
+  const [frameLoading, setFrameLoading] = useState(true);
+
+  console.log(accessToken);
+  
+
+  const postLike = useCallback(async (code: string) => {
     try {
-      await axios.post(`https://api.unsplash.com/photos/${frameId}/like`, {
-        header: {
-          "client_id": process.env.REACT_APP_UNSPLASH_API_ACCESS_KEY,
-        },
-      });
-    } catch (err) {
-      console.log(err);
+      setFrameData(
+        await (
+          await axios.post(`https://api.unsplash.com/photos/${id}/like`, {
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          })
+        ).data,
+      );
+    } catch (err: AxiosError | any) {
+      setFrameError(err);
+    } finally {
+      setFrameLoading(false);
     }
   }, []);
 
@@ -18,4 +35,6 @@ export default function useLike(id: string, like: boolean | undefined) {
       postLike(id);
     }
   }, [like]);
+
+  return { frameData, frameError, frameLoading };
 }

@@ -1,6 +1,7 @@
 import axios, { AxiosError } from "axios";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { IData } from "../../interface";
+import useMetaData from "../../utils/info/useMetaData";
 
 // Хук, который загружает массив из информации о картинках в зависимости от номера страницы(id) и кол-ва картинок(num)
 export default function useFramesList(num: number, id: number) {
@@ -12,6 +13,8 @@ export default function useFramesList(num: number, id: number) {
   // Загрузка
   const [load, setLoad] = useState<boolean>(true);
 
+  const {unsplash} = useMetaData()
+
   const getInfo = useCallback(async () => {
     try {
       setFrames(
@@ -20,7 +23,7 @@ export default function useFramesList(num: number, id: number) {
             `https://api.unsplash.com/photos/?page=${id}&per_page=${num}`,
             {
               headers: {
-                Authorization: `Client-ID ${process.env.REACT_APP_UNSPLASH_API_ACCESS_KEY}`,
+                Authorization: `Client-ID ${unsplash.ACCESS_KEY}`,
               },
             }
           )

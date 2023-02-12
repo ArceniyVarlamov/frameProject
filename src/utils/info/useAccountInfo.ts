@@ -1,10 +1,9 @@
-import { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { IAccountState, setIsRegistered } from "../../store/accountSlice";
+import { useSelector } from "react-redux";
+import { IAccountState } from "../../store/accountSlice";
 
 export default function useAccountInfo() {
-  const { isRegistered, accessToken } = useSelector(
+  const { isRegistered, registeredWith, accessToken } = useSelector(
     (state: { account: IAccountState }) => state.account
   );
-  return { isRegistered, accessToken };
+  return { isRegistered, registeredWith, accessToken };
 }

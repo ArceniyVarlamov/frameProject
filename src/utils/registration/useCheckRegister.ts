@@ -1,26 +1,34 @@
 import axios, { AxiosError } from "axios";
 import { useCallback, useEffect, useState } from "react";
-import useMetaData from "../info/useMetaData";
-import { IUnsplashUser } from "../../interface";
 import { useDispatch } from "react-redux";
+import { IUnsplashUser } from "../../interface";
 import { setAccessToken, setIsRegistered } from "../../store/accountSlice";
-export default function useRegisterUnsplash(code?: string | null) {
+import useMetaData from "../info/useMetaData";
+import useAccountInfo from "../info/useAccountInfo";
+
+export default function useCheckRegister() {
 	const dispatch = useDispatch();
 
+	const { isRegistered, registeredWith, accessToken } = useAccountInfo()
 	const [accountData, setAccountData] = useState({} as IUnsplashUser);
 	const [accountError, setAccountError] = useState<string>(
 		"" as AxiosError | any,
 	);
 	const [accountLoading, setAccountLoading] = useState(true);
-
 	const { unsplash, app } = useMetaData();
 
-	const postRegisterUnsplash = useCallback(async (code: string) => {
+	const postRefreshUnsplash = useCallback(async () => {
 		try {
 			setAccountData(
 				await (
 					await axios.post(
-						`https://unsplash.com/oauth/token?client_id=${unsplash.ACCESS_KEY}&client_secret=${unsplash.SECRET_KEY}&redirect_uri=${app.URL + '/registered'}&grant_type=authorization_code&code=${code}`,
+						`https://unsplash.com/oauth/token?client_id=${
+							unsplash.ACCESS_KEY
+						}&client_secret=${unsplash.SECRET_KEY}&redirect_uri=${
+							app.URL
+						}&grant_type=refresh_token&refresh_token=${localStorage.getItem(
+							"refresh_token",
+						)}`,
 					)
 				).data,
 			);
@@ -29,23 +37,21 @@ export default function useRegisterUnsplash(code?: string | null) {
 		} finally {
 			setAccountLoading(false);
 		}
-	}, []);
+	}, [])
 
 	useEffect(() => {
-		if (code) {
-			postRegisterUnsplash(code);
-		}
-	}, [code, postRegisterUnsplash]);
+		if (!accessToken && typeof localStorage.getItem('refresh_token') === "undefined") {
+			postRefreshUnsplash()
+    }
+	}, []);
 
 	useEffect(() => {
 		if (accountData.access_token) {
 			localStorage.setItem("refresh_token", accountData.refresh_token);
-			console.log(localStorage.getItem("refresh_token"));
 			dispatch(setAccessToken(accountData.access_token));
 			dispatch(setIsRegistered(true));
-			console.log(accountData);
 		}
 	}, [accountData]);
 
-	return { accountData, accountError, accountLoading };
+	return { accountData, accountError, accountLoading }
 }

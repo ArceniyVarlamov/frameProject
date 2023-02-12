@@ -5,8 +5,10 @@ import FramePage from './pages/frame';
 import RegistrationPage from './pages/registrationWith';
 import EmailPage from './pages/withEmail';
 import LoginPage from './pages/loginWith';
+import Registered from './pages/registered';
+
 function App() {
-  
+
   return (
     <BrowserRouter>
       <Routes>
@@ -14,7 +16,8 @@ function App() {
         <Route path="frame/:id" element={<FramePage/>}/>
         <Route path="/registration" element={<RegistrationPage/>}/>
         <Route path="/login" element={<LoginPage/>}/>
-        <Route path="email/:type" element={<EmailPage/>}/>
+        <Route path="/email/:type" element={<EmailPage/>}/>
+        <Route path="/registered" element={<Registered/>}/>
       </Routes>
     </BrowserRouter>
   );

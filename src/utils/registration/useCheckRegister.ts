@@ -9,7 +9,7 @@ import useAccountInfo from "../info/useAccountInfo";
 export default function useCheckRegister() {
 	const dispatch = useDispatch();
 
-	const { isRegistered, registeredWith, accessToken } = useAccountInfo()
+	const { isRegistered, registeredWith, accessToken } = useAccountInfo();
 	const [accountData, setAccountData] = useState({} as IUnsplashUser);
 	const [accountError, setAccountError] = useState<string>(
 		"" as AxiosError | any,
@@ -37,12 +37,15 @@ export default function useCheckRegister() {
 		} finally {
 			setAccountLoading(false);
 		}
-	}, [])
+	}, []);
 
 	useEffect(() => {
-		if (!accessToken && typeof localStorage.getItem('refresh_token') === "undefined") {
-			postRefreshUnsplash()
-    }
+		if (
+			!accessToken &&
+			typeof localStorage.getItem("refresh_token") === "undefined"
+		) {
+			postRefreshUnsplash();
+		}
 	}, []);
 
 	useEffect(() => {
@@ -53,5 +56,5 @@ export default function useCheckRegister() {
 		}
 	}, [accountData]);
 
-	return { accountData, accountError, accountLoading }
+	return { accountData, accountError, accountLoading };
 }

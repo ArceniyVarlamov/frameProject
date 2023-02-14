@@ -1,7 +1,11 @@
 import { Link } from "react-router-dom";
 import useAccountInfo from "../../utils/info/useAccountInfo";
+import useCheckRegister from './../../utils/registration/useCheckRegister';
 
 export default function Header() {
+  
+  useCheckRegister()
+
   const { isRegistered } = useAccountInfo();
 
   return (
@@ -24,7 +28,7 @@ export default function Header() {
           <>
             <div className='header__notifications'></div>
             <div className='header__messages'></div>
-            <div className='header__account'></div>
+            <Link to='/account' className='header__account'></Link>
             <div className='header__accounts'></div>
           </>
         )}

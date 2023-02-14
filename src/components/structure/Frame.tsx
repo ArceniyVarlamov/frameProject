@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Loading from "../functional/Loading";
 import Error from "../functional/Error";
 import useFramesId from "../../hooks/get/useFramesId";
@@ -7,9 +7,8 @@ import download from "../../images/download.png";
 import share from "../../images/share.png";
 import likeUnactive from "../../images/like_unactive.svg";
 import likeActive from "../../images/like_active.svg";
-import useAccountInfo from "../../utils/info/useAccountInfo";
-import useRegisterUnsplash from '../../utils/registration/useRegisterUnsplash';
 import useLike from "../../hooks/post/useLike";
+import conditional from "../../utils/functional/condition";
 
 export default function Frame({ id }: { id: string }) {
 
@@ -22,26 +21,6 @@ export default function Frame({ id }: { id: string }) {
   // component functions
   const liked = () => {
     setLike((curr) => !curr);
-  };
-  const conditional = ({
-    src,
-    alt = "",
-    addStart = "",
-    addEnd = "",
-    slice = undefined,
-  }: {
-    src: string | number | undefined;
-    alt?: string;
-    addStart?: string;
-    addEnd?: string;
-    slice?: number;
-  }) => {
-    const output = src ? src.toString() : alt;
-    let slicing = output;
-    if (output.slice(0, slice).length < output.length) {
-      slicing = output.slice(0, slice) + "...";
-    }
-    return src ? addStart + slicing + addEnd : slicing;
   };
 
   const {frameData, frameError, frameLoading} = useLike(id, like)

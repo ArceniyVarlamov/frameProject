@@ -5,7 +5,8 @@ import FramePage from './pages/frame';
 import RegistrationPage from './pages/registrationWith';
 import EmailPage from './pages/withEmail';
 import LoginPage from './pages/loginWith';
-import Registered from './pages/registered';
+import RegisteredPage from './pages/registered';
+import AccountPage from './pages/account';
 
 function App() {
 
@@ -17,7 +18,8 @@ function App() {
         <Route path="/registration" element={<RegistrationPage/>}/>
         <Route path="/login" element={<LoginPage/>}/>
         <Route path="/email/:type" element={<EmailPage/>}/>
-        <Route path="/registered" element={<Registered/>}/>
+        <Route path="/registered" element={<RegisteredPage/>}/>
+        <Route path="/account" element={<AccountPage/>}/>
       </Routes>
     </BrowserRouter>
   );

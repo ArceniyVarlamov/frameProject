@@ -11,9 +11,7 @@ export default function useCheckRegister() {
 
 	const { isRegistered, registeredWith, accessToken } = useAccountInfo();
 	const [accountData, setAccountData] = useState({} as IUnsplashUser);
-	const [accountError, setAccountError] = useState<string>(
-		"" as AxiosError | any,
-	);
+	const [accountError, setAccountError] = useState("" as AxiosError | any);
 	const [accountLoading, setAccountLoading] = useState(true);
 	const { unsplash, app } = useMetaData();
 
@@ -42,7 +40,7 @@ export default function useCheckRegister() {
 	useEffect(() => {
 		if (
 			!accessToken &&
-			typeof localStorage.getItem("refresh_token") === "undefined"
+			localStorage.getItem("refresh_token")
 		) {
 			postRefreshUnsplash();
 		}
@@ -50,11 +48,12 @@ export default function useCheckRegister() {
 
 	useEffect(() => {
 		if (accountData.access_token) {
+
 			localStorage.setItem("refresh_token", accountData.refresh_token);
 			dispatch(setAccessToken(accountData.access_token));
 			dispatch(setIsRegistered(true));
 		}
-	}, [accountData]);
+	}, [accountData, accountError]);
 
 	return { accountData, accountError, accountLoading };
 }

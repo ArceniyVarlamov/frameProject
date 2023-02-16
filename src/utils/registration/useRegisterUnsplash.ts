@@ -19,9 +19,13 @@ export default function useRegisterUnsplash(code?: string | null) {
 		try {
 			setAccountData(
 				await (
-					await axios.post(
-						`https://unsplash.com/oauth/token?client_id=${unsplash.ACCESS_KEY}&client_secret=${unsplash.SECRET_KEY}&redirect_uri=${app.URL + '/registered'}&grant_type=authorization_code&code=${code}`,
-					)
+					await axios.post(`https://unsplash.com/oauth/token`, {
+						client_id: unsplash.ACCESS_KEY,
+						client_secret: unsplash.SECRET_KEY,
+						redirect_uri: app.URL + "/registered",
+						grant_type: "authorization_code",
+						code: code,
+					})
 				).data,
 			);
 		} catch (err: AxiosError | any) {

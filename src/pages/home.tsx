@@ -9,8 +9,6 @@ import useCheckRegister from './../utils/registration/useCheckRegister';
 
 export default function HomePage() {
 
-  useCheckRegister()
-
   return  (
     <>
       <Header />

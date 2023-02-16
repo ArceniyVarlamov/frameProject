@@ -16,7 +16,7 @@ const conditional = ({
   if (output.slice(0, slice).length < output.length) {
     slicing = output.slice(0, slice) + "...";
   }
-  return src ? addStart + slicing + addEnd : slicing;
+  return src ? (addStart + slicing + addEnd).toString() : slicing.toString();
 };
 
 export default conditional

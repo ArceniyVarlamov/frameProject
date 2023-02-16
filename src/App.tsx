@@ -7,8 +7,11 @@ import EmailPage from './pages/withEmail';
 import LoginPage from './pages/loginWith';
 import RegisteredPage from './pages/registered';
 import AccountPage from './pages/account';
+import useCheckRegister from './utils/registration/useCheckRegister';
 
 function App() {
+
+  useCheckRegister()
 
   return (
     <BrowserRouter>

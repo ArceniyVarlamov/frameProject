@@ -22,12 +22,13 @@ export default function FrameCol({ num, id }: { num: number; id: number }) {
               <div
                 className='main__frame'
                 style={{
-                  backgroundColor: item.color,
+                  backgroundColor: item?.color,
                   height: `${heights[i]}px`,
                 }}
               >
-                <Link to={`/frame/${item.id}`}>
-                  <img src={item.urls.regular} className='main__img' />
+                <Link to={`/frame/${item?.id}`} className='main__link'>
+                  <img src={item?.urls?.regular} className='main__img' />
+                  <div className="main__author">{item?.user?.username}</div>
                 </Link>
               </div>
             )}

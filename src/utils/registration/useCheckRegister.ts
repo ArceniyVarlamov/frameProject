@@ -19,15 +19,13 @@ export default function useCheckRegister() {
 		try {
 			setAccountData(
 				await (
-					await axios.post(
-						`https://unsplash.com/oauth/token?client_id=${
-							unsplash.ACCESS_KEY
-						}&client_secret=${unsplash.SECRET_KEY}&redirect_uri=${
-							app.URL
-						}&grant_type=refresh_token&refresh_token=${localStorage.getItem(
-							"refresh_token",
-						)}`,
-					)
+					await axios.post(`https://unsplash.com/oauth/token`, {
+							client_id: unsplash.ACCESS_KEY,
+							client_secret: unsplash.SECRET_KEY,
+							redirect_uri: app.URL,
+							grant_type: "refresh_token",
+							refresh_token: localStorage.getItem("refresh_token"),
+					})
 				).data,
 			);
 		} catch (err: AxiosError | any) {

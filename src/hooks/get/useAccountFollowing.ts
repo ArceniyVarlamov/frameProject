@@ -4,23 +4,24 @@ import { useEffect, useCallback } from "react";
 import { IAccountPublicData } from "../../interface";
 import useAccountInfo from "../../utils/info/useAccountInfo";
 
-export default function useAccountCurrent() {
+export default function useAccountFollowing(username: string | null = "") {
 	const [data, setData] = useState({} as IAccountPublicData);
 	const [error, setError] = useState("" as AxiosError | any);
 	const [load, setLoad] = useState<boolean>(false);
 	const { accessToken } = useAccountInfo();
 	const getInfo = useCallback(async () => {
-		console.log(accessToken, "12515231251251523");
-
 		try {
 			setData(
 				await (
-					await axios.get(`https://api.unsplash.com/me`, {
-						headers: {
-							access_token: accessToken,
-							token_type: "Bearer",
+					await axios.get(
+						`https://api.unsplash.com/users/${username}/following`,
+						{
+							headers: {
+								access_token: accessToken,
+								token_type: "Bearer",
+							},
 						},
-					})
+					)
 				).data,
 			);
 		} catch (err: AxiosError | any) {
@@ -39,7 +40,7 @@ export default function useAccountCurrent() {
 	}, [accessToken]);
 
 	useEffect(() => {
-		console.log(data, error, "--------------------");
+		console.log(data, error, "++++++++++++++++++++");
 	}, [data, error]);
 
 	return { data, error, load };

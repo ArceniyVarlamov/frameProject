@@ -32,6 +32,8 @@ export default function useFramesList(num: number, id: number) {
     } catch (err: AxiosError | any) {
       setError(await err.message);
     } finally {
+      console.log(id);
+      
       setLoad(false);
     }
   }, []);
@@ -39,6 +41,7 @@ export default function useFramesList(num: number, id: number) {
   // Когда пользователь достигнет границы страницы загружется информация
   useEffect(() => {
     getInfo();
+
   }, []);
 
   return { frames, error, load };

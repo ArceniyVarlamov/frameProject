@@ -4,7 +4,7 @@ import { useEffect, useCallback } from "react";
 import { IData } from "../../interface";
 import useMetaData from '../../utils/info/useMetaData';
 
-export default function useFramesId(id: string) {
+export default function useFramesId(id: string | null | undefined) {
   const [data, setData] = useState<IData>();
   const [error, setError] = useState<string>("");
   const [load, setLoad] = useState<boolean>(false);
@@ -25,11 +25,13 @@ export default function useFramesId(id: string) {
     } finally {
       setLoad(false);
     }
-  }, []);
+  }, [id, unsplash.ACCESS_KEY]);
 
   useEffect(() => {
-    getInfo();
-  }, [id]);
+    if (typeof id === "string") {
+      getInfo();
+    }
+  }, [getInfo, id]);
 
   return { data, error, load };
 }

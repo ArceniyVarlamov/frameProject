@@ -8,9 +8,11 @@ import LoginPage from './pages/loginWith';
 import RegisteredPage from './pages/registered';
 import AccountPage from './pages/account';
 import useCheckRegister from './utils/registration/useCheckRegister';
+import CollectionPage from './pages/collection';
 
 function App() {
-
+  console.log('aweyqweyweyry');
+  
   useCheckRegister()
 
   return (
@@ -23,6 +25,7 @@ function App() {
         <Route path="/email/:type" element={<EmailPage/>}/>
         <Route path="/registered" element={<RegisteredPage/>}/>
         <Route path="/account" element={<AccountPage/>}/>
+        <Route path="collection/:id" element={<CollectionPage/>}/>
       </Routes>
     </BrowserRouter>
   );

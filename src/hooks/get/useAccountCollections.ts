@@ -1,26 +1,20 @@
 import axios, { AxiosError } from "axios";
 import { useState } from "react";
 import { useEffect, useCallback } from "react";
-import { useDispatch } from "react-redux";
-import { IAccountPublicData } from "../../interface";
-import { setLinks } from "../../store/accountSlice";
 import useAccountInfo from "../../utils/info/useAccountInfo";
+import { IAccountCollection } from './../../interface';
 
-export default function useAccountCurrent() {
-	const dispatch = useDispatch();
-
-	const [data, setData] = useState({} as IAccountPublicData);
+export default function useAccountCollections(username: string | null = "") {
+	const [data, setData] = useState([] as IAccountCollection[]);
 	const [error, setError] = useState("" as AxiosError | any);
 	const [load, setLoad] = useState<boolean>(false);
 	const { accessToken } = useAccountInfo();
 	const getInfo = useCallback(async (accessToken: string) => {
-		console.log(accessToken, "12515231251251523");
-
 		try {
 			setData(
 				await (
 					await axios.get(
-						`https://api.unsplash.com/me?access_token=${accessToken}`,
+						`https://api.unsplash.com/users/${username}/collections?access_token=${accessToken}`,
 					)
 				).data,
 			);
@@ -29,22 +23,18 @@ export default function useAccountCurrent() {
 		} finally {
 			setLoad(false);
 		}
-	}, []);
+	}, [username]);
 
 	useEffect(() => {
-		console.log(accessToken, accessToken.length > 0, "qwtqertqwetwetwertwert");
-
-		if (accessToken.length > 0) {
+		if (typeof accessToken === 'string') {
 			getInfo(accessToken);
 		}
 	}, [accessToken, getInfo]);
 
-	useEffect(() => {
-		if (data?.links) {
-			console.log(data, error, "--------------------");
-			dispatch(setLinks(data?.links))
-		}
-	}, [data, error]);
+  useEffect(() => {
+    console.log(data, error, load);
+    
+  }, [data, error, load]);
 
 	return { data, error, load };
 }

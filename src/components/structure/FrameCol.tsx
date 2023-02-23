@@ -4,6 +4,7 @@ import Error from "../functional/Error";
 import useRandomHeight from "../../hooks/functions/useRandomHeight";
 import useFramesList from "../../hooks/get/useFramesList";
 import useFramesInfo from "../../utils/info/useFramesInfo";
+import Image from './Image';
 
 export default function FrameCol({ num, id }: { num: number; id: number }) {
   const { frames, error, load } = useFramesList(num, id);
@@ -27,7 +28,7 @@ export default function FrameCol({ num, id }: { num: number; id: number }) {
                 }}
               >
                 <Link to={`/frame/${item?.id}`} className='main__link'>
-                  <img src={item?.urls?.regular} className='main__img' />
+                  <Image src={item?.urls?.regular} className='main__img'></Image>
                   <div className="main__author">{item?.user?.username}</div>
                 </Link>
               </div>

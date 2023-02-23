@@ -15,43 +15,40 @@ export default function useCheckRegister() {
 	const [accountLoading, setAccountLoading] = useState(true);
 	const { unsplash, app } = useMetaData();
 
-	const postRefreshUnsplash = useCallback(async () => {
-		try {
-			setAccountData(
-				await (
-					await axios.post(`https://unsplash.com/oauth/token`, {
-							client_id: unsplash.ACCESS_KEY,
-							client_secret: unsplash.SECRET_KEY,
-							redirect_uri: app.URL,
-							grant_type: "refresh_token",
-							refresh_token: localStorage.getItem("refresh_token"),
-					})
-				).data,
-			);
-		} catch (err: AxiosError | any) {
-			setAccountError(err);
-		} finally {
-			setAccountLoading(false);
-		}
-	}, []);
+	const postRefreshUnsplash = useCallback(
+		async (refreshToken: string | null) => {
+			try {
+				setAccountData(
+					await (
+						await axios.post(
+							`https://unsplash.com/oauth/token?client_id=${unsplash.ACCESS_KEY}&client_secret=${unsplash.SECRET_KEY}&redirect_uri=${app.URL}&grant_type=refresh_token&refresh_token=${refreshToken}`,
+						)
+					).data,
+				);
+			} catch (err: AxiosError | any) {
+				setAccountError(err);
+			} finally {
+				setAccountLoading(false);
+			}
+		},
+		[],
+	);
 
 	useEffect(() => {
-		if (
-			!accessToken &&
-			localStorage.getItem("refresh_token")
-		) {
-			postRefreshUnsplash();
+		if (localStorage.getItem("refresh_token") && !isRegistered) {
+			postRefreshUnsplash(localStorage.getItem("refresh_token"));
 		}
-	}, []);
+	}, [accessToken.length, isRegistered, postRefreshUnsplash]);
 
 	useEffect(() => {
 		if (accountData.access_token) {
+			console.log(accountData, accountError);
 
 			localStorage.setItem("refresh_token", accountData.refresh_token);
 			dispatch(setAccessToken(accountData.access_token));
 			dispatch(setIsRegistered(true));
 		}
-	}, [accountData, accountError]);
+	}, [accountData, accountError, dispatch]);
 
 	return { accountData, accountError, accountLoading };
 }

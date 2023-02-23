@@ -9,6 +9,7 @@ import likeUnactive from "../../images/like_unactive.svg";
 import likeActive from "../../images/like_active.svg";
 import useLike from "../../hooks/post/useLike";
 import conditional from "../../utils/functional/condition";
+import Image from './Image';
 
 export default function Frame({ id }: { id: string }) {
 	// own hooks
@@ -22,7 +23,7 @@ export default function Frame({ id }: { id: string }) {
 		setLike((curr) => !curr);
 	};
 
-	const { frameData, frameError, frameLoading } = useLike(id, like);
+	// const { frameData, frameError, frameLoading } = useLike(id, like);
 
 	return (
 		<>
@@ -30,14 +31,7 @@ export default function Frame({ id }: { id: string }) {
 			<Loading loading={load} />
 			{!load && (
 				<div className='frame'>
-					<img
-						className='frame__img'
-						src={conditional({
-							src: data?.urls?.full,
-							alt: `https://via.placeholder.com/300x900/white`,
-						})}
-						alt='frame'
-					/>
+					<Image className='frame__img' src={data?.urls?.full}></Image>
 					<div className='frame__info'>
 						<div className='frame__links'>
 							<div>
@@ -59,14 +53,7 @@ export default function Frame({ id }: { id: string }) {
 						</div>
 						<div className='frame__author' style={{ backgroundColor: color }}>
 							<div className='frame__user'>
-								<img
-									className='frame__icon'
-									src={conditional({
-										src: data?.user?.profile_image?.small,
-										alt: `https://via.placeholder.com/45x45/grey`,
-									})}
-									alt='icon'
-								/>
+								<Image src={data?.user?.profile_image?.small} className='frame__icon'></Image>
 								<div className='frame__user-goal'>
 									<p className='frame__username' style={{ color: color }}>
 										{conditional({ src: data?.user?.username })}

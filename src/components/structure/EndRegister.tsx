@@ -20,7 +20,7 @@ export default function EndRegister() {
 	) : (
 		<div className='registered'>
 			<Loading loading={accountLoading}></Loading>
-			<p className='registered__message'>registration completed successfully</p>
+			<p className='registered__message'>Registration completed successfully</p>
 			<Link className='registered__link' to='/'>
 				Back to main page
 			</Link>

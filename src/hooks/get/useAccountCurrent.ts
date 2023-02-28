@@ -41,10 +41,9 @@ export default function useAccountCurrent() {
 
 	useEffect(() => {
 		if (data?.links) {
-			console.log(data, error, "--------------------");
 			dispatch(setLinks(data?.links))
 		}
-	}, [data, error]);
+	}, [data, dispatch, error]);
 
 	return { data, error, load };
 }

@@ -30,18 +30,18 @@ export default function Account({ className }: { className?: string }) {
 					></Image>
 					<div className='account__info'>
 						<div className='account__author'>
-							<div className='account__username'>
+							<div className='account__username truncate'>
 								{conditional({ src: data?.username, alt: "noname" })}
 							</div>
-							<div className='account__subscribe'>Subscribe</div>
+							<div className='account__subscribe truncate'>Subscribe</div>
 						</div>
 						<div className='account__numbers'>
-							<div className='account__downloads'>
+							<div className='account__downloads truncate'>
 								{conditional({ src: data?.downloads, alt: "0" })}{" "}
 								<p>downloads</p>
 							</div>
 							<div
-								className='account__subscribers'
+								className='account__subscribers truncate'
 								onClick={() => {
 									setShowFollowing(!showFollowing);
 									setFollowing(false);
@@ -51,7 +51,7 @@ export default function Account({ className }: { className?: string }) {
 								<p>subscribers</p>
 							</div>
 							<div
-								className='account__subscriptions'
+								className='account__subscriptions truncate'
 								onClick={() => {
 									setShowFollowing(!showFollowing);
 									setFollowing(true);

@@ -12,14 +12,14 @@ export default function Header() {
     <div className='header'>
       <div className='header__container'>
         <Link to='/' className='header__logo'></Link>
-        <div className='header__create'>Create</div>
-        <input type='text' placeholder='Search' />
+        <div className='header__create truncate'>Create</div>
+        <input type='text' placeholder='Search' className="truncate header__search"/>
         {!isRegistered && (
           <>
-            <Link to='/registration' className='header__register'>
+            <Link to='/registration' className='header__register truncate'>
               Register
             </Link>
-            <Link to='/login' className='header__login'>
+            <Link to='/login' className='header__login truncate'>
               Login
             </Link>
           </>

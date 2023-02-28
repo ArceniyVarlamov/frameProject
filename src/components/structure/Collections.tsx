@@ -5,6 +5,7 @@ import arrow from "../../images/Arrow-down.png";
 import Following from "./Following";
 import Image from "./Image";
 import useAccountCollections from "../../hooks/get/useAccountCollections";
+import { Link } from "react-router-dom";
 
 export default function Collections({
 	username,
@@ -15,18 +16,21 @@ export default function Collections({
 }) {
   
 	const { data, error, load } = useAccountCollections(username);
+
+	console.log(data, 'asfwqwtttttttt');
+	
 	
 	return (
     <div className={`collections ${className}`}>
-			{data!.map((item, i) => {
+			{data ? data?.map((item, i) => {
 				return (
-					<div className="collections__collection" key={item?.id}>
+					<Link to={`collection/${item?.id}`} className="collections__collection" key={item?.id}>
 						<Image
-							src={item?.cover_photo.urls.regular}
+							src={item?.cover_photo.urls?.regular}
 						></Image>
-					</div>
+					</Link>
 				)
-			})}
+			}) : <></>}
     </div>
   );
 }

@@ -1,16 +1,15 @@
-import Frame from "../components/structure/Frame";
 import Header from '../components/structure/Header';
 import { useParams } from 'react-router-dom';
-import Account from './../components/structure/Account';
+import Collections from "../components/structure/Collections";
 
-export default function AccountPage() {
+export default function CollectionsPage() {
 
   const { username = "" } = useParams();
   
   return (
     <>
       <Header/>
-      <Account username={username}/>
+      <Collections username={username} toShow={Infinity}/>
     </>
   )
 }

@@ -8,6 +8,7 @@ import useAccountFollowers from "./../../hooks/get/useAccontFollowers";
 import { useRef } from "react";
 import useAccountCollections from './../../hooks/get/useAccountCollections';
 import Image from './Image';
+import { IAccountPublicData } from './../../interface';
 
 export default function Following({
 	username,
@@ -16,7 +17,7 @@ export default function Following({
 	setShow,
 	setFollowing,
 }: {
-	username?: string | null;
+	username: string | null;
 	following: boolean;
 	show: boolean;
 	setShow: any;
@@ -112,7 +113,7 @@ export default function Following({
 										<Loading loading={followingLoad}></Loading>
 										<Error err={followingError}></Error>
 										<div className='following__img'>
-											<Image src={item?.profile_image.medium}></Image>
+											<Image src={item?.profile_image?.medium}></Image>
 										</div>
 										<div className='following__info'>
 											<div className='following__username'>
@@ -139,7 +140,7 @@ export default function Following({
 										<Loading loading={followersLoad}></Loading>
 										<Error err={followersError}></Error>
 										<div className='following__img'>
-											<Image src={item?.profile_image.medium}></Image>
+											<Image src={item?.profile_image?.medium}></Image>
 										</div>
 										<div className='following__info'>
 											<div className='following__username'>

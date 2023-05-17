@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useEffect, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { IAccountPublicData } from "../../interface";
-import { setLinks } from "../../store/accountSlice";
+import { setInfo, setIsRegistered } from "../../store/accountSlice";
 import useAccountInfo from "../../utils/info/useAccountInfo";
 
 export default function useAccountCurrent() {
@@ -14,8 +14,7 @@ export default function useAccountCurrent() {
 	const [load, setLoad] = useState<boolean>(false);
 	const { accessToken } = useAccountInfo();
 	const getInfo = useCallback(async (accessToken: string) => {
-		console.log(accessToken, "12515231251251523");
-
+		
 		try {
 			setData(
 				await (
@@ -32,16 +31,16 @@ export default function useAccountCurrent() {
 	}, []);
 
 	useEffect(() => {
-		console.log(accessToken, accessToken.length > 0, "qwtqertqwetwetwertwert");
-
 		if (accessToken.length > 0) {
 			getInfo(accessToken);
 		}
 	}, [accessToken, getInfo]);
 
 	useEffect(() => {
-		if (data?.links) {
-			dispatch(setLinks(data?.links))
+		if (data && !localStorage.getItem("accountInfo")) {
+			localStorage.setItem("accountInfo", JSON.stringify(data))
+			dispatch(setIsRegistered(true));
+			dispatch(setInfo(data))
 		}
 	}, [data, dispatch, error]);
 

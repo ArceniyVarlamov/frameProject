@@ -1,20 +1,24 @@
 import axios, { AxiosError } from "axios";
 import { useState } from "react";
 import { useEffect, useCallback } from "react";
+import { useDispatch } from "react-redux";
 import { IAccountPublicData } from "../../interface";
+import { setInfo, setIsRegistered } from "../../store/accountSlice";
 import useAccountInfo from "../../utils/info/useAccountInfo";
 
-export default function useAccountFollowers(username: string | null) {
-	const [data, setData] = useState([] as IAccountPublicData[]);
+export default function useAccountCurrent(username: string) {
+	const dispatch = useDispatch();
+
+	const [data, setData] = useState({} as IAccountPublicData);
 	const [error, setError] = useState("" as AxiosError | any);
 	const [load, setLoad] = useState<boolean>(false);
-	const { accessToken, accountInfo } = useAccountInfo();
-	const getInfo = useCallback(async (accessToken: string) => {
+
+	const getInfo = useCallback(async () => {
 		try {
 			setData(
 				await (
 					await axios.get(
-						`https://api.unsplash.com/users/${username}/followers?access_token=${accessToken}`,
+						`https://api.unsplash.com/users/${username}`,
 					)
 				).data,
 			);
@@ -23,13 +27,14 @@ export default function useAccountFollowers(username: string | null) {
 		} finally {
 			setLoad(false);
 		}
-	}, []);
+	}, [username]);
 
-	useEffect(() => {
-		if (typeof accessToken === 'string') {
-			getInfo(accessToken);
-		}
-	}, [accessToken, getInfo, accountInfo]);
+  useEffect(() => {
+    if (typeof username === "string") {
+      getInfo();
+    }
+  }, [getInfo, username]);
 
 	return { data, error, load };
 }
+

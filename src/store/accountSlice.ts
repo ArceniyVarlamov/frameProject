@@ -1,18 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { IAccountLinks } from "../interface";
+import { IAccountPublicData } from "../interface";
 
 export interface IAccountState {
   isRegistered: boolean;
   registeredWith: string;
   accessToken: string;
-  links: IAccountLinks
+  accountInfo: IAccountPublicData;
 }
 
 const accountState: IAccountState = {
   isRegistered: false,
   registeredWith: "",
   accessToken: "",
-  links: {} as IAccountLinks,
+  accountInfo: {} as IAccountPublicData,
 };
 
 const accountSlice = createSlice({
@@ -28,12 +28,12 @@ const accountSlice = createSlice({
     setAccessToken(state, action) {
       state.accessToken = action.payload
     },
-    setLinks(state, action) {
-      state.links = action.payload
+    setInfo(state, action) {
+      state.accountInfo = action.payload
     },
   },
 });
 
-export const { setIsRegistered, setRegisteredWith, setAccessToken, setLinks } = accountSlice.actions;
+export const { setIsRegistered, setRegisteredWith, setAccessToken, setInfo } = accountSlice.actions;
 
 export default accountSlice.reducer;

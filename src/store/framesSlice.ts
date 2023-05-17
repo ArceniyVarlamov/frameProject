@@ -2,13 +2,13 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export interface IFramesState {
   frames: string[];
-  id: number;
+  framesHeight: number[];
   col: number;
 }
 
 const framesState: IFramesState = {
   frames: [],
-  id: 1,
+  framesHeight: [],
   col: 1,
 };
 
@@ -16,15 +16,18 @@ const framesSlice = createSlice({
   name: "frames",
   initialState: framesState,
   reducers: {
-    addId(state) {
-      state.id += 13;
-    },
     addCol(state) {
       state.col += 1;
+    },
+    addFramesHeight(state, action) {
+      state.framesHeight.push(action.payload)
+    },
+    addHeight(state, action) {
+      state.framesHeight[action.payload.column] += action.payload.height
     },
   },
 });
 
-export const { addId, addCol } = framesSlice.actions;
+export const { addCol, addFramesHeight, addHeight } = framesSlice.actions;
 
 export default framesSlice.reducer;

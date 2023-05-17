@@ -21,12 +21,12 @@ export default function useAccountCollection(id: string | null = "") {
 			try {
 				setDataCollection(
 					await (
-						await axios.get(`https://api.unsplash.com/collections/${id}`)
+						await axios.get(`https://api.unsplash.com/collections/${id}?access_token=${accessToken}`)
 					).data,
 				);
 				setDataCollectionPhotos(
 					await (
-						await axios.get(`https://api.unsplash.com/collections/${id}/photos`)
+						await axios.get(`https://api.unsplash.com/collections/${id}/photos?access_token=${accessToken}`)
 					).data,
 				);
 			} catch (err: AxiosError | any) {

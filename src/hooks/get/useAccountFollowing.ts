@@ -4,17 +4,17 @@ import { useEffect, useCallback } from "react";
 import { IAccountPublicData } from "../../interface";
 import useAccountInfo from "../../utils/info/useAccountInfo";
 
-export default function useAccountFollowing(username: string | null = "") {
+export default function useAccountFollowing(username: string | null) {
 	const [data, setData] = useState([] as IAccountPublicData[]);
 	const [error, setError] = useState("" as AxiosError | any);
 	const [load, setLoad] = useState<boolean>(false);
-	const { accessToken, links } = useAccountInfo();
-	const getInfo = useCallback(async (accessToken: string, link: string) => {
+	const { accessToken, accountInfo } = useAccountInfo();
+	const getInfo = useCallback(async (accessToken: string) => {
 		try {
 			setData(
 				await (
 					await axios.get(
-						`${link}?access_token=${accessToken}`,
+						`https://api.unsplash.com/users/${username}/following?access_token=${accessToken}`,
 					)
 				).data,
 			);
@@ -26,12 +26,12 @@ export default function useAccountFollowing(username: string | null = "") {
 	}, []);
 
 	useEffect(() => {
-		console.log(accessToken, accessToken.length > 0, "qwtqertqwetwetwertwert");
+		console.log(accountInfo);
 
-		if (typeof accessToken === 'string' && typeof links.following === 'string') {
-			getInfo(accessToken, links.following);
+		if (typeof accessToken === 'string') {
+			getInfo(accessToken);
 		}
-	}, [accessToken, getInfo, links.following]);
+	}, [accessToken, getInfo, accountInfo]);
 
 	return { data, error, load };
 }

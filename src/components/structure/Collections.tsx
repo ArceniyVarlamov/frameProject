@@ -6,31 +6,49 @@ import Following from "./Following";
 import Image from "./Image";
 import useAccountCollections from "../../hooks/get/useAccountCollections";
 import { Link } from "react-router-dom";
+import { ICollectionsFrame } from "../../interface";
+import { IAccountCollection } from "./../../interface";
 
 export default function Collections({
 	username,
-	className,
+	className = "",
+	toShow = -1,
 }: {
 	username: string | null;
 	className?: string;
+	toShow?: number;
 }) {
-  
-	const { data, error, load } = useAccountCollections(username);
+	// const { data, error, load } = useAccountCollections(username);
 
-	console.log(data, 'asfwqwtttttttt');
-	
-	
+	const data = [{id: 'N8dERqiW7Sg'} as IAccountCollection]
+
+
 	return (
-    <div className={`collections ${className}`}>
-			{data ? data?.map((item, i) => {
-				return (
-					<Link to={`collection/${item?.id}`} className="collections__collection" key={item?.id}>
-						<Image
-							src={item?.cover_photo.urls?.regular}
-						></Image>
-					</Link>
-				)
-			}) : <></>}
-    </div>
-  );
+		<>
+			<div className={`collections ${className}`}>
+				{data ? (
+					data?.slice(0, toShow).map((item, i) => {
+						return (
+							<Link
+								to={`/collection/${item?.id}`}
+								className='collections__collection'
+								key={item?.id}
+							>
+								<Image src={item?.cover_photo?.urls?.regular}></Image>
+							</Link>
+						);
+					})
+				) : (
+					<></>
+				)}
+			</div>
+			{data.length > toShow ? (
+				<Link className='collections__more' to={`/collections/${username}`}>
+					Show more
+				</Link>
+			) : (
+				<></>
+			)}
+		</>
+	);
 }

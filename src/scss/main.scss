@@ -91,6 +91,7 @@ input :active, :hover, :focus {
 	justify-content: center;
 	align-items: center;
 	height: 70px;
+	margin-bottom: 10px;
 	& * {
 		transition: 0.3s linear;
 	}
@@ -190,33 +191,32 @@ input :active, :hover, :focus {
 	&__search {
 		height: 48px;
 	}
+	&__img {
+		width: 100%;
+		height: 100%;
+		border-radius: 50%;
+		object-fit: cover;
+		object-position: center;
+	}
 }
 
 .main {
-	
 	display: flex;
-	flex-wrap: wrap;
-	margin: 0 5px;
 	width: calc(100% - 10px);
-	justify-content: space-evenly;
-	height: auto;
-	&__container {
-		display: flex;
-		justify-content: space-around;
-		flex-wrap: wrap;
-		width: 100%;
-	}
+	gap: 15px;
+	flex-wrap: wrap;
+	justify-content: center;
 	&__col {
 		position: relative;
 		display: flex;
 		flex-direction: column;
-		width: 15%;
-		margin: 0 5px 0 5px;
+		gap: 10px;
+		width: 200px;
 	}
 	&__frame {
-		border-radius: 15px;
+		user-select: none;
 		width: 100%;
-		margin: 0 5px 15px 5px;
+		border-radius: 15px;
 		border-radius: 15px;
 	}
 	&__img {
@@ -820,6 +820,37 @@ input :active, :hover, :focus {
 			height: 100%;
 			object-fit: cover;
 		}
+	}
+	&__more {
+		height: 40px;
+		display: block;
+		text-decoration: none;
+		color: $logo-color;
+		margin: 0 0 10px 0;
+		width: 75%;
+		margin: auto;
+		text-align: right;
+	}
+}
+
+.collection {
+	width: 95%;
+	display: flex;
+	margin: auto;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	&__container {
+		display: flex;
+	}
+	&__frame {
+
+	}
+	&__link {
+	}
+	&__img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
 	}
 }
 

@@ -6,28 +6,60 @@ import Following from "./Following";
 import Image from "./Image";
 import useAccountCollections from "../../hooks/get/useAccountCollections";
 import useAccountCollection from "./../../hooks/get/useAccontCollection";
+import { IAccountCollection, IData } from "./../../interface";
+import { Link } from "react-router-dom";
+import useRandomHeights from "../../hooks/functions/useRandomHeights";
 
 export default function Collection({
 	id,
-	className,
+	frameHeight,
+	...props
 }: {
-	id: string | null | undefined;
-	className?: string;
+	id: string | null;
+	frameHeight: number;
 }) {
-	const {
-		dataCollection,
-		dataCollectionPhotos,
-		errorCollection,
-		loadCollection,
-	} = useAccountCollection(id);
+	// const {
+	// 	dataCollection,
+	// 	dataCollectionPhotos,
+	// 	errorCollection,
+	// 	loadCollection,
+	// } = useAccountCollection(id);
 
+	const dataCollection = {} as IAccountCollection;
+	const dataCollectionPhotos = [
+		{},
+		{},
+		{},
+		{},
+		{},
+		{},
+		{},
+		{},
+		{},
+		{},
+		{},
+		{},
+	] as IData[];
+
+	const {randomHeights} = useRandomHeights(frameHeight, 200)
+	
 	return (
-		<div className={`collections ${className}`}>
-      <div className="collections__title">{dataCollection?.title}</div>
+		<div className='collection' {...props}>
 			{dataCollectionPhotos!.map((item, i) => {
 				return (
-					<div className='collections__collection' key={item?.id}>
-						<Image src={item?.urls.regular}></Image>
+					<div
+						className='collection__frame'
+						style={{
+							backgroundColor: item?.color,
+							height: `${randomHeights[i]}px`,
+						}}
+					>
+						<Link to={`/frame/${item?.id}`} className='collection__link'>
+							<Image
+								src={item?.urls?.regular}
+								className='collection__img'
+							></Image>
+						</Link>
 					</div>
 				);
 			})}

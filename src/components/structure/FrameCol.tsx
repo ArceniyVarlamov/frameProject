@@ -3,39 +3,47 @@ import Loading from "../functional/Loading";
 import Error from "../functional/Error";
 import useFramesList from "../../hooks/get/useFramesList";
 import Image from "./Image";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { IData } from "../../interface";
 import useFramesInfo from "../../utils/info/useFramesInfo";
 import useRandomHeight from "../../hooks/functions/useRandomHeights";
 import useRandomHeights from "../../hooks/functions/useRandomHeights";
 
 export default function FrameCol({
-	num,
+	framesPerLoad,
 	frameHeight,
 	frameHeightDiffusion,
+	column,
 	...props
 }: {
-	num: number;
+	framesPerLoad: number;
 	frameHeight: number;
 	frameHeightDiffusion: number;
+	column: number
 }) {
-	const [prev, setPrev] = useState<IData[]>([]);
 
-	const { frames, error, load } = useFramesList(num);
+	const [col, setCol] = useState(1)
+	const {framesLoaded} = useFramesInfo()
 
-	const { randomHeights } = useRandomHeights(frameHeight, 200, num);
+	const { frames, error, load } = useFramesList(framesPerLoad, column);
 
+	const { randomHeights } = useRandomHeights(frameHeight, frameHeightDiffusion, framesPerLoad);
+
+	// ООООООООЧЕЕЕНЬ странная заглушка,
+	// которая работает лишь из-за рендеринга компонентов после загрузки
+	// проблема была в изменении масштаба, сейчас она с помощью этого работает,
+	// Перепробоал с useState миллиарды вариантов, пробовал другую структуру,
+	// А на самом деле проблема была в этом рендеринге который происходил в самом
+	// хуке получения фреймов.
 	useEffect(() => {
-		if (frames) {
-			setPrev([...prev, ...frames]);
-		}
-	}, [frames]);
+		setCol(col + 1)
+	}, [col, frames]);
 
 	return (
-		<div className='main__col'>
+		<div className='main__col' { ...props }>
 			<Error err={error} />
 			<Loading loading={load} />
-			{prev!.map((item, i) => {
+			{frames!.map((item, i) => {
 				return (
 					<div key={item.id}>
 						{!load && (

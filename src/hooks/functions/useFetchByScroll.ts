@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { useCallback, useEffect, useState } from "react";
-import { addCol } from "../../store/framesSlice";
+import { addFramesLoaded } from "../../store/framesSlice";
 import { IFramesState } from "./../../store/framesSlice";
 import useFramesInfo from "../../utils/info/useFramesInfo";
 
@@ -9,7 +9,7 @@ export default function useFetchByScroll() {
 
 	const dispatch = useDispatch();
 
-	const { col } = useFramesInfo();
+	const { framesLoaded } = useFramesInfo();
 
 	// Условие при котором меняется фетчинг
 
@@ -24,7 +24,7 @@ export default function useFetchByScroll() {
 		} else {
 			setFetching(false);
 		}
-	}, [fetching]);
+	}, []);
 	// Добавление слушателя скролла
 	useEffect(() => {
 		document.addEventListener("scroll", scrollHandler);
@@ -36,10 +36,11 @@ export default function useFetchByScroll() {
 
 	useEffect(() => {
 		if (fetching) {
-			dispatch(addCol());
+			// Увеличивает количество групп фреймов в колонке
+			dispatch(addFramesLoaded());
 			setFetching(false);
 		}
-	}, [fetching]);
+	}, [dispatch, fetching]);
 
-	return { col };
+	return { framesLoaded };
 }

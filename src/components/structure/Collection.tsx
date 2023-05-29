@@ -41,7 +41,7 @@ export default function Collection({
 		{},
 	] as IData[];
 
-	const {randomHeights} = useRandomHeights(frameHeight, 200)
+	const {randomHeights} = useRandomHeights(frameHeight, 200, 10, 10)
 	
 	return (
 		<div className='collection' {...props}>

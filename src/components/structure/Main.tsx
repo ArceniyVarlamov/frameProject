@@ -13,7 +13,7 @@ export default function Main() {
 	// Меняет количество столбцов при изменении ширины
 	const frameHandler = useCallback(() => {
 		setColNum(Math.round(window.innerWidth / 250));
-	}, [colNum]);
+	}, []);
 
 	useEffect(() => {
 		window.addEventListener("resize", frameHandler);
@@ -21,13 +21,13 @@ export default function Main() {
 
 	return (
 		<div className='main'>
-			{Array(colNum > 9 ? 9 : colNum)
+			{Array(colNum)
 				.fill("")
 				.map((item, i) => (
 					// framesPerLoad - Загрузится фреймов за 1 запрос
 					// frameHeight - Высота 1 фрейма
 					// frameHeightDiffusion - колебание в высоте 1 фрейма
-					<FrameCol framesPerLoad={2} frameHeight={400} frameHeightDiffusion={0} column={i} />
+					<FrameCol framesPerLoad={2} frameHeight={500} frameHeightDiffusion={100} column={i} />
 				))}
 		</div>
 	);

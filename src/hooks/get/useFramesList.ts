@@ -7,7 +7,7 @@ import { useDispatch } from 'react-redux';
 
 // Хук, который загружает массив из информации о картинках в зависимости от номера страницы(id) и кол-ва картинок(num)
 export default function useFramesList(num: number, column: number) {
-	const frames = useRef<IData[]>([]);
+	const [frames, setFrames] = useState<IData[]>([]);
 	const [error, setError] = useState("");
 	const [load, setLoad] = useState(true);
 	const { unsplash } = useMetaData();
@@ -28,14 +28,10 @@ export default function useFramesList(num: number, column: number) {
 			// 	).data)]
 			// );
 			let all: IData[] = [];
-			console.log(frames.current.length, framesLoaded * num, column);
-			
-			for (let i = frames.current.length; i < framesLoaded * num; i++) {
-				console.log('aaaaa');
-				
+			for (let i = frames.length; i < framesLoaded * num; i++) {
 				all.push({} as IData);
 			}
-			frames.current = [...frames.current, ...all]
+			setFrames([...frames, ...all])
 		} catch (err: AxiosError | any) {
 			setError(await err.message);
 		} finally {
@@ -49,5 +45,5 @@ export default function useFramesList(num: number, column: number) {
 	}, [getInfo, framesLoaded]);
 
 
-	return { frames: frames.current, error, load };
+	return { frames, error, load };
 }

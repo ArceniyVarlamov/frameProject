@@ -22,22 +22,11 @@ export default function FrameCol({
 	column: number
 }) {
 
-	const [col, setCol] = useState(1)
 	const {framesLoaded} = useFramesInfo()
 
 	const { frames, error, load } = useFramesList(framesPerLoad, column);
 
-	const { randomHeights } = useRandomHeights(frameHeight, frameHeightDiffusion, framesPerLoad);
-
-	// ООООООООЧЕЕЕНЬ странная заглушка,
-	// которая работает лишь из-за рендеринга компонентов после загрузки
-	// проблема была в изменении масштаба, сейчас она с помощью этого работает,
-	// Перепробоал с useState миллиарды вариантов, пробовал другую структуру,
-	// А на самом деле проблема была в этом рендеринге который происходил в самом
-	// хуке получения фреймов.
-	useEffect(() => {
-		setCol(col + 1)
-	}, [col, frames]);
+	const { randomHeights } = useRandomHeights(frameHeight, frameHeightDiffusion, framesPerLoad, frames.length);
 
 	return (
 		<div className='main__col' { ...props }>

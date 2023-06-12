@@ -3,12 +3,17 @@ import { useState } from "react";
 import { useEffect, useCallback } from "react";
 import { IData } from "../../interface";
 import useMetaData from '../../utils/info/useMetaData';
+import { useDispatch } from "react-redux";
+import { addError } from "../../store/functionsSlice";
 
 export default function useFramesId(id: string | null | undefined) {
   const [data, setData] = useState<IData>();
-  const [error, setError] = useState<string>("");
-  const [load, setLoad] = useState<boolean>(false);
+  const [load, setLoad] = useState(false);
+
   const {unsplash} = useMetaData()
+
+  const dispatch = useDispatch()
+
   const getInfo = useCallback(async () => {
     try {
       setData(
@@ -21,7 +26,7 @@ export default function useFramesId(id: string | null | undefined) {
         ).data
       );
     } catch (err: AxiosError | any) {
-      setError(err.message);
+      dispatch(addError(`${err.message} occurred while getting frame data`))
     } finally {
       setLoad(false);
     }
@@ -33,5 +38,5 @@ export default function useFramesId(id: string | null | undefined) {
     }
   }, [getInfo, id]);
 
-  return { data, error, load };
+  return { data, load };
 }

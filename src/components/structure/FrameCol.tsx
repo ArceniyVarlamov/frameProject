@@ -8,6 +8,8 @@ import { IData } from "../../interface";
 import useFramesInfo from "../../utils/info/useFramesInfo";
 import useRandomHeight from "../../hooks/functions/useRandomHeights";
 import useRandomHeights from "../../hooks/functions/useRandomHeights";
+import { addFramesRedirect } from "../../store/framesSlice";
+import { useDispatch } from 'react-redux';
 
 export default function FrameCol({
 	framesPerLoad,
@@ -24,13 +26,14 @@ export default function FrameCol({
 
 	const {framesLoaded} = useFramesInfo()
 
-	const { frames, error, load } = useFramesList(framesPerLoad, column);
+	const { frames, load } = useFramesList(framesPerLoad, column);
 
 	const { randomHeights } = useRandomHeights(frameHeight, frameHeightDiffusion, framesPerLoad, frames.length);
 
+	const dispatch = useDispatch()
+
 	return (
 		<div className='main__col' { ...props }>
-			<Error err={error} />
 			<Loading loading={load} />
 			{frames!.map((item, i) => {
 				return (
@@ -43,7 +46,7 @@ export default function FrameCol({
 									height: `${randomHeights[i]}px`,
 								}}
 							>
-								<Link to={`/frame/${item?.id}`} className='main__link'>
+								<Link onClick={() => dispatch(addFramesRedirect())} to={`/frame/${item?.id}`} className='main__link'>
 									<Image
 										src={item?.urls?.regular}
 										className='main__img'

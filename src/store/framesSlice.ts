@@ -2,17 +2,20 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export interface IFramesState {
   frames: string[];
-  framesHeight: {columnNum: number; heightsValue: number[]}[];
+  framesMaxHeight: number;
   framesLoaded: number;
+  framesRedirect: number;
 }
 
 const framesState: IFramesState = {
   // Какие-то фреймы
   frames: [],
   // Подсчёт высоты каждого столбца. Нужно для системы разных высот столбиков в useRandomHeights
-  framesHeight: [],
-  // Подсчёт количества загруженных групп фреймов
+  framesMaxHeight: 0,
+  // Подсчёт количества загруженных групп фреймов. Минимальное - 1
   framesLoaded: 1,
+  // Подсчёт количества редиректов для обновления состояний колонок
+  framesRedirect: 0,
 };
 
 const framesSlice = createSlice({
@@ -22,12 +25,21 @@ const framesSlice = createSlice({
     addFramesLoaded(state) {
       state.framesLoaded += 1;
     },
-    addFramesHeight(state, action) {
-      state.framesHeight.push(action.payload)
+    resetFramesLoaded(state) {
+      state.framesLoaded = 0;
+    },
+    addFramesMaxHeight(state, action) {
+      if (action.payload > state.framesMaxHeight) {
+        state.framesMaxHeight = action.payload
+        console.log(state.framesMaxHeight);
+      }
+    },
+    addFramesRedirect(state) {
+      state.framesRedirect += 1;
     },
   },
 });
 
-export const { addFramesLoaded, addFramesHeight } = framesSlice.actions;
+export const { addFramesLoaded, addFramesMaxHeight, addFramesRedirect, resetFramesLoaded } = framesSlice.actions;
 
 export default framesSlice.reducer;

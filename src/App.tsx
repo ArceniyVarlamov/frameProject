@@ -15,7 +15,7 @@ import MePage from './pages/me';
 
 function App() {
   
-  // useCheckRegister()
+  useCheckRegister()
 
   return (
     <BrowserRouter>

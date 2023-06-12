@@ -12,12 +12,11 @@ export default function Image({
 	src?: string | null | undefined;
 	className?: string;
 }) {
-	const { data, error, load } = useFramesId(id);
+	const { data, load } = useFramesId(id);
 
 	return (
 		<>
 			<Loading loading={load}></Loading>
-			<Error err={error}></Error>
 			<img
 				src={
 					(src ? src : data?.urls.regular)

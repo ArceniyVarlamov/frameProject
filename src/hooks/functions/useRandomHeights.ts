@@ -1,5 +1,7 @@
 import { useState, useEffect, useCallback, useRef } from "react";
 import useFramesInfo from "../../utils/info/useFramesInfo";
+import { useDispatch } from "react-redux";
+import { addFramesMaxHeight } from "../../store/framesSlice";
 
 export default function useRandomHeights(
 	frameHeight: number,
@@ -7,9 +9,10 @@ export default function useRandomHeights(
 	framesPerLoad: number = 1,
 	framesLength: number
 ) {
-	const { framesLoaded } = useFramesInfo();
+	const { framesLoaded, framesMaxHeight } = useFramesInfo();
 	const [randomHeights, setRandomHeights] = useState<number[]>([]);
 	const [initialHeight, setInitialHeight] = useState(frameHeight)
+	const dispatch = useDispatch()
 	// работает, но при сильно долгом скроле появляется вероятность разности высот
 	// TODO доделать хук
 	useEffect(() => {
@@ -18,7 +21,7 @@ export default function useRandomHeights(
 		for (let i = framesLength; i < framesPerLoad * framesLoaded; i++) {
 			
 			let randomHeigth = Math.round(Math.random() * diffusion)
-			if (frameHeight + randomHeigth > initialHeight / framesLength * framesPerLoad) {
+			if (frameHeight + randomHeigth > initialHeight / framesLength * framesPerLoad && initialHeight < framesMaxHeight) {
 				heights = [...heights, frameHeight - randomHeigth]
 				heightsValue += frameHeight - randomHeigth
 			} else {
@@ -28,6 +31,7 @@ export default function useRandomHeights(
 		}
 		setRandomHeights([...randomHeights, ...heights])
 		setInitialHeight(initialHeight + heightsValue)
+		dispatch(addFramesMaxHeight(initialHeight))
 		
 	}, [diffusion, frameHeight, framesLength, framesLoaded, framesPerLoad]);
 

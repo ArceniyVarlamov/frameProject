@@ -8,7 +8,7 @@ export default function EndRegister() {
 	const { accountData, accountError, accountLoading } = useRegisterUnsplash(
 		params.get("code"),
 	);
-
+	
 	return accountError ? (
 		<div className='registered'>
 			<Loading loading={accountLoading}></Loading>

@@ -3,12 +3,17 @@ import { useState } from "react";
 import { useEffect, useCallback } from "react";
 import useAccountInfo from "../../utils/info/useAccountInfo";
 import { IAccountCollection } from './../../interface';
+import { addError } from "../../store/functionsSlice";
+import { useDispatch } from "react-redux";
 
 export default function useAccountCollections(username: string | null = "") {
-	const [data, setData] = useState([] as IAccountCollection[]);
-	const [error, setError] = useState("" as AxiosError | any);
-	const [load, setLoad] = useState<boolean>(false);
+	const [data, setData] = useState<IAccountCollection[]>();
+	const [load, setLoad] = useState(false);
+	
 	const { accessToken } = useAccountInfo();
+
+	const dispatch = useDispatch()
+
 	const getInfo = useCallback(async (accessToken: string) => {
 		try {
 			setData(
@@ -19,7 +24,7 @@ export default function useAccountCollections(username: string | null = "") {
 				).data,
 			);
 		} catch (err: AxiosError | any) {
-			setError(err.message);
+			dispatch(addError(`${err.message} occurred while getting collections data`))
 		} finally {
 			setLoad(false);
 		}
@@ -31,10 +36,6 @@ export default function useAccountCollections(username: string | null = "") {
 		}
 	}, [accessToken, getInfo]);
 
-  useEffect(() => {
-    console.log(data, error, load);
-    
-  }, [data, error, load]);
-
-	return { data, error, load };
+	return { data, load };
 }
+

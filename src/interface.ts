@@ -17,6 +17,7 @@ export interface IData {
 	categories: string[];
 	likes: number;
 	liked_by_user: boolean;
+	alt_description: string;
 	current_user_collections: string[];
 	user: {
 		id: string;

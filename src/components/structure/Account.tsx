@@ -16,7 +16,7 @@ export default function Account({
 	username: string;
 }) {
 	
-	const { data: accountInfo, error, load } = useUserInfo(username);
+	const { data: accountInfo, load } = useUserInfo(username);
 	const [close, setClose] = useState(true);
 	const [showFollowing, setShowFollowing] = useState(false);
 	const [following, setFollowing] = useState(true);
@@ -74,7 +74,7 @@ export default function Account({
 								src: accountInfo?.bio,
 								slice: close ? 200 : undefined,
 							})}
-							{(accountInfo?.bio ? accountInfo?.bio.length : "") > 200 ? (
+							{accountInfo?.bio?.length || 0 > 200 ? (
 								<img
 									src={arrow}
 									onClick={() => setClose(!close)}

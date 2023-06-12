@@ -3,34 +3,39 @@ import { useState } from "react";
 import { useEffect, useCallback } from "react";
 import useAccountInfo from "../../utils/info/useAccountInfo";
 import { IAccountCollection, IData } from "./../../interface";
+import { useDispatch } from "react-redux";
+import { addError } from "../../store/functionsSlice";
 
 export default function useAccountCollection(id: string | null = "") {
-	const [dataCollection, setDataCollection] = useState(
-		{} as IAccountCollection,
-	);
-	const [dataCollectionPhotos, setDataCollectionPhotos] = useState(
-		[] as IData[],
-	);
-	const [errorCollection, setErrorCollection] = useState(
-		"" as AxiosError | any,
-	);
+	const [dataCollection, setDataCollection] = useState<IAccountCollection>();
+	const [dataCollectionPhotos, setDataCollectionPhotos] = useState<IData[]>();
 	const [loadCollection, setLoadCollection] = useState<boolean>(false);
+
 	const { accessToken } = useAccountInfo();
+
+	const dispatch = useDispatch();
+
 	const getInfo = useCallback(
 		async (accessToken: string) => {
 			try {
 				setDataCollection(
 					await (
-						await axios.get(`https://api.unsplash.com/collections/${id}?access_token=${accessToken}`)
+						await axios.get(
+							`https://api.unsplash.com/collections/${id}?access_token=${accessToken}`,
+						)
 					).data,
 				);
 				setDataCollectionPhotos(
 					await (
-						await axios.get(`https://api.unsplash.com/collections/${id}/photos?access_token=${accessToken}`)
+						await axios.get(
+							`https://api.unsplash.com/collections/${id}/photos?access_token=${accessToken}`,
+						)
 					).data,
 				);
 			} catch (err: AxiosError | any) {
-				setErrorCollection(err.message);
+				dispatch(
+					addError(`${err.message} occurred while getting collection data`),
+				);
 			} finally {
 				setLoadCollection(false);
 			}
@@ -44,19 +49,9 @@ export default function useAccountCollection(id: string | null = "") {
 		}
 	}, [accessToken, getInfo]);
 
-	useEffect(() => {
-		console.log(
-			dataCollection,
-			dataCollectionPhotos,
-			errorCollection,
-			loadCollection,
-		);
-	}, [dataCollection, dataCollectionPhotos, errorCollection, loadCollection]);
-
 	return {
 		dataCollection,
 		dataCollectionPhotos,
-		errorCollection,
 		loadCollection,
 	};
 }

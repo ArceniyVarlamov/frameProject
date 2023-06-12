@@ -6,9 +6,9 @@ import Loading from "../functional/Loading";
 import Error from "./../functional/Error";
 import useAccountFollowers from "./../../hooks/get/useAccontFollowers";
 import { useRef } from "react";
-import useAccountCollections from './../../hooks/get/useAccountCollections';
-import Image from './Image';
-import { IAccountPublicData } from './../../interface';
+import useAccountCollections from "./../../hooks/get/useAccountCollections";
+import Image from "./Image";
+import { IAccountPublicData } from "./../../interface";
 
 export default function Following({
 	username,
@@ -25,13 +25,11 @@ export default function Following({
 }) {
 	const {
 		data: followingData,
-		error: followingError,
 		load: followingLoad,
 	} = useAccountFollowing(username);
 
 	const {
 		data: followersData,
-		error: followersError,
 		load: followersLoad,
 	} = useAccountFollowers(username);
 
@@ -47,8 +45,6 @@ export default function Following({
 	};
 
 	const followingClick = (e: React.MouseEvent<HTMLElement>) => {
-		console.log("safasffsaf", followersRef, followersRef);
-
 		setFollowing(true);
 		followersRef?.current?.classList.remove("following__slide-in");
 		followingRef?.current?.classList.add("following__slide-in");
@@ -107,58 +103,60 @@ export default function Following({
 				</div>
 				<div className='following__users'>
 					{following
-						? followingData.map((item) => {
+						? followingData?.map((item) => {
 								return (
-									<div className='following__user' key={item.id}>
+									<>
 										<Loading loading={followingLoad}></Loading>
-										<Error err={followingError}></Error>
-										<div className='following__img'>
-											<Image src={item?.profile_image?.medium}></Image>
-										</div>
-										<div className='following__info'>
-											<div className='following__username'>
-												{conditional({
-													src: item?.username,
-													slice: 20,
-												})}
+										<div className='following__user' key={item.id}>
+											<div className='following__img'>
+												<Image src={item?.profile_image?.medium}></Image>
 											</div>
-											<div className='following__bio'>
-												{conditional({
-													src: item?.bio,
-													alt: "frame user",
-													slice: 20,
-												})}
+											<div className='following__info'>
+												<div className='following__username'>
+													{conditional({
+														src: item?.username,
+														slice: 20,
+													})}
+												</div>
+												<div className='following__bio'>
+													{conditional({
+														src: item?.bio,
+														alt: "frame user",
+														slice: 20,
+													})}
+												</div>
 											</div>
+											<div className='following__subscribe'>Subscribe</div>
 										</div>
-										<div className='following__subscribe'>Subscribe</div>
-									</div>
+									</>
 								);
 						  })
-						: followersData.map((item) => {
+						: followersData?.map((item) => {
 								return (
-									<div className='following__user' key={item.id}>
+									<>
 										<Loading loading={followersLoad}></Loading>
-										<Error err={followersError}></Error>
-										<div className='following__img'>
-											<Image src={item?.profile_image?.medium}></Image>
-										</div>
-										<div className='following__info'>
-											<div className='following__username'>
-												{conditional({
-													src: item?.username,
-													slice: 20,
-												})}
+										<div className='following__user' key={item.id}>
+											<div className='following__img'>
+												<Image src={item?.profile_image?.medium}></Image>
 											</div>
-											<div className='following__bio'>
-												{conditional({
-													src: item?.bio,
-													alt: "frame user",
-													slice: 20,
-												})}
+											<div className='following__info'>
+												<div className='following__username'>
+													{conditional({
+														src: item?.username,
+														slice: 20,
+													})}
+												</div>
+												<div className='following__bio'>
+													{conditional({
+														src: item?.bio,
+														alt: "frame user",
+														slice: 20,
+													})}
+												</div>
 											</div>
+											<div className='following__subscribe'>Subscribe</div>
 										</div>
-										<div className='following__subscribe'>Subscribe</div>
-									</div>
+									</>
 								);
 						  })}
 				</div>

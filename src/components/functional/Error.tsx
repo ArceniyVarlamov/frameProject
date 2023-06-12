@@ -5,7 +5,7 @@ export default function Error({ err }: { err: string }) {
 
 	setTimeout(() => {
 		setShow(false);
-	}, 7000);
+	}, 5000);
 
 	return err && show ? (
 		<div className='error' onClick={() => setShow(false)}>

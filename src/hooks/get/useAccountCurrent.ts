@@ -5,18 +5,20 @@ import { useDispatch } from "react-redux";
 import { IAccountPublicData } from "../../interface";
 import { setInfo, setIsRegistered } from "../../store/accountSlice";
 import useAccountInfo from "../../utils/info/useAccountInfo";
+import { addError } from "../../store/functionsSlice";
 
 export default function useAccountCurrent() {
-	const dispatch = useDispatch();
+	const [meData, setMeData] = useState<IAccountPublicData>();
+	const [load, setLoad] = useState(false);
 
-	const [data, setData] = useState({} as IAccountPublicData);
-	const [error, setError] = useState("" as AxiosError | any);
-	const [load, setLoad] = useState<boolean>(false);
 	const { accessToken } = useAccountInfo();
+
+	const dispatch = useDispatch()
+
 	const getInfo = useCallback(async (accessToken: string) => {
 		
 		try {
-			setData(
+			setMeData(
 				await (
 					await axios.get(
 						`https://api.unsplash.com/me?access_token=${accessToken}`,
@@ -24,7 +26,7 @@ export default function useAccountCurrent() {
 				).data,
 			);
 		} catch (err: AxiosError | any) {
-			setError(err.message);
+			dispatch(addError(`${err.message} occurred while getting your account data`))
 		} finally {
 			setLoad(false);
 		}
@@ -36,13 +38,5 @@ export default function useAccountCurrent() {
 		}
 	}, [accessToken, getInfo]);
 
-	useEffect(() => {
-		if (data && !localStorage.getItem("accountInfo")) {
-			localStorage.setItem("accountInfo", JSON.stringify(data))
-			dispatch(setIsRegistered(true));
-			dispatch(setInfo(data))
-		}
-	}, [data, dispatch, error]);
-
-	return { data, error, load };
+	return { meData, load };
 }

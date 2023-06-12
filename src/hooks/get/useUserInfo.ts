@@ -3,15 +3,13 @@ import { useState } from "react";
 import { useEffect, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { IAccountPublicData } from "../../interface";
-import { setInfo, setIsRegistered } from "../../store/accountSlice";
-import useAccountInfo from "../../utils/info/useAccountInfo";
+import { addError } from "../../store/functionsSlice";
 
 export default function useAccountCurrent(username: string) {
-	const dispatch = useDispatch();
-
 	const [data, setData] = useState({} as IAccountPublicData);
-	const [error, setError] = useState("" as AxiosError | any);
 	const [load, setLoad] = useState<boolean>(false);
+	
+	const dispatch = useDispatch();
 
 	const getInfo = useCallback(async () => {
 		try {
@@ -23,7 +21,7 @@ export default function useAccountCurrent(username: string) {
 				).data,
 			);
 		} catch (err: AxiosError | any) {
-			setError(err.message);
+			dispatch(addError(`${err.message} occurred while getting user data`))
 		} finally {
 			setLoad(false);
 		}
@@ -35,6 +33,6 @@ export default function useAccountCurrent(username: string) {
     }
   }, [getInfo, username]);
 
-	return { data, error, load };
+	return { data, load };
 }
 

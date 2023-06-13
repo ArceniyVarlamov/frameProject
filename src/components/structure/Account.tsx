@@ -25,7 +25,7 @@ export default function Account({
 		<>
 			<div className={`account ${className}`}>
 				<Following
-					username={accountInfo?.username}
+					username={accountInfo.username!}
 					setFollowing={setFollowing}
 					following={following}
 					show={showFollowing}
@@ -88,7 +88,7 @@ export default function Account({
 					</div>
 				</div>
 			</div>
-			<Collections username={accountInfo?.username} toShow={6}></Collections>
+			<Collections username={accountInfo?.username!} toShow={6}></Collections>
 		</>
 	);
 }

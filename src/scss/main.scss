@@ -37,23 +37,41 @@ input :active, :hover, :focus {
 	outline-offset: 0;
 }
 
-.error {
-	cursor: pointer;
-	z-index: 1;
-	border-radius: 5px;
-	width: 60%;
-	height: 50px;
-	text-align: center;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	color: $helpfull-color;
-	font-weight: 700;
+.errors {
+	z-index: 10;
 	position: fixed;
-	top: 95px;
-	left: 50%;
-	transform: translateX(-50%);
-	background-color: rgba($logo-color, 0.9);
+	top: 90px;
+	right: 20px;
+	display: flex;
+	flex-direction: column;
+	gap: 15px;
+	&__error {
+		animation: normal error 3s;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 5px 10px;
+		height: 20%;
+		background-color: rgba($main-color, 0.2);
+		opacity: 0.8;
+		font-weight: 600;
+		line-height: 20px;
+	}
+}
+
+@keyframes error {
+  0% {
+    opacity: 0;
+  }
+
+	50% {
+		opacity: 1;
+	}
+
+  100% {
+    opacity: 0;
+  }
 }
 
 .loading {

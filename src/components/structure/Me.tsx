@@ -21,7 +21,7 @@ export default function Me({
 		<>
 			<div className={`account ${className}`}>
 				<Following
-					username={accountData!.username}
+					username={accountData?.username!}
 					setFollowing={setFollowing}
 					following={following}
 					show={showFollowing}
@@ -30,18 +30,18 @@ export default function Me({
 				<div className='account__about'>
 					<Image
 						className='account__image'
-						src={accountData!.profile_image?.medium}
+						src={accountData?.profile_image?.medium}
 					></Image>
 					<div className='account__info'>
 						<div className='account__author'>
 							<div className='account__username truncate'>
-								{conditional({ src: accountData!.username, alt: "noname" })}
+								{conditional({ src: accountData?.username, alt: "noname" })}
 							</div>
 							<div className='account__subscribe truncate'>Subscribe</div>
 						</div>
 						<div className='account__numbers'>
 							<div className='account__downloads truncate'>
-								{conditional({ src: accountData!.downloads, alt: "0" })}{" "}
+								{conditional({ src: accountData?.downloads, alt: "0" })}{" "}
 								<p>downloads</p>
 							</div>
 							<div
@@ -51,7 +51,7 @@ export default function Me({
 									setFollowing(false);
 								}}
 							>
-								{conditional({ src: accountData!.followers_count, alt: "0" })}
+								{conditional({ src: accountData?.followers_count, alt: "0" })}
 								<p>subscribers</p>
 							</div>
 							<div
@@ -61,13 +61,13 @@ export default function Me({
 									setFollowing(true);
 								}}
 							>
-								{conditional({ src: accountData!.following_count, alt: "0" })}
+								{conditional({ src: accountData?.following_count, alt: "0" })}
 								<p>subscriptions</p>
 							</div>
 						</div>
 						<div className='account__bio'>
 							{conditional({
-								src: accountData!.bio,
+								src: accountData?.bio,
 								slice: close ? 200 : undefined,
 							})}
 							{accountData?.bio?.length || 0 > 200 ? (
@@ -84,7 +84,7 @@ export default function Me({
 					</div>
 				</div>
 			</div>
-			<Collections username={accountData!.username} toShow={6}></Collections>
+			<Collections username={accountData?.username!} toShow={6}></Collections>
 		</>
 	);
 }

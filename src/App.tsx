@@ -9,9 +9,9 @@ import RegisteredPage from './pages/registered';
 import AccountPage from './pages/account';
 import useCheckRegister from './utils/registration/useCheckRegister';
 import CollectionPage from './pages/collection';
-import useAccountCurrent from './hooks/get/useAccountCurrent';
 import CollectionsPage from './pages/collections';
 import MePage from './pages/me';
+import Error from "./components/functional/Error";
 
 function App() {
   
@@ -19,6 +19,7 @@ function App() {
 
   return (
     <BrowserRouter>
+      <Error/>
       <Routes>
         <Route path="/" element={<HomePage/>}/>
         <Route path="frame/:id" element={<FramePage/>}/>

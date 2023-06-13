@@ -1,17 +1,26 @@
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
+import useFunctionsInfo from "../../utils/info/useFunctionsInfo";
+import { useDispatch } from "react-redux";
+import { removeError } from "../../store/functionsSlice";
 
-export default function Error({ err }: { err: string }) {
-	const [show, setShow] = useState(true);
+export default function Error() {
+	const { errors } = useFunctionsInfo();
 
-	setTimeout(() => {
-		setShow(false);
-	}, 5000);
+	const dispatch = useDispatch();
 
-	return err && show ? (
-		<div className='error' onClick={() => setShow(false)}>
-			{err}
+	useEffect(() => {
+		setInterval(() => {
+			dispatch(removeError(0));
+		}, 3000);
+	}, []);
+
+	return (
+		<div className='errors'>
+			{errors.map((item, i) => (
+				<div className='errors__error' onClick={() => dispatch(removeError(i))}>
+					{item}
+				</div>
+			))}
 		</div>
-	) : (
-		<></>
 	);
 }

@@ -1,6 +1,5 @@
 import { useState } from "react";
 import useRegisterFireBase from "../../utils/registration/useRegisterFirebase";
-import Error from "../functional/Error";
 import { Link, useParams } from "react-router-dom";
 import Correct from "../functional/Notification";
 
@@ -54,7 +53,6 @@ export default function Form() {
         <Link to='/' />
       </div>
       <Correct correct={correct} message='not valid password' />
-      <Error err={errorFirebase} />
     </div>
   ) : (
     <div className='form'>
@@ -77,7 +75,6 @@ export default function Form() {
         </div>
         <Link to='/' />
       </div>
-      <Error err={errorFirebase} />
     </div>
   );
 }

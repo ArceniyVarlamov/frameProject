@@ -6,7 +6,7 @@ import useAccountInfo from "../../utils/info/useAccountInfo";
 import { useDispatch } from "react-redux";
 import { addError } from "../../store/functionsSlice";
 
-export default function useAccountFollowers(username: string | null) {
+export default function useAccountFollowers(username: string) {
 	const [data, setData] = useState<IAccountPublicData[]>();
 	const [load, setLoad] = useState(false);
 

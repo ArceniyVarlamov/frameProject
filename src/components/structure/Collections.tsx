@@ -1,33 +1,27 @@
-import useAccountCurrent from "./../../hooks/get/useAccountCurrent";
-import conditional from "./../../utils/functional/condition";
-import { useEffect, useState } from "react";
-import arrow from "../../images/Arrow-down.png";
-import Following from "./Following";
 import Image from "./Image";
 import useAccountCollections from "../../hooks/get/useAccountCollections";
 import { Link } from "react-router-dom";
-import { ICollectionsFrame } from "../../interface";
-import { IAccountCollection } from "./../../interface";
 
 export default function Collections({
 	username,
 	className = "",
 	toShow = -1,
 }: {
-	username: string | null;
+	username: string;
 	className?: string;
 	toShow?: number;
 }) {
-	// const { data, error, load } = useAccountCollections(username);
+	const { data, load } = useAccountCollections(username);
+	console.log(data);
+	
 
-	const data = [{id: 'N8dERqiW7Sg'} as IAccountCollection]
-
+	// const data = [{id: 'N8dERqiW7Sg'} as IAccountCollection, {id: 'N8dERqiW7Sg'} as IAccountCollection, {id: 'N8dERqiW7Sg'} as IAccountCollection, {id: 'N8dERqiW7Sg'} as IAccountCollection, {id: 'N8dERqiW7Sg'} as IAccountCollection, {id: 'N8dERqiW7Sg'} as IAccountCollection]
 
 	return (
 		<>
-			<div className={`collections ${className}`}>
+			{/* <div className={`collections ${className}`}>
 				{data ? (
-					data?.slice(0, toShow).map((item, i) => {
+					data?.map((item, i) => {
 						return (
 							<Link
 								to={`/collection/${item?.id}`}
@@ -42,13 +36,13 @@ export default function Collections({
 					<></>
 				)}
 			</div>
-			{data.length > toShow ? (
+			{data?.length! > toShow ? (
 				<Link className='collections__more' to={`/collections/${username}`}>
 					Show more
 				</Link>
 			) : (
 				<></>
-			)}
+			)} */}
 		</>
 	);
 }

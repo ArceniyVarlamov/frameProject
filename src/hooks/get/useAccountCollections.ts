@@ -6,7 +6,7 @@ import { IAccountCollection } from './../../interface';
 import { addError } from "../../store/functionsSlice";
 import { useDispatch } from "react-redux";
 
-export default function useAccountCollections(username: string | null = "") {
+export default function useAccountCollections(username: string = "") {
 	const [data, setData] = useState<IAccountCollection[]>();
 	const [load, setLoad] = useState(false);
 	
@@ -31,10 +31,10 @@ export default function useAccountCollections(username: string | null = "") {
 	}, [username]);
 
 	useEffect(() => {
-		if (typeof accessToken === 'string') {
+		if (typeof accessToken === 'string' && typeof username === 'string') {
 			getInfo(accessToken);
 		}
-	}, [accessToken, getInfo]);
+	}, [accessToken, getInfo, username]);
 
 	return { data, load };
 }

@@ -3,12 +3,9 @@ import search from "../../images/search.png";
 import cross from "../../images/cross.png";
 import conditional from "./../../utils/functional/condition";
 import Loading from "../functional/Loading";
-import Error from "./../functional/Error";
 import useAccountFollowers from "./../../hooks/get/useAccontFollowers";
 import { useRef } from "react";
-import useAccountCollections from "./../../hooks/get/useAccountCollections";
 import Image from "./Image";
-import { IAccountPublicData } from "./../../interface";
 
 export default function Following({
 	username,
@@ -17,7 +14,7 @@ export default function Following({
 	setShow,
 	setFollowing,
 }: {
-	username: string | null;
+	username: string;
 	following: boolean;
 	show: boolean;
 	setShow: any;
@@ -26,12 +23,12 @@ export default function Following({
 	const {
 		data: followingData,
 		load: followingLoad,
-	} = useAccountFollowing(username);
+	} = useAccountFollowing(username!);
 
 	const {
 		data: followersData,
 		load: followersLoad,
-	} = useAccountFollowers(username);
+	} = useAccountFollowers(username!);
 
 	const followersRef = useRef<HTMLDivElement>(null);
 	const followingRef = useRef<HTMLDivElement>(null);

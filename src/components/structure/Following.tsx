@@ -14,7 +14,7 @@ export default function Following({
 	setShow,
 	setFollowing,
 }: {
-	username: string;
+	username: string | null | undefined;
 	following: boolean;
 	show: boolean;
 	setShow: any;
@@ -23,12 +23,12 @@ export default function Following({
 	const {
 		data: followingData,
 		load: followingLoad,
-	} = useAccountFollowing(username!);
+	} = useAccountFollowing(username);
 
 	const {
 		data: followersData,
 		load: followersLoad,
-	} = useAccountFollowers(username!);
+	} = useAccountFollowers(username);
 
 	const followersRef = useRef<HTMLDivElement>(null);
 	const followingRef = useRef<HTMLDivElement>(null);

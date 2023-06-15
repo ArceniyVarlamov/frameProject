@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { useDispatch } from "react-redux";
 
 export interface IFunctionsState {
 	errors: string[];
@@ -12,19 +13,26 @@ const functionsSlice = createSlice({
 	name: "functions",
 	initialState: functionsState,
 	reducers: {
-		addError(state, action) {
+		incError(state, action) {
+			console.log(action.payload, 'aaaaaa');
+			
 			state.errors.push(action.payload);
 		},
 		removeError(state, action) {
-			try {
-				state.errors.splice(action.payload, action.payload + 1);
-			} catch (error) {
-				console.log(error);
-			}
+			state.errors.splice(action.payload, action.payload + 1);
 		},
 	},
 });
 
-export const { addError, removeError } = functionsSlice.actions;
+export const { incError, removeError } = functionsSlice.actions;
+
+export const addError = (dispatch: any, text: string): void => {
+	
+	dispatch(incError(text))
+	setTimeout(() => {
+		dispatch(removeError(0))
+	}, 3000);
+}
 
 export default functionsSlice.reducer;
+

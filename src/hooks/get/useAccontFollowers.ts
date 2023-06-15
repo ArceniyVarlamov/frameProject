@@ -6,7 +6,7 @@ import useAccountInfo from "../../utils/info/useAccountInfo";
 import { useDispatch } from "react-redux";
 import { addError } from "../../store/functionsSlice";
 
-export default function useAccountFollowers(username: string) {
+export default function useAccountFollowers(username: string | null | undefined) {
 	const [data, setData] = useState<IAccountPublicData[]>();
 	const [load, setLoad] = useState(false);
 
@@ -14,7 +14,7 @@ export default function useAccountFollowers(username: string) {
 
 	const dispatch = useDispatch()
 
-	const getInfo = useCallback(async (accessToken: string) => {
+	const getInfo = useCallback(async (accessToken: string, username: string) => {
 		try {
 			setData(
 				await (
@@ -24,15 +24,18 @@ export default function useAccountFollowers(username: string) {
 				).data,
 			);
 		} catch (err: AxiosError | any) {
-			dispatch(addError(`${err.message} occurred while getting followers data`))
+			addError(dispatch, `${err.message} occurred while getting collection data`)
 		} finally {
 			setLoad(false);
 		}
-	}, []);
+	}, [dispatch]);
 
 	useEffect(() => {
+		console.log(username, typeof username, '111111111', typeof username === 'string');
 		if (typeof accessToken === 'string' && typeof username === 'string') {
-			getInfo(accessToken);
+			console.log(username, typeof username, '222222222', typeof username === 'string');
+			
+			getInfo(accessToken, username);
 		}
 	}, [accessToken, getInfo, username]);
 

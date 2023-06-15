@@ -26,7 +26,7 @@ export default function useFramesId(id: string | null | undefined) {
         ).data
       );
     } catch (err: AxiosError | any) {
-      dispatch(addError(`${err.message} occurred while getting frame data`))
+      addError(dispatch, `${err.message} occurred while getting collection data`)
     } finally {
       setLoad(false);
     }

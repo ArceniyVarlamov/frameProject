@@ -46,6 +46,7 @@ input :active, :hover, :focus {
 	flex-direction: column;
 	gap: 15px;
 	&__error {
+		position: relative;
 		animation: normal error 3s;
 		cursor: pointer;
 		display: flex;
@@ -62,14 +63,17 @@ input :active, :hover, :focus {
 
 @keyframes error {
   0% {
+		right: -100px;
     opacity: 0;
   }
 
 	50% {
+		right: 0;
 		opacity: 1;
 	}
 
   100% {
+		right: -100px;
     opacity: 0;
   }
 }

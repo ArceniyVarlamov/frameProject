@@ -7,7 +7,7 @@ export default function Collections({
 	className = "",
 	toShow = -1,
 }: {
-	username: string;
+	username: string | null | undefined;
 	className?: string;
 	toShow?: number;
 }) {
@@ -19,7 +19,7 @@ export default function Collections({
 
 	return (
 		<>
-			{/* <div className={`collections ${className}`}>
+			<div className={`collections ${className}`}>
 				{data ? (
 					data?.map((item, i) => {
 						return (
@@ -42,7 +42,7 @@ export default function Collections({
 				</Link>
 			) : (
 				<></>
-			)} */}
+			)}
 		</>
 	);
 }

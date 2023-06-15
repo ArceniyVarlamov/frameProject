@@ -21,7 +21,7 @@ export default function useAccountCurrent(username: string) {
 				).data,
 			);
 		} catch (err: AxiosError | any) {
-			dispatch(addError(`${err.message} occurred while getting user data`))
+			addError(dispatch, `${err.message} occurred while getting collection data`)
 		} finally {
 			setLoad(false);
 		}

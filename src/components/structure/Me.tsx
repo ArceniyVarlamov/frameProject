@@ -21,7 +21,7 @@ export default function Me({
 		<>
 			<div className={`account ${className}`}>
 				<Following
-					username={accountData?.username!}
+					username={accountData?.username}
 					setFollowing={setFollowing}
 					following={following}
 					show={showFollowing}
@@ -84,7 +84,7 @@ export default function Me({
 					</div>
 				</div>
 			</div>
-			<Collections username={accountData?.username!} toShow={6}></Collections>
+			<Collections username={accountData?.username} toShow={6}></Collections>
 		</>
 	);
 }

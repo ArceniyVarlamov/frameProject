@@ -8,12 +8,6 @@ export default function Error() {
 
 	const dispatch = useDispatch();
 
-	useEffect(() => {
-		setInterval(() => {
-			dispatch(removeError(0));
-		}, 3000);
-	}, []);
-
 	return (
 		<div className='errors'>
 			{errors.map((item, i) => (

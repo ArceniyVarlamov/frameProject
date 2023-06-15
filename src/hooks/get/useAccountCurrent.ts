@@ -26,14 +26,14 @@ export default function useAccountCurrent() {
 				).data,
 			);
 		} catch (err: AxiosError | any) {
-			dispatch(addError(`${err.message} occurred while getting your account data`))
+			addError(dispatch, `${err.message} occurred while getting collection data`)
 		} finally {
 			setLoad(false);
 		}
 	}, []);
 
 	useEffect(() => {
-		if (accessToken.length > 0) {
+		if (typeof accessToken === 'string') {
 			getInfo(accessToken);
 		}
 	}, [accessToken, getInfo]);

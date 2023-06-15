@@ -47,7 +47,7 @@ export default function useFramesList(num: number, column: number) {
 			// }
 			// setFrames([...frames, ...all]);
 		} catch (err: AxiosError | any) {
-			dispatch(addError(`${err.message} occurred while getting frames data`))
+			addError(dispatch, `${err.message} occurred while getting collection data`)
 		} finally {
 			setLoad(false);
 		}

@@ -5,7 +5,7 @@ import useFramesList from "../../hooks/get/useFramesList";
 import Image from "./Image";
 import { useEffect, useRef, useState } from "react";
 import { IData } from "../../interface";
-import useFramesInfo from "../../utils/info/useFramesInfo";
+import useFramesInfo from "../../utils/info/useFramesStoreInfo";
 import useRandomHeight from "../../hooks/functions/useRandomHeights";
 import useRandomHeights from "../../hooks/functions/useRandomHeights";
 import { addFramesRedirect } from "../../store/framesSlice";

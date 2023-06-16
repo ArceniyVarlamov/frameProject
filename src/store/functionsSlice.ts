@@ -14,12 +14,12 @@ const functionsSlice = createSlice({
 	initialState: functionsState,
 	reducers: {
 		incError(state, action) {
-			console.log(action.payload, 'aaaaaa');
-			
 			state.errors.push(action.payload);
 		},
 		removeError(state, action) {
-			state.errors.splice(action.payload, action.payload + 1);
+			if (state.errors.length > 0) {
+				state.errors.splice(action.payload, action.payload + 1);
+			}
 		},
 	},
 });
@@ -31,7 +31,7 @@ export const addError = (dispatch: any, text: string): void => {
 	dispatch(incError(text))
 	setTimeout(() => {
 		dispatch(removeError(0))
-	}, 3000);
+	}, 7000);
 }
 
 export default functionsSlice.reducer;

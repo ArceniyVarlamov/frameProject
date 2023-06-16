@@ -2,7 +2,7 @@ import axios, { AxiosError } from "axios";
 import { useState } from "react";
 import { useEffect, useCallback } from "react";
 import { IAccountPublicData } from "../../interface";
-import useAccountInfo from "../../utils/info/useAccountInfo";
+import useAccountInfo from "../../utils/info/useAccountStoreInfo";
 import { useDispatch } from "react-redux";
 import { addError } from "../../store/functionsSlice";
 
@@ -14,7 +14,7 @@ export default function useAccountFollowing(username: string | null | undefined)
 
 	const dispatch = useDispatch()
 
-	const getInfo = useCallback(async (accessToken: string, username: string) => {
+	const getInfo = useCallback(async () => {
 		try {
 			setData(
 				await (
@@ -23,18 +23,17 @@ export default function useAccountFollowing(username: string | null | undefined)
 					)
 				).data,
 			);
-		} catch (err: AxiosError | any) {
-			addError(dispatch, `${err.message} occurred while getting collection data`)
+		} catch (err: unknown) {
+			const error = err as AxiosError;
+			addError(dispatch, `${error.message} while getting your following data`)
 		} finally {
 			setLoad(false);
 		}
-	}, [dispatch]);
+	}, [accessToken, dispatch, username]);
 
 	useEffect(() => {
-		console.log(username, typeof username, '111111111', typeof username === 'string');
 		if (typeof accessToken === 'string' && typeof username === 'string') {
-			console.log(username, typeof username, '22222222222', typeof username === 'string');
-			getInfo(accessToken, username);
+			getInfo();
 		}
 	}, [accessToken, getInfo, username]);
 

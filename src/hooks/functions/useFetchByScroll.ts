@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useCallback, useEffect, useState } from "react";
 import { addFramesLoaded } from "../../store/framesSlice";
 import { IFramesState } from "./../../store/framesSlice";
-import useFramesInfo from "../../utils/info/useFramesInfo";
+import useFramesInfo from "../../utils/info/useFramesStoreInfo";
 
 export default function useFetchByScroll() {
 	const [fetching, setFetching] = useState<boolean>(false);

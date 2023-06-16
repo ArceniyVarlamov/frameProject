@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { IUnsplashUser } from "../../interface";
 import { setAccessToken, setIsRegistered } from "../../store/accountSlice";
 import useMetaData from "../info/useMetaData";
-import useAccountInfo from "../info/useAccountInfo";
+import useAccountInfo from "../info/useAccountStoreInfo";
 
 export default function useCheckRegister() {
 	const dispatch = useDispatch();

@@ -10,6 +10,7 @@ import likeActive from "../../images/like_active.svg";
 import useLike from "../../hooks/post/useLike";
 import conditional from "../../utils/functional/condition";
 import Image from "./Image";
+import { NavLink } from "react-router-dom";
 
 export default function Frame({ id }: { id: string }) {
 	// own hooks
@@ -121,21 +122,28 @@ export default function Frame({ id }: { id: string }) {
 						</div>
 						<div className='frame__author' style={{ backgroundColor: color }}>
 							<div className='frame__user'>
-								<Image
-									src={data?.user?.profile_image?.small}
-									className='frame__icon'
-								></Image>
+								<NavLink to={`/account/${data?.user?.username}`}>
+									<Image
+										src={data?.user?.profile_image?.small}
+										className='frame__icon'
+									></Image>
+								</NavLink>
+
 								<div className='frame__user-goal'>
 									<p className='frame__username' style={{ color: color }}>
 										{conditional({ src: data?.user?.username })}
 									</p>
 									<p className='frame__total-photos'>
-										{conditional({ src: data?.user?.total_photos + " total photos" })}
+										{conditional({
+											src: data?.user?.total_photos + " total photos",
+										})}
 									</p>
 								</div>
 							</div>
 							<div className='frame__description'>
-								{conditional({ src: data?.description || data?.alt_description })}
+								{conditional({
+									src: data?.description || data?.alt_description,
+								})}
 							</div>
 						</div>
 						<div className='frame__likes'>

@@ -4,11 +4,14 @@ import { useEffect, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { IAccountPublicData } from "../../interface";
 import { addError } from "../../store/functionsSlice";
+import useAccountStoreInfo from "../../utils/info/useAccountStoreInfo";
 
-export default function useAccountCurrent(username: string) {
+export default function useAccountInfo(username: string | undefined) {
 	const [data, setData] = useState({} as IAccountPublicData);
 	const [load, setLoad] = useState<boolean>(false);
 	
+	const { accessToken } = useAccountStoreInfo();
+
 	const dispatch = useDispatch();
 
 	const getInfo = useCallback(async () => {
@@ -16,22 +19,23 @@ export default function useAccountCurrent(username: string) {
 			setData(
 				await (
 					await axios.get(
-						`https://api.unsplash.com/users/${username}`,
+						`https://api.unsplash.com/users/${username}?access_token=${accessToken}`,
 					)
 				).data,
 			);
-		} catch (err: AxiosError | any) {
-			addError(dispatch, `${err.message} occurred while getting collection data`)
+		} catch (err: unknown) {
+			const error = err as AxiosError;
+			addError(dispatch, `${error.message} while getting account data`)
 		} finally {
 			setLoad(false);
 		}
-	}, [username]);
+	}, [accessToken, dispatch, username]);
 
   useEffect(() => {
-    if (typeof username === "string") {
+    if (typeof username === "string" && typeof accessToken === 'string') {
       getInfo();
     }
-  }, [getInfo, username]);
+  }, [accessToken, getInfo, username]);
 
 	return { data, load };
 }

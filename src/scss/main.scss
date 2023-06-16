@@ -42,38 +42,56 @@ input :active, :hover, :focus {
 	position: fixed;
 	top: 90px;
 	right: 20px;
+	width: 20%;
 	display: flex;
 	flex-direction: column;
 	gap: 15px;
 	&__error {
 		position: relative;
-		animation: normal error 3s;
-		cursor: pointer;
+		animation: normal error 7s forwards;
 		display: flex;
 		align-items: center;
-		justify-content: center;
+		justify-content: space-between;
 		padding: 5px 10px;
 		height: 20%;
-		background-color: rgba($main-color, 0.2);
-		opacity: 0.8;
-		font-weight: 600;
+		background-color: rgba($main-color, 0.1);
+		color: $help-color;
+		font-weight: 500;
 		line-height: 20px;
+		border-radius: 5px;
+	}
+	& p {
+		width: 95%;
+		height: 100%;
+	}
+	& img {
+		cursor: pointer;
+		opacity: 0.6;
+		mix-blend-mode: overlay;
+		width: 15px;
+		height: 15px;
+		align-self: flex-start;
 	}
 }
 
 @keyframes error {
   0% {
-		right: -100px;
+		right: -110%;
     opacity: 0;
   }
 
-	50% {
+	20% {
+		right: 0;
+		opacity: 1;
+	}
+
+	80% {
 		right: 0;
 		opacity: 1;
 	}
 
   100% {
-		right: -100px;
+		right: -110%;
     opacity: 0;
   }
 }
@@ -203,7 +221,7 @@ input :active, :hover, :focus {
 		border-radius: 20px;
 		font-size: 20px;
 		font-weight: 500;
-		padding: 0 2vw;
+		padding: 0 5vw;
 		display: flex;
 		align-items: center;
 		&:hover {

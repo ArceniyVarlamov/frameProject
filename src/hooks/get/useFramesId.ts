@@ -25,12 +25,13 @@ export default function useFramesId(id: string | null | undefined) {
           })
         ).data
       );
-    } catch (err: AxiosError | any) {
-      addError(dispatch, `${err.message} occurred while getting collection data`)
+    } catch (err: unknown) {
+      const error = err as AxiosError;
+      addError(dispatch, `${error.message} while getting frame data`)
     } finally {
       setLoad(false);
     }
-  }, [id, unsplash.ACCESS_KEY]);
+  }, [dispatch, id, unsplash.ACCESS_KEY]);
 
   useEffect(() => {
     if (typeof id === "string") {

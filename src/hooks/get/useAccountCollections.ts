@@ -1,20 +1,22 @@
 import axios, { AxiosError } from "axios";
 import { useState } from "react";
 import { useEffect, useCallback } from "react";
-import useAccountInfo from "../../utils/info/useAccountInfo";
-import { IAccountCollection } from './../../interface';
+import { IAccountCollection } from "./../../interface";
 import { addError } from "../../store/functionsSlice";
 import { useDispatch } from "react-redux";
+import useAccountStoreInfo from "../../utils/info/useAccountStoreInfo";
 
-export default function useAccountCollections(username: string | null | undefined) {
+export default function useAccountCollections(
+	username: string | null | undefined,
+) {
 	const [data, setData] = useState<IAccountCollection[]>();
 	const [load, setLoad] = useState(false);
-	
-	const { accessToken } = useAccountInfo();
 
-	const dispatch = useDispatch()
+	const { accessToken } = useAccountStoreInfo();
 
-	const getInfo = useCallback(async (accessToken: string) => {
+	const dispatch = useDispatch();
+
+	const getInfo = useCallback(async () => {
 		try {
 			setData(
 				await (
@@ -23,19 +25,19 @@ export default function useAccountCollections(username: string | null | undefine
 					)
 				).data,
 			);
-		} catch (err: AxiosError | any) {
-			addError(dispatch, `${err.message} occurred while getting collection data`)
+		} catch (err: unknown) {
+			const error = err as AxiosError;
+			addError(dispatch, `${error.message} while getting collections data`)
 		} finally {
 			setLoad(false);
 		}
-	}, [username]);
+	}, [accessToken, dispatch, username]);
 
 	useEffect(() => {
-		if (typeof accessToken === 'string' && typeof username === 'string') {
-			getInfo(accessToken);
+		if (typeof accessToken === "string" && typeof username === "string") {
+			getInfo();
 		}
 	}, [accessToken, getInfo, username]);
 
 	return { data, load };
 }
-

@@ -1,12 +1,16 @@
+import AccountInfo from '../components/structure/AccountInfo';
 import Header from '../components/structure/Header';
-import Me from "../components/structure/Me";
+import useAccountCurrent from '../hooks/get/useAccountCurrent';
+import Account from '../components/structure/Account';
 
 export default function MePage() {
+
+  const {meData, load} = useAccountCurrent()
 
   return (
     <>
       <Header/>
-      <Me/>
+      <Account accountData={meData}/>
     </>
   )
 }

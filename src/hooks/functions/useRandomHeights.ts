@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, useRef } from "react";
-import useFramesInfo from "../../utils/info/useFramesInfo";
+import useFramesInfo from "../../utils/info/useFramesStoreInfo";
 import { useDispatch } from "react-redux";
 import { addFramesMaxHeight } from "../../store/framesSlice";
 

@@ -6,6 +6,7 @@ import Loading from "../functional/Loading";
 import useAccountFollowers from "./../../hooks/get/useAccontFollowers";
 import { useRef } from "react";
 import Image from "./Image";
+import { NavLink } from "react-router-dom";
 
 export default function Following({
 	username,
@@ -20,15 +21,11 @@ export default function Following({
 	setShow: any;
 	setFollowing: any;
 }) {
-	const {
-		data: followingData,
-		load: followingLoad,
-	} = useAccountFollowing(username);
+	const { data: followingData, load: followingLoad } =
+		useAccountFollowing(username);
 
-	const {
-		data: followersData,
-		load: followersLoad,
-	} = useAccountFollowers(username);
+	const { data: followersData, load: followersLoad } =
+		useAccountFollowers(username);
 
 	const followersRef = useRef<HTMLDivElement>(null);
 	const followingRef = useRef<HTMLDivElement>(null);
@@ -103,10 +100,11 @@ export default function Following({
 						? followingData?.map((item) => {
 								return (
 									<>
-										<Loading loading={followingLoad}></Loading>
 										<div className='following__user' key={item.id}>
 											<div className='following__img'>
-												<Image src={item?.profile_image?.medium}></Image>
+												<NavLink to={`/account/${item?.username}`}>
+													<Image src={item?.profile_image?.medium}></Image>
+												</NavLink>
 											</div>
 											<div className='following__info'>
 												<div className='following__username'>
@@ -131,10 +129,11 @@ export default function Following({
 						: followersData?.map((item) => {
 								return (
 									<>
-										<Loading loading={followersLoad}></Loading>
 										<div className='following__user' key={item.id}>
 											<div className='following__img'>
-												<Image src={item?.profile_image?.medium}></Image>
+												<NavLink to={`/account/${item?.username}`}>
+													<Image src={item?.profile_image?.medium}></Image>
+												</NavLink>
 											</div>
 											<div className='following__info'>
 												<div className='following__username'>

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import useAccountInfo from "../../utils/info/useAccountInfo";
+import useAccountInfo from "../../utils/info/useAccountStoreInfo";
 import useCheckRegister from "./../../utils/registration/useCheckRegister";
 import Image from './Image';
 import { addFramesRedirect } from "../../store/framesSlice";

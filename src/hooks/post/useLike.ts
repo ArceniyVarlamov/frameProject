@@ -1,6 +1,6 @@
 import axios, { AxiosError } from "axios";
 import { useCallback, useEffect, useState } from "react";
-import useAccountInfo from "../../utils/info/useAccountInfo";
+import useAccountInfo from "../../utils/info/useAccountStoreInfo";
 import useMetaData from "../../utils/info/useMetaData";
 export default function useLike(id: string, like: boolean | undefined) {
 	const { accessToken } = useAccountInfo();

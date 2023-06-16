@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { IFramesState } from "../../store/framesSlice";
 
-export default function useFramesInfo() {
+export default function useFramesStoreInfo() {
   const { framesLoaded, frames, framesMaxHeight, framesRedirect } = useSelector(
     (state: { frames: IFramesState }) => state.frames
   );

@@ -5,13 +5,15 @@ import arrow from "../../images/Arrow-down.png";
 import Following from "./Following";
 import Image from "./Image";
 import Collections from "./Collections";
+import { IAccountPublicData } from "../../interface";
 
-export default function Me({
+export default function AccountInfo({
+	accountData,
 	className,
 }: {
+  accountData: IAccountPublicData | undefined;
 	className?: string;
 }) {
-	const {meData: accountData, load} = useAccountCurrent()
 	const [close, setClose] = useState(true);
 	const [showFollowing, setShowFollowing] = useState(false);
 	const [following, setFollowing] = useState(true);
@@ -30,7 +32,7 @@ export default function Me({
 				<div className='account__about'>
 					<Image
 						className='account__image'
-						src={accountData?.profile_image?.medium}
+						src={accountData?.profile_image?.large}
 					></Image>
 					<div className='account__info'>
 						<div className='account__author'>
@@ -84,7 +86,8 @@ export default function Me({
 					</div>
 				</div>
 			</div>
-			<Collections username={accountData?.username} toShow={6}></Collections>
 		</>
 	);
 }
+
+

@@ -22,13 +22,13 @@ function App() {
       <Error/>
       <Routes>
         <Route path="/" element={<HomePage/>}/>
-        <Route path="frame/:id" element={<FramePage/>}/>
+        <Route path="/frame/:id" element={<FramePage/>}/>
         <Route path="/registration" element={<RegistrationPage/>}/>
         <Route path="/login" element={<LoginPage/>}/>
         <Route path="/email/:type" element={<EmailPage/>}/>
         <Route path="/registered" element={<RegisteredPage/>}/>
         <Route path="/me" element={<MePage/>}/>
-        <Route path="/account" element={<AccountPage/>}/>
+        <Route path="/account/:username" element={<AccountPage/>}/>
         <Route path="/collection/:id" element={<CollectionPage/>}/>
         <Route path="/collections/:username" element={<CollectionsPage/>}/>
       </Routes>

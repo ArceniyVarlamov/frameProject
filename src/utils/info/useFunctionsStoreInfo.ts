@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 import { IFunctionsState } from "../../store/functionsSlice";
 
-export default function useFunctionsInfo() {
+export default function useFunctionsStoreInfo() {
   const { errors } = useSelector(
     (state: { functions: IFunctionsState }) => state.functions
   );

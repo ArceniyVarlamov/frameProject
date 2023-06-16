@@ -2,7 +2,7 @@ import axios, { AxiosError } from "axios";
 import { useState, useEffect, useCallback } from "react";
 import { IData } from "../../interface";
 import useMetaData from "../../utils/info/useMetaData";
-import useFramesInfo from "../../utils/info/useFramesInfo";
+import useFramesInfo from "../../utils/info/useFramesStoreInfo";
 import { useDispatch } from "react-redux";
 import { resetFramesLoaded } from "../../store/framesSlice";
 import { addError } from "../../store/functionsSlice";
@@ -46,12 +46,13 @@ export default function useFramesList(num: number, column: number) {
 			// 	all.push({} as IData);
 			// }
 			// setFrames([...frames, ...all]);
-		} catch (err: AxiosError | any) {
-			addError(dispatch, `${err.message} occurred while getting collection data`)
+		} catch (err: unknown) {
+			const error = err as AxiosError;
+			addError(dispatch, `${error.message} while getting frames data`)
 		} finally {
 			setLoad(false);
 		}
-	}, [column, framesLoaded, num]);
+	}, [dispatch, frames, framesLoaded, num, unsplash.ACCESS_KEY]);
 
 	// Когда пользователь достигнет границы страницы загружется информация
 	useEffect(() => {

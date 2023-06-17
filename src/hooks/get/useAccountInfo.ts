@@ -14,7 +14,7 @@ export default function useAccountInfo(username: string | undefined) {
 
 	const dispatch = useDispatch();
 
-	const getInfo = useCallback(async () => {
+	const getInfo = useCallback(async (accessToken: string, username: string) => {
 		try {
 			setData(
 				await (
@@ -29,11 +29,11 @@ export default function useAccountInfo(username: string | undefined) {
 		} finally {
 			setLoad(false);
 		}
-	}, [accessToken, dispatch, username]);
+	}, []);
 
   useEffect(() => {
     if (typeof username === "string" && typeof accessToken === 'string') {
-      getInfo();
+      getInfo(accessToken, username);
     }
   }, [accessToken, getInfo, username]);
 

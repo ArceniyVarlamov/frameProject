@@ -655,6 +655,7 @@ input :active, :hover, :focus {
 	}
 	&__bio {
 		width: 100%;
+		word-break:keep-all;
 	}
 	&__bio-close {
 		transition: 0.1s linear;

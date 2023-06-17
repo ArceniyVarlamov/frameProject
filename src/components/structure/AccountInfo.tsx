@@ -72,7 +72,7 @@ export default function AccountInfo({
 								src: accountData?.bio,
 								slice: close ? 200 : undefined,
 							})}
-							{accountData?.bio?.length || 0 > 200 ? (
+							{accountData?.bio?.length! > 200 ? (
 								<img
 									src={arrow}
 									onClick={() => setClose(!close)}

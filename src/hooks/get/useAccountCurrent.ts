@@ -14,7 +14,7 @@ export default function useAccountCurrent() {
 
 	const dispatch = useDispatch()
 
-	const getInfo = useCallback(async () => {
+	const getInfo = useCallback(async (accessToken: string) => {
 		
 		try {
 			setMeData(
@@ -30,11 +30,11 @@ export default function useAccountCurrent() {
 		} finally {
 			setLoad(false);
 		}
-	}, [accessToken, dispatch]);
+	}, []);
 
 	useEffect(() => {
 		if (typeof accessToken === 'string') {
-			getInfo();
+			getInfo(accessToken);
 		}
 	}, [accessToken, getInfo]);
 

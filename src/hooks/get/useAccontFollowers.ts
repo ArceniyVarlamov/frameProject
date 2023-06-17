@@ -14,7 +14,7 @@ export default function useAccountFollowers(username: string | null | undefined)
 
 	const dispatch = useDispatch()
 
-	const getInfo = useCallback(async () => {
+	const getInfo = useCallback(async (accessToken: string, username: string) => {
 		try {
 			setData(
 				await (
@@ -29,11 +29,11 @@ export default function useAccountFollowers(username: string | null | undefined)
 		} finally {
 			setLoad(false);
 		}
-	}, [accessToken, dispatch, username]);
+	}, [username]);
 
 	useEffect(() => {
 		if (typeof accessToken === 'string' && typeof username === 'string') {
-			getInfo();
+			getInfo(accessToken, username);
 		}
 	}, [accessToken, getInfo, username]);
 

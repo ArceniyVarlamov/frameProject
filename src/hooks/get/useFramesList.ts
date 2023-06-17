@@ -52,7 +52,7 @@ export default function useFramesList(num: number, column: number) {
 		} finally {
 			setLoad(false);
 		}
-	}, [dispatch, frames, framesLoaded, num, unsplash.ACCESS_KEY]);
+	}, [column, framesLoaded, num]);
 
 	// Когда пользователь достигнет границы страницы загружется информация
 	useEffect(() => {

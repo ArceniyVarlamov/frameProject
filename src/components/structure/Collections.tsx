@@ -12,8 +12,6 @@ export default function Collections({
 	toShow?: number;
 }) {
 	const { data, load } = useAccountCollections(username);
-	console.log(data);
-	
 
 	// const data = [{id: 'N8dERqiW7Sg'} as IAccountCollection, {id: 'N8dERqiW7Sg'} as IAccountCollection, {id: 'N8dERqiW7Sg'} as IAccountCollection, {id: 'N8dERqiW7Sg'} as IAccountCollection, {id: 'N8dERqiW7Sg'} as IAccountCollection, {id: 'N8dERqiW7Sg'} as IAccountCollection]
 

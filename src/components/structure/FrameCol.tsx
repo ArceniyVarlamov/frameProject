@@ -62,8 +62,8 @@ export default function FrameCol({
 										}}
 									/>
 								</Link>
-								<NavLink to={`/account/${item?.user?.username}`}>
-									<div className='main__author'>
+								<NavLink className='main__author' to={`/account/${item?.user?.username}`}>
+
 										<p className='main__author-username'>
 											{item?.user?.username}
 										</p>
@@ -71,7 +71,6 @@ export default function FrameCol({
 											src={item?.user?.profile_image?.medium}
 											className='main__author-img'
 										/>
-									</div>
 								</NavLink>
 							</div>
 						)}

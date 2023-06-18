@@ -14,7 +14,19 @@ export default function HeaderRegistered() {
 	return (
 		<div className='header'>
 			<div className='header__container '>
-
+				<Link
+					to='/'
+					className='header__logo truncate'
+					onClick={() => dispatch(addFramesRedirect())}
+				></Link>
+				<Link to='/create' className='header__create truncate'>
+					Create
+				</Link>
+				<input
+					type='text'
+					placeholder='Search'
+					className='truncate header__search'
+				/>
 				<div className='header__notifications'></div>
 				<div className='header__messages'></div>
 				<Link to='/me' className='header__account'>

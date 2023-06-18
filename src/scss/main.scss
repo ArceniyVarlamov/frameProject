@@ -5,8 +5,8 @@ $pre-main-color: rgba(158, 158, 158, 0.7);
 $page-color: rgba(255, 255, 255, 0.6);
 $header-color: rgba(211, 211, 211, 0.2);
 // $logo-color: rgb(162, 26, 26);
-// $logo-color: rgba(80, 26, 162);
-$logo-color: rgb(3, 3, 3);
+$logo-color: rgba(80, 26, 162);
+// $logo-color: rgb(3, 3, 3);
 $help-color: black;
 $helpfull-color: aliceblue;
 :root {
@@ -257,8 +257,9 @@ input :active,
 		position: relative;
 		display: flex;
 		flex-direction: column;
-		gap: 20px;
+		gap: 30px;
 		width: 200px;
+		
 	}
 	&__frame {
 		user-select: none;
@@ -283,6 +284,7 @@ input :active,
 		display: flex;
 		align-items: center;
 		justify-content: flex-end;
+		text-decoration: none;
 		gap: 5px;
 	}
 	&__author-username {

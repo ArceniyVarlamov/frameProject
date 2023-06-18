@@ -26,7 +26,7 @@ export default function SignUp() {
           <p>Unsplash</p>
           <img src={unsplashImg} alt='unsplash' />
         </a>
-        <Link to='/login' className='underline'>
+        <Link to='/login' className='sign__except'>
           Already registered? Sign in
         </Link>
       </div>

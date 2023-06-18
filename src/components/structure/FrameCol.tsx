@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import Loading from "../functional/Loading";
 import Error from "../functional/Error";
 import useFramesList from "../../hooks/get/useFramesList";
@@ -9,7 +9,7 @@ import useFramesInfo from "../../utils/info/useFramesStoreInfo";
 import useRandomHeight from "../../hooks/functions/useRandomHeights";
 import useRandomHeights from "../../hooks/functions/useRandomHeights";
 import { addFramesRedirect } from "../../store/framesSlice";
-import { useDispatch } from 'react-redux';
+import { useDispatch } from "react-redux";
 
 export default function FrameCol({
 	framesPerLoad,
@@ -21,19 +21,23 @@ export default function FrameCol({
 	framesPerLoad: number;
 	frameHeight: number;
 	frameHeightDiffusion: number;
-	column: number
+	column: number;
 }) {
-
-	const {framesLoaded} = useFramesInfo()
+	const { framesLoaded } = useFramesInfo();
 
 	const { frames, load } = useFramesList(framesPerLoad, column);
 
-	const { randomHeights } = useRandomHeights(frameHeight, frameHeightDiffusion, framesPerLoad, frames.length);
+	const { randomHeights } = useRandomHeights(
+		frameHeight,
+		frameHeightDiffusion,
+		framesPerLoad,
+		frames.length,
+	);
 
-	const dispatch = useDispatch()
+	const dispatch = useDispatch();
 
 	return (
-		<div className='main__col' { ...props }>
+		<div className='main__col' {...props}>
 			<Loading loading={load} />
 			{frames!.map((item, i) => {
 				return (
@@ -42,17 +46,33 @@ export default function FrameCol({
 							<div
 								className='main__frame'
 								style={{
-									backgroundColor: item?.color,
-									height: `${randomHeights[i]}px`,
+									height: `${randomHeights[i] + 16}px`,
 								}}
 							>
-								<Link onClick={() => dispatch(addFramesRedirect())} to={`/frame/${item?.id}`} className='main__link'>
+								<Link
+									onClick={() => dispatch(addFramesRedirect())}
+									to={`/frame/${item?.id}`}
+									className='main__link'
+								>
 									<Image
 										src={item?.urls?.regular}
 										className='main__img'
-									></Image>
-									<div className='main__author'>{item?.user?.username}</div>
+										style={{
+											backgroundColor: item?.color,
+										}}
+									/>
 								</Link>
+								<NavLink to={`/account/${item?.user?.username}`}>
+									<div className='main__author'>
+										<p className='main__author-username'>
+											{item?.user?.username}
+										</p>
+										<Image
+											src={item?.user?.profile_image?.medium}
+											className='main__author-img'
+										/>
+									</div>
+								</NavLink>
 							</div>
 						)}
 					</div>

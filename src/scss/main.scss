@@ -4,8 +4,9 @@ $main-color: rgba(178, 178, 178, 0.7);
 $pre-main-color: rgba(158, 158, 158, 0.7);
 $page-color: rgba(255, 255, 255, 0.6);
 $header-color: rgba(211, 211, 211, 0.2);
-// rgb(162, 26, 26);
-$logo-color: rgba(80, 26, 162);
+// $logo-color: rgb(162, 26, 26);
+// $logo-color: rgba(80, 26, 162);
+$logo-color: rgb(3, 3, 3);
 $help-color: black;
 $helpfull-color: aliceblue;
 :root {
@@ -32,7 +33,9 @@ p {
 	margin: 0;
 }
 
-input :active, :hover, :focus {
+input :active,
+:hover,
+:focus {
 	outline: 0;
 	outline-offset: 0;
 }
@@ -75,10 +78,10 @@ input :active, :hover, :focus {
 }
 
 @keyframes error {
-  0% {
+	0% {
 		right: -110%;
-    opacity: 0;
-  }
+		opacity: 0;
+	}
 
 	20% {
 		right: 0;
@@ -90,10 +93,10 @@ input :active, :hover, :focus {
 		opacity: 1;
 	}
 
-  100% {
+	100% {
 		right: -110%;
-    opacity: 0;
-  }
+		opacity: 0;
+	}
 }
 
 .loading {
@@ -147,16 +150,6 @@ input :active, :hover, :focus {
 		left: 0;
 		height: 70px;
 		z-index: 1;
-		& input {
-			width: 40%;
-			border-radius: 15px;
-			padding: 0 10px;
-			background-color: $header-color;
-			&:focus {
-				background-color: $pre-main-color;
-				outline-color: $logo-color;
-			}
-		}
 		& *:hover {
 			background-color: $pre-main-color;
 		}
@@ -180,13 +173,12 @@ input :active, :hover, :focus {
 		text-decoration: none;
 		color: $logo-color;
 		&:hover {
-			background-color: $logo-color;
+			background-color: rgba($logo-color, 0.9);
 			color: $helpfull-color;
 		}
 	}
 	&__register {
 		padding: 0 2vw;
-		
 	}
 	&__login {
 		padding: 0 2vw;
@@ -219,17 +211,32 @@ input :active, :hover, :focus {
 		height: 80%;
 		cursor: pointer;
 		border-radius: 20px;
-		font-size: 20px;
-		font-weight: 500;
+		font-size: 22px;
+		font-weight: 600;
 		padding: 0 5vw;
 		display: flex;
 		align-items: center;
+		text-decoration: none;
+		color: rgba($help-color, 0.8);
+
 		&:hover {
-			background-color: $pre-main-color;
+			color: rgba($logo-color, 0.8);
+			background-color: rgba($logo-color, 0.2);
 		}
 	}
 	&__search {
 		height: 48px;
+		width: 40%;
+		border-radius: 15px;
+		padding: 0 10px;
+		box-shadow: 2px 2px 20px -2px rgba($logo-color, 0.1);
+		&:focus {
+			font-size: 17px;
+			font-weight: 500;
+		}
+		&:hover {
+			background-color: $header-color;
+		}
 	}
 	&__img {
 		width: 100%;
@@ -250,7 +257,7 @@ input :active, :hover, :focus {
 		position: relative;
 		display: flex;
 		flex-direction: column;
-		gap: 10px;
+		gap: 20px;
 		width: 200px;
 	}
 	&__frame {
@@ -270,51 +277,48 @@ input :active, :hover, :focus {
 		position: relative;
 		width: 100%;
 		height: 100%;
-		&:hover .main__author {
-			background-color: rgba(0, 0, 0, 0.5);
-			padding: 3px 5px;
-			font-size: 14px;
-			mix-blend-mode:normal;
-		}
 	}
 	&__author {
 		height: 16px;
 		display: flex;
 		align-items: center;
-		justify-content: center;
-		mix-blend-mode:difference;
-		transition: 0.3s linear;
-		position: absolute;
-		bottom: 10px;
-		right: 10px;
-		font-size: 12px;
-		font-weight: 600;
-		color: $helpfull-color;
-		border-radius: 5px;
-		
+		justify-content: flex-end;
+		gap: 5px;
 	}
-	@keyframes loading {
-		0% {
-			left: 0;
-			width: 50px;
-			height: 5px;
-			top: 2.5px;
-			border-radius: 5px;
-		}
-		50% {
-			width: 15px;
-			height: 15px;
-			top: 0;
-			border-radius: 15px;
-			backgroun: $pre-main-color;
-		}
-		100% {
-			left: calc(100% - 50px);
-			width: 50px;
-			height: 5px;
-			top: 2.5px;
-			border-radius: 5px;
-		}
+	&__author-username {
+		color: $help-color;
+		font-size: 14px;
+		font-weight: 600;
+		opacity: 0.8;
+	}
+	&__author-img {
+		width: 14px;
+		height: 14px;
+		border-radius: 50%;
+	}
+}
+
+@keyframes loading {
+	0% {
+		left: 0;
+		width: 50px;
+		height: 5px;
+		top: 2.5px;
+		border-radius: 5px;
+	}
+	50% {
+		width: 15px;
+		height: 15px;
+		top: 0;
+		border-radius: 15px;
+		backgroun: $pre-main-color;
+	}
+	100% {
+		left: calc(100% - 50px);
+		width: 50px;
+		height: 5px;
+		top: 2.5px;
+		border-radius: 5px;
 	}
 }
 
@@ -594,7 +598,7 @@ input :active, :hover, :focus {
 	background-color: $page-color;
 	border-radius: 15px;
 	margin: 40px auto 15px;
-	word-break:break-all;
+	word-break: break-all;
 	&__about {
 		padding-bottom: 30px;
 		width: 90%;
@@ -655,7 +659,7 @@ input :active, :hover, :focus {
 	}
 	&__bio {
 		width: 100%;
-		word-break:keep-all;
+		word-break: keep-all;
 	}
 	&__bio-close {
 		transition: 0.1s linear;
@@ -709,7 +713,7 @@ input :active, :hover, :focus {
 		align-items: center;
 		flex-direction: column;
 	}
-	
+
 	&__find {
 		outline: 1px $help-color solid;
 		border-radius: 10px;
@@ -738,7 +742,7 @@ input :active, :hover, :focus {
 			height: 20px;
 		}
 		&::before {
-			content: '';
+			content: "";
 			width: 1px;
 			height: 60%;
 			transform: translate(-10px);
@@ -751,7 +755,8 @@ input :active, :hover, :focus {
 		display: flex;
 		justify-content: center;
 	}
-	&__followers, &__following {
+	&__followers,
+	&__following {
 		cursor: pointer;
 		font-size: 16px;
 		padding: 4px 5px;
@@ -771,13 +776,13 @@ input :active, :hover, :focus {
 	}
 	&__slide-in {
 		animation-name: slide-in;
-		animation-timing-function: cubic-bezier(0,.06,.67,1);
+		animation-timing-function: cubic-bezier(0, 0.06, 0.67, 1);
 		animation-fill-mode: both;
 		animation-duration: 0.5s;
 	}
 	&__slide-out {
 		animation-name: slide-out;
-		animation-timing-function: cubic-bezier(0,.06,.67,1);
+		animation-timing-function: cubic-bezier(0, 0.06, 0.67, 1);
 		animation-fill-mode: both;
 		animation-duration: 0.5s;
 	}
@@ -892,7 +897,6 @@ input :active, :hover, :focus {
 		display: flex;
 	}
 	&__frame {
-
 	}
 	&__link {
 	}
@@ -903,9 +907,44 @@ input :active, :hover, :focus {
 	}
 }
 
+.unregistered {
+	width: 100%;
+	height: calc(100vh - 80px);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-direction: column;
+	gap: 10px;
+	font-size: 22px;
+	font-weight: 600;
+	opacity: 0.8;
+
+	&__link {
+		text-decoration: none;
+		color: $logo-color;
+	}
+}
+
+.underline {
+	font-size: 16px;
+	color: $logo-color;
+	top: 5px;
+	left: calc(10% + 15px);
+	text-decoration: none;
+	background-position: 0% 100%;
+	background-repeat: no-repeat;
+	background-image: linear-gradient($logo-color, $logo-color);
+	background-size: 0% 1px;
+	transition: background-size 0.2s ease-in;
+	&:hover {
+		background-size: 100% 1px;
+	}
+}
+
 @media (max-width: 867px) {
 	.header {
-		&__login, &__register {
+		&__login,
+		&__register {
 			font-size: 16px;
 		}
 		&__create {

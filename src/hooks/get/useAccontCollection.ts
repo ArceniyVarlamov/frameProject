@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 import { addError } from "../../store/functionsSlice";
 import useAccountStoreInfo from "../../utils/info/useAccountStoreInfo";
 
-export default function useAccountCollection(id: string = "") {
+export default function useAccountCollection(id: string | undefined | null) {
 	const [dataCollection, setDataCollection] = useState<IAccountCollection>();
 	const [dataCollectionPhotos, setDataCollectionPhotos] = useState<IData[]>();
 	const [loadCollection, setLoadCollection] = useState<boolean>(false);

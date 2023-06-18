@@ -7,10 +7,12 @@ export default function Image({
 	id,
 	src,
 	className,
+	style
 }: {
 	id?: string | null | undefined;
 	src?: string | null | undefined;
 	className?: string;
+	style?: any
 }) {
 	const { data, load } = useFramesId(id);
 
@@ -27,6 +29,7 @@ export default function Image({
 				}
 				alt='f'
 				className={className?.toString()}
+				style={style}
 			/>
 		</>
 	);

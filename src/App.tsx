@@ -12,9 +12,10 @@ import CollectionPage from "./pages/collection";
 import CollectionsPage from "./pages/collections";
 import MePage from "./pages/me";
 import Error from "./components/functional/Error";
+import CreatePage from "./pages/create";
 
 function App() {
-	useCheckRegister();
+	// useCheckRegister();
 
 	return (
 		<BrowserRouter>
@@ -30,6 +31,7 @@ function App() {
 				<Route path='/account/:username' element={<AccountPage />} />
 				<Route path='/collection/:id' element={<CollectionPage />} />
 				<Route path='/collections/:username' element={<CollectionsPage />} />
+				<Route path='/create' element={<CreatePage />} />
 			</Routes>
 		</BrowserRouter>
 	);

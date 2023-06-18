@@ -6,7 +6,7 @@ import Collection from './../components/structure/Collection';
 
 export default function CollectionPage() {
 
-  const { id = "" } = useParams();
+  const { id } = useParams();
   
   return (
     <>

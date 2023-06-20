@@ -1,14 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@200;300;400;500&display=swap");
 
-$main-color: rgba(178, 178, 178, 0.7);
-$pre-main-color: rgba(158, 158, 158, 0.7);
-$page-color: rgba(255, 255, 255, 0.6);
-$header-color: rgba(211, 211, 211, 0.2);
-// $logo-color: rgb(162, 26, 26);
-$logo-color: rgba(80, 26, 162);
-// $logo-color: rgb(3, 3, 3);
-$help-color: black;
-$helpfull-color: aliceblue;
+$grey178-color: rgba(178, 178, 178, 0.7);
+$grey158-color: rgba(158, 158, 158, 0.7);
+$white-05-opacity-color: rgba(255, 255, 255, 0.6);
+$grey211-02-opacity-color: rgba(211, 211, 211, 0.2);
+// $main-color: rgb(162, 26, 26);
+// $main-color: rgba(80, 26, 162);
+$main-color: rgb(3, 3, 3);
+$black-color: black;
+$aliceblue-color: aliceblue;
+$white-color: white;
 :root {
 	--main-color: rgba(178, 178, 178, 0.7);
 	--pre-main-color: rgba(158, 158, 158, 0.7);
@@ -17,13 +18,14 @@ $helpfull-color: aliceblue;
 	--logo-color: rgba(80, 26, 162);
 	--help-color: black;
 	--helpfull-color: aliceblue;
+	--header-height: 70px;
 }
 
 body {
 	box-sizing: border-box;
 	margin: 0;
 	font-family: "Noto Sans", sans-serif;
-	background-color: $page-color;
+	background-color: $white-05-opacity-color;
 	input {
 		border: none;
 	}
@@ -57,8 +59,8 @@ input :active,
 		justify-content: space-between;
 		padding: 5px 10px;
 		height: 20%;
-		background-color: rgba($main-color, 0.1);
-		color: $help-color;
+		background-color: rgba($grey178-color, 0.1);
+		color: $black-color;
 		font-weight: 500;
 		line-height: 20px;
 		border-radius: 5px;
@@ -100,7 +102,7 @@ input :active,
 }
 
 .loading {
-	background-color: $main-color;
+	background-color: $grey178-color;
 	border-radius: 15px;
 	position: absolute;
 	top: 0;
@@ -120,7 +122,7 @@ input :active,
 	left: 20px;
 	width: 200px;
 	height: 60px;
-	background-color: $main-color;
+	background-color: $grey178-color;
 }
 
 .truncate {
@@ -129,17 +131,32 @@ input :active,
 	text-overflow: ellipsis;
 }
 
+.underline {
+	font-size: 16px;
+	color: $main-color;
+	top: 5px;
+	left: calc(10% + 15px);
+	text-decoration: none;
+	background-position: 0% 100%;
+	background-repeat: no-repeat;
+	background-image: linear-gradient($main-color, $main-color);
+	background-size: 0% 1px;
+	transition: background-size 0.2s ease-in;
+	&:hover {
+		background-size: 100% 1px;
+	}
+}
+
 .header {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: 70px;
-	margin-bottom: 10px;
+	height: var(--header-height);
 	& * {
 		transition: 0.3s linear;
 	}
 	&__container {
-		background-color: $header-color;
+		background-color: $grey211-02-opacity-color;
 		width: 100%;
 		gap: 10px;
 		display: flex;
@@ -150,9 +167,6 @@ input :active,
 		left: 0;
 		height: 70px;
 		z-index: 1;
-		& *:hover {
-			background-color: $pre-main-color;
-		}
 	}
 	&__account {
 		height: 24px;
@@ -171,10 +185,10 @@ input :active,
 		font-size: 20px;
 		font-weight: 500;
 		text-decoration: none;
-		color: $logo-color;
+		color: $main-color;
 		&:hover {
-			background-color: rgba($logo-color, 0.9);
-			color: $helpfull-color;
+			background-color: rgba($main-color, 0.9);
+			color: $aliceblue-color;
 		}
 	}
 	&__register {
@@ -186,11 +200,11 @@ input :active,
 	&__logo {
 		height: 48px;
 		width: 48px;
-		background-color: $logo-color;
+		background-color: $main-color;
 		opacity: 0.8;
 		border-radius: 50%;
 		&:hover {
-			background-color: $logo-color;
+			background-color: $main-color;
 			opacity: 0.7;
 		}
 	}
@@ -198,7 +212,7 @@ input :active,
 	&__notifications,
 	&__account,
 	&__accounts {
-		background-color: $main-color;
+		background-color: $grey178-color;
 		border-radius: 50%;
 		cursor: pointer;
 	}
@@ -217,11 +231,11 @@ input :active,
 		display: flex;
 		align-items: center;
 		text-decoration: none;
-		color: rgba($help-color, 0.8);
+		color: rgba($black-color, 0.8);
 
 		&:hover {
-			color: rgba($logo-color, 0.8);
-			background-color: rgba($logo-color, 0.2);
+			color: rgba($main-color, 0.8);
+			background-color: rgba($main-color, 0.2);
 		}
 	}
 	&__search {
@@ -229,13 +243,12 @@ input :active,
 		width: 40%;
 		border-radius: 15px;
 		padding: 0 10px;
-		box-shadow: 2px 2px 20px -2px rgba($logo-color, 0.1);
+		box-shadow: 2px 2px 20px -2px rgba($main-color, 0.1);
 		&:focus {
-			font-size: 17px;
 			font-weight: 500;
+			background-color: $grey211-02-opacity-color;
 		}
 		&:hover {
-			background-color: $header-color;
 		}
 	}
 	&__img {
@@ -259,7 +272,6 @@ input :active,
 		flex-direction: column;
 		gap: 30px;
 		width: 200px;
-		
 	}
 	&__frame {
 		user-select: none;
@@ -288,7 +300,7 @@ input :active,
 		gap: 5px;
 	}
 	&__author-username {
-		color: $help-color;
+		color: $black-color;
 		font-size: 14px;
 		font-weight: 600;
 		opacity: 0.8;
@@ -313,7 +325,7 @@ input :active,
 		height: 15px;
 		top: 0;
 		border-radius: 15px;
-		backgroun: $pre-main-color;
+		backgroun: $grey158-color;
 	}
 	100% {
 		left: calc(100% - 50px);
@@ -339,7 +351,7 @@ input :active,
 		user-select: none;
 	}
 	&__info {
-		box-shadow: inset 0px 0px 8px 0 rgba($help-color, 0.3);
+		box-shadow: inset 0px 0px 8px 0 rgba($black-color, 0.3);
 		border-top-right-radius: 15px;
 		border-bottom-right-radius: 15px;
 		width: 50%;
@@ -360,7 +372,7 @@ input :active,
 			align-items: center;
 			justify-content: center;
 			&:hover {
-				background-color: rgba($header-color, 1);
+				background-color: rgba($grey211-02-opacity-color, 1);
 			}
 		}
 		& img {
@@ -378,7 +390,7 @@ input :active,
 		padding: 0 1%;
 	}
 	&__author {
-		box-shadow: 0px 0px 10px 0px rgba($help-color, 0.2);
+		box-shadow: 0px 0px 10px 0px rgba($black-color, 0.2);
 		width: 80%;
 		height: auto;
 		flex-direction: column;
@@ -408,7 +420,7 @@ input :active,
 	&__username {
 		font-size: 20px;
 		font-weight: bolder;
-		color: $helpfull-color;
+		color: $aliceblue-color;
 		mix-blend-mode: darken;
 		align-self: top;
 		filter: brightness(0);
@@ -416,7 +428,7 @@ input :active,
 	&__total-photos {
 		font-weight: 700;
 		font-size: 16px;
-		color: $help-color;
+		color: $black-color;
 		mix-blend-mode: overlay;
 	}
 	&__description {
@@ -491,7 +503,7 @@ input :active,
 		border: none;
 		cursor: pointer;
 		transition: 0.2s linear;
-		background-color: rgba($header-color, 0.2);
+		background-color: rgba($grey211-02-opacity-color, 0.2);
 		border-radius: 10px;
 		display: flex;
 		align-items: center;
@@ -501,22 +513,22 @@ input :active,
 		margin: 15px auto;
 		height: 70px;
 		user-select: none;
-		color: rgba($help-color, 0.9);
+		color: rgba($black-color, 0.9);
 		font-size: 24px;
 		&:hover {
-			background-color: rgba($header-color, 0.7);
+			background-color: rgba($grey211-02-opacity-color, 0.7);
 		}
 	}
 	&__except {
 		font-size: 16px;
 		position: relative;
-		color: $logo-color;
+		color: $main-color;
 		top: 5px;
 		left: calc(10% + 15px);
 		text-decoration: none;
 		background-position: 0% 100%;
 		background-repeat: no-repeat;
-		background-image: linear-gradient($logo-color, $logo-color);
+		background-image: linear-gradient($main-color, $main-color);
 		background-size: 0% 1px;
 		transition: background-size 0.2s ease-in;
 		&:hover {
@@ -534,12 +546,12 @@ input :active,
 	input {
 		width: 70%;
 		height: 35px;
-		background-color: rgba($logo-color, 0.1);
+		background-color: rgba($main-color, 0.1);
 		padding-left: 10px;
 		border-radius: 5px;
-		outline: 1px solid $logo-color;
+		outline: 1px solid $main-color;
 		&::placeholder {
-			color: $logo-color;
+			color: $main-color;
 			font-size: 15px;
 		}
 	}
@@ -558,9 +570,9 @@ input :active,
 		transition: 0.5s ease-in-out;
 		cursor: pointer;
 		padding: 5px 10px;
-		border: $logo-color solid 2px;
+		border: $main-color solid 2px;
 		border-radius: 5px;
-		color: $logo-color;
+		color: $main-color;
 		font-weight: 600;
 		font-size: 20px;
 		width: 30%;
@@ -569,14 +581,14 @@ input :active,
 		align-items: center;
 		justify-content: center;
 		&:hover {
-			background-color: $logo-color;
-			color: $helpfull-color;
+			background-color: $main-color;
+			color: $aliceblue-color;
 		}
 	}
 }
 
 .registered {
-	height: calc(100vh - 70px);
+	height: calc(100vh - var(--header-height));
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -584,20 +596,20 @@ input :active,
 	&__message {
 		font-size: 24px;
 		font-weight: 600;
-		color: $logo-color;
+		color: $main-color;
 	}
 	&__link {
 		height: 50px;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		border-color: 1px solid $logo-color;
+		border-color: 1px solid $main-color;
 	}
 }
 
 .account {
 	max-width: 600px;
-	background-color: $page-color;
+	background-color: $white-05-opacity-color;
 	border-radius: 15px;
 	margin: 40px auto 15px;
 	word-break: break-all;
@@ -616,7 +628,7 @@ input :active,
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		background-color: $main-color;
+		background-color: $grey178-color;
 		border-radius: 50%;
 	}
 	&__info {
@@ -639,8 +651,8 @@ input :active,
 		font-size: 18px;
 		font-weight: 500;
 		padding: 5px 15px;
-		background-color: $logo-color;
-		color: $helpfull-color;
+		background-color: $main-color;
+		color: $aliceblue-color;
 		cursor: pointer;
 	}
 	&__subscribers {
@@ -710,14 +722,14 @@ input :active,
 		margin: auto;
 		width: 60%;
 		height: 90%;
-		background-color: $helpfull-color;
+		background-color: $aliceblue-color;
 		display: flex;
 		align-items: center;
 		flex-direction: column;
 	}
 
 	&__find {
-		outline: 1px $help-color solid;
+		outline: 1px $black-color solid;
 		border-radius: 10px;
 		display: flex;
 		width: 90%;
@@ -729,7 +741,7 @@ input :active,
 	&__input {
 		width: 85%;
 		height: 100%;
-		background-color: $helpfull-color;
+		background-color: $aliceblue-color;
 		padding-left: 15px;
 	}
 	&__search {
@@ -737,7 +749,7 @@ input :active,
 		height: 100%;
 		display: flex;
 		align-items: center;
-		background-color: $helpfull-color;
+		background-color: $aliceblue-color;
 		justify-content: center;
 		& img {
 			width: 20px;
@@ -748,7 +760,7 @@ input :active,
 			width: 1px;
 			height: 60%;
 			transform: translate(-10px);
-			background-color: rgba($help-color, 0.3);
+			background-color: rgba($black-color, 0.3);
 		}
 	}
 	&__switch {
@@ -766,7 +778,7 @@ input :active,
 		font-size: 14px;
 		text-decoration: none;
 		background-repeat: no-repeat;
-		background-image: linear-gradient($logo-color, $logo-color);
+		background-image: linear-gradient($main-color, $main-color);
 		transition: background-size 0.5s ease-in-out;
 		background-size: 100% 2px;
 	}
@@ -820,7 +832,7 @@ input :active,
 	&__img {
 		width: 40px;
 		height: 40px;
-		background-color: $main-color;
+		background-color: $grey178-color;
 		margin: 0 10px;
 		border-radius: 50%;
 		& img {
@@ -831,7 +843,7 @@ input :active,
 		}
 	}
 	&__info {
-		width: calc(80% - 70px);
+		width: calc(80% - var(--header-height));
 	}
 	&__username {
 		font-size: 12px;
@@ -852,8 +864,8 @@ input :active,
 		font-size: 16px;
 		font-weight: 500;
 		padding: 5px 15px;
-		background-color: $logo-color;
-		color: $helpfull-color;
+		background-color: $main-color;
+		color: $aliceblue-color;
 		text-align: center;
 		cursor: pointer;
 	}
@@ -881,7 +893,7 @@ input :active,
 		height: 40px;
 		display: block;
 		text-decoration: none;
-		color: $logo-color;
+		color: $main-color;
 		margin: 0 0 10px 0;
 		width: 75%;
 		margin: auto;
@@ -911,7 +923,7 @@ input :active,
 
 .unregistered {
 	width: 100%;
-	height: calc(100vh - 80px);
+	height: calc(100vh - var(--header-height));
 	display: flex;
 	align-items: center;
 	justify-content: center;
@@ -923,23 +935,157 @@ input :active,
 
 	&__link {
 		text-decoration: none;
-		color: $logo-color;
+		color: $main-color;
 	}
 }
 
-.underline {
-	font-size: 16px;
-	color: $logo-color;
-	top: 5px;
-	left: calc(10% + 15px);
-	text-decoration: none;
-	background-position: 0% 100%;
-	background-repeat: no-repeat;
-	background-image: linear-gradient($logo-color, $logo-color);
-	background-size: 0% 1px;
-	transition: background-size 0.2s ease-in;
-	&:hover {
-		background-size: 100% 1px;
+.create {
+	width: 100%;
+	height: calc(100vh - var(--header-height));
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: 600;
+	& * {
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 50%;
+		height: 30%;
+		border: 3px solid $grey211-02-opacity-color;
+		transition: 0.2s linear;
+		mix-blend-mode: color-burn;
+		&:hover {
+			border-color: $white-05-opacity-color;
+			background-color: $grey211-02-opacity-color;
+			color: $main-color;
+			font-size: 22px;
+			transform-origin: bottom;
+		}
+	}
+}
+
+.create-collection {
+	width: 100%;
+	position: fixed;
+	z-index: 1;
+	height: calc(100vh - var(--header-height));
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	&__form {
+		position: relative;
+		padding: 10px 20px;
+		min-width: 400px;
+		height: 90%;
+		box-shadow: 2px 6px 38px -12px rgba(34, 60, 80, 0.2);
+		background-color: $white-color;
+		border-radius: 10px;
+	}
+	&__top-text {
+		font-size: 24px;
+		font-weight: 500;
+		padding: 10px 0 0 0;
+	}
+	&__pre-text {
+		color: rgba($black-color, 0.7);
+		padding: 5px 0;
+	}
+	&__name,
+	&__description {
+		margin: 10px 0;
+	}
+
+	&__input-name,
+	&__input-description {
+		resize: none;
+		width: 100%;
+		font-size: 14px;
+		word-break: keep-all;
+		&:focus {
+			box-shadow: 2px 6px 45px -10px rgba($main-color, 0.1);
+			box-shadow: inset 2px 6px 45px -10px rgba($main-color, 0.1);
+		}
+	}
+	&__input-name {
+		height: 28px;
+	}
+	&__input-description {
+		height: 140px;
+	}
+	&__private {
+		display: flex;
+		gap: 10px;
+		align-items: center;
+	}
+	&__checkbox {
+		accent-color: $main-color;
+		width: 18px;
+		height: 18px;
+	}
+	&__private-text {
+		font-weight: 500;
+	}
+	&__access {
+		position: absolute;
+		width: 100%;
+		bottom: 20px;
+		left: 0;
+		display: flex;
+		justify-content: center;
+		gap: 30%;
+		align-items: center;
+	}
+	&__cancel,
+	&__create {
+		width: 30%;
+		height: 50px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+		font-size: 20px;
+		font-weight: 500;
+		transition: 0.5s cubic-bezier(0.39, 0.575, 0.565, 1);
+	}
+	&__create {
+		color: $main-color;
+		$outerBorderWidth: 2px;
+		$innerBorderWidth: 2px;
+
+		&:before {
+			content: "";
+			position: absolute;
+			border: $main-color solid $outerBorderWidth;
+			width: 30%;
+			top: 0;
+			right: 0;
+			bottom: 0;
+			left: 65%;
+			transition-duration: 0.3s;
+			transition-property: top right bottom left;
+		}
+
+		&:hover:before {
+			top: -($outerBorderWidth + $innerBorderWidth);
+			right: -($outerBorderWidth + $innerBorderWidth);
+			bottom: -($outerBorderWidth + $innerBorderWidth);
+			left: 65%;
+		}
+		&:hover {
+			transition: 0.2s;
+			font-size: 22px;
+		}
+	}
+	&__cancel {
+		background-color: $main-color;
+		color: $white-color;
+		&:hover {
+			background-color: $white-color;
+			color: $main-color;
+			outline: 1px solid $main-color;
+		}
 	}
 }
 

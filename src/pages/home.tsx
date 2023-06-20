@@ -18,7 +18,7 @@ export default function HomePage() {
   return  (
     <>
       <Header />
-      <Main framesPerLoad={2} frameHeight={400} frameHeightDiffusion={100}></Main>
+      {/* <Main framesPerLoad={2} frameHeight={400} frameHeightDiffusion={100}></Main> */}
     </>
   )
 }

@@ -7,15 +7,11 @@ import { useEffect } from "react";
 export default function FramePage() {
   const { id = "" } = useParams();
 
-  useEffect(() => {
-		window.scrollTo(0, 0)
-	}, []);
-
   return (
     <>
       <Header/>
       <Frame id={id}/>
-      {/* <Main framesPerLoad={2} frameHeight={400} frameHeightDiffusion={100}></Main> */}
+      <Main framesWidth={200}></Main>
     </>
   )
 }

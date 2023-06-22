@@ -11,14 +11,10 @@ import { addFramesRedirect } from "../store/framesSlice";
 
 export default function HomePage() {
 
-  useEffect(() => {
-		window.scrollTo(0, 0)
-	}, []);
-
   return  (
     <>
       <Header />
-      {/* <Main framesPerLoad={2} frameHeight={400} frameHeightDiffusion={100}></Main> */}
+      <Main framesWidth={200}></Main>
     </>
   )
 }

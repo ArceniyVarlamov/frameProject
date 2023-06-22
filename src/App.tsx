@@ -13,9 +13,12 @@ import CollectionsPage from "./pages/collections";
 import MePage from "./pages/me";
 import Error from "./components/functional/Error";
 import CreatePage from "./pages/create";
+import { useEffect } from "react";
+import useFramesStoreInfo from "./utils/info/useFramesStoreInfo";
+import { addFramesRedirect } from "./store/framesSlice";
 
 function App() {
-	// useCheckRegister();
+	useCheckRegister();
 
 	return (
 		<BrowserRouter>

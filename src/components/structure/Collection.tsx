@@ -8,7 +8,6 @@ import useAccountCollections from "../../hooks/get/useAccountCollections";
 import useAccountCollection from "./../../hooks/get/useAccontCollection";
 import { IAccountCollection, IData } from "./../../interface";
 import { Link } from "react-router-dom";
-import useRandomHeights from "../../hooks/functions/useRandomHeights";
 
 export default function Collection({
 	id,
@@ -2858,17 +2857,15 @@ export default function Collection({
 		},
 	];
 
-	const { randomHeights } = useRandomHeights(frameHeight, 200, 10, 10);
-
 	return (
 		<div className='collection' {...props}>
-			{dataCollectionPhotos!.map((item, i) => {
+			{dataCollectionPhotos?.map((item, i) => {
 				return (
 					<div
 						className='collection__frame'
 						style={{
 							backgroundColor: item?.color,
-							height: `${randomHeights[i]}px`,
+							gridRowEnd: `span ${item?.height / 100}`,
 						}}
 					>
 						<Link to={`/frame/${item?.id}`} className='collection__link'>

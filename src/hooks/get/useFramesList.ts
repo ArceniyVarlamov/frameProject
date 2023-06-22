@@ -4,11 +4,11 @@ import { IData } from "../../interface";
 import useMetaData from "../../utils/info/useMetaData";
 import useFramesInfo from "../../utils/info/useFramesStoreInfo";
 import { useDispatch } from "react-redux";
-import { resetFramesLoaded } from "../../store/framesSlice";
+import { addFramesLoaded, resetFramesLoaded, resetFramesRedirect } from "../../store/framesSlice";
 import { addError } from "../../store/functionsSlice";
 
 // Хук, который загружает массив из информации о картинках в зависимости от номера страницы(id) и кол-ва картинок(num)
-export default function useFramesList(num: number, column: number) {
+export default function useFramesList(num: number) {
 	const [frames, setFrames] = useState<IData[]>([]);
 	const [load, setLoad] = useState(true);
 
@@ -18,12 +18,12 @@ export default function useFramesList(num: number, column: number) {
 	const dispatch = useDispatch()
 
 	useEffect(() => {
-		if (framesRedirect !== 0) {
+		if (framesRedirect) {
+			window.scrollTo(0, 0)
 			dispatch(resetFramesLoaded())
-			setFrames([]);
-			setLoad(true);
+			dispatch(resetFramesRedirect())
+			setFrames(frames.slice(frames.length - framesLoaded * num))
 		}
-		
 	}, [framesRedirect]);
 
 	const getInfo = useCallback(async () => {
@@ -41,9 +41,11 @@ export default function useFramesList(num: number, column: number) {
 				).data)]
 			);
 			// Вариант если api ограничивает запросы
+			// const heights = [400, 700, 1400, 300, 600, 500]
+
 			// let all: IData[] = [];
 			// for (let i = frames.length; i < framesLoaded * num; i++) {
-			// 	all.push({} as IData);
+			// 	all.push({height: heights[i % heights.length]} as IData);
 			// }
 			// setFrames([...frames, ...all]);
 		} catch (err: unknown) {
@@ -52,7 +54,7 @@ export default function useFramesList(num: number, column: number) {
 		} finally {
 			setLoad(false);
 		}
-	}, [column, framesLoaded, num]);
+	}, [framesLoaded, num]);
 
 	// Когда пользователь достигнет границы страницы загружется информация
 	useEffect(() => {

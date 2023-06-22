@@ -4,12 +4,14 @@ $grey178-color: rgba(178, 178, 178, 0.7);
 $grey158-color: rgba(158, 158, 158, 0.7);
 $white-05-opacity-color: rgba(255, 255, 255, 0.6);
 $grey211-02-opacity-color: rgba(211, 211, 211, 0.2);
-// $main-color: rgb(162, 26, 26);
+$main-color: rgb(162, 26, 26);
 // $main-color: rgba(80, 26, 162);
-$main-color: rgb(3, 3, 3);
+// $main-color: rgb(3, 3, 3);
 $black-color: black;
 $aliceblue-color: aliceblue;
 $white-color: white;
+$x-inc: 10px;
+$y-inc: 15px;
 :root {
 	--main-color: rgba(178, 178, 178, 0.7);
 	--pre-main-color: rgba(158, 158, 158, 0.7);
@@ -261,23 +263,15 @@ input :active,
 }
 
 .main {
-	display: flex;
-	width: calc(100% - 10px);
-	gap: 15px;
-	flex-wrap: wrap;
+	margin: auto;
+	width: 90%;
+	display: grid;
+	grid-auto-rows: 10px;
 	justify-content: center;
-	&__col {
-		position: relative;
-		display: flex;
-		flex-direction: column;
-		gap: 30px;
-		width: 200px;
-	}
 	&__frame {
-		user-select: none;
-		width: 100%;
-		border-radius: 15px;
-		border-radius: 15px;
+		padding: 0;
+    margin: $y-inc $x-inc;
+    border-radius: 16px;
 	}
 	&__img {
 		width: 100%;
@@ -876,12 +870,12 @@ input :active,
 	margin: auto;
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: space-around;
+	justify-content: center;
+	gap: 10px;
 	&__collection {
 		cursor: pointer;
-		margin-bottom: 10px;
-		width: 30%;
-		height: 15vw;
+		width: 35vh;
+		height: 25vh;
 		& img {
 			width: 100%;
 			border-radius: 15px;
@@ -902,15 +896,16 @@ input :active,
 }
 
 .collection {
-	width: 95%;
-	display: flex;
 	margin: auto;
-	flex-wrap: wrap;
-	justify-content: space-between;
-	&__container {
-		display: flex;
-	}
+	width: 90%;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, 30%);
+	grid-auto-rows: 10px;
+	justify-content: center;
 	&__frame {
+		padding: 0;
+    margin: $y-inc $x-inc;
+    border-radius: 16px;
 	}
 	&__link {
 	}

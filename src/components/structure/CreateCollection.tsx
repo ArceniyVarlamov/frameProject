@@ -1,6 +1,7 @@
 import { useState } from "react";
 
 export default function CreateCollection() {
+	
 	return (
 		<div className='create-collection'>
 			<div className='create-collection__form'>

@@ -1,7 +1,7 @@
 import AccountInfo from '../components/structure/AccountInfo';
 import Header from '../components/structure/Header';
 import useAccountCurrent from '../hooks/get/useAccountCurrent';
-import Account from '../components/structure/Account';
+import Collections from '../components/structure/Collections';
 
 export default function MePage() {
 
@@ -10,7 +10,8 @@ export default function MePage() {
   return (
     <>
       <Header/>
-      <Account accountData={meData}/>
+      <AccountInfo accountData={meData} />
+			<Collections username={meData?.username} toShow={6} />
     </>
   )
 }

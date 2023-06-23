@@ -37,6 +37,7 @@ export default function Main({
 		<div
 			className='main'
 			style={{
+				// Отвечает за длину каждого фрейма
 				gridTemplateColumns: `repeat(auto-fill, ${framesWidth}px)`,
 			}}
 		>
@@ -48,6 +49,7 @@ export default function Main({
 								className='main__frame'
 								style={{
 									backgroundColor: item?.color,
+									// Отвечает за высоту каждого фрейма
 									gridRowEnd: `span ${Math.round(
 										(item?.height / 100 < 35 ? 35 : item?.height / 100) || Math.random() * (40 - 10) + 10,
 									)}`,

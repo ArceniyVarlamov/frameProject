@@ -11,7 +11,7 @@ export default function CollectionPage() {
   return (
     <>
       <Header/>
-      <Collection id={id} frameHeight={400}/>
+      <Collection id={id} frameWidth={200}/>
     </>
   )
 }

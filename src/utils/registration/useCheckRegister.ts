@@ -5,13 +5,13 @@ import { IUnsplashUser } from "../../interface";
 import { setAccessToken, setIsRegistered } from "../../store/accountSlice";
 import useMetaData from "../info/useMetaData";
 import useAccountInfo from "../info/useAccountStoreInfo";
+import { addError } from "../../store/functionsSlice";
 
 export default function useCheckRegister() {
 	const dispatch = useDispatch();
 
 	const { isRegistered, accessToken } = useAccountInfo();
 	const [accountData, setAccountData] = useState({} as IUnsplashUser);
-	const [accountError, setAccountError] = useState("" as AxiosError | any);
 	const [accountLoading, setAccountLoading] = useState(true);
 	const { unsplash, app } = useMetaData();
 
@@ -25,8 +25,9 @@ export default function useCheckRegister() {
 						)
 					).data,
 				);
-			} catch (err: AxiosError | any) {
-				setAccountError(err);
+			} catch (err: unknown) {
+				const error = err as AxiosError;
+				addError(dispatch, `${error.message} while regisering`)
 			} finally {
 				setAccountLoading(false);
 			}
@@ -46,7 +47,7 @@ export default function useCheckRegister() {
 			dispatch(setAccessToken(accountData.access_token));
 			dispatch(setIsRegistered(true));
 		}
-	}, [accountData, accountError, dispatch]);
+	}, [accountData, dispatch]);
 
-	return { accountData, accountError, accountLoading };
+	return { accountData, accountLoading };
 }

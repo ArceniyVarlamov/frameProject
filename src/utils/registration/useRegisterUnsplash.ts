@@ -4,13 +4,11 @@ import useMetaData from "../info/useMetaData";
 import { IUnsplashUser } from "../../interface";
 import { useDispatch } from "react-redux";
 import { setAccessToken, setIsRegistered } from "../../store/accountSlice";
+import { addError } from "../../store/functionsSlice";
 export default function useRegisterUnsplash(code?: string | null) {
 	const dispatch = useDispatch();
 
 	const [accountData, setAccountData] = useState({} as IUnsplashUser);
-	const [accountError, setAccountError] = useState<string>(
-		"" as AxiosError | any,
-	);
 	const [accountLoading, setAccountLoading] = useState(true);
 
 	const { unsplash, app } = useMetaData();
@@ -28,8 +26,9 @@ export default function useRegisterUnsplash(code?: string | null) {
 					)
 				).data,
 			);
-		} catch (err: AxiosError | any) {
-			setAccountError(err);
+		} catch (err: unknown) {
+			const error = err as AxiosError;
+			addError(dispatch, `${error.message} while registering with unsplash`)
 		} finally {
 			setAccountLoading(false);
 		}
@@ -42,7 +41,6 @@ export default function useRegisterUnsplash(code?: string | null) {
 	}, [code, postRegisterUnsplash]);
 
 	useEffect(() => {
-		console.log(accountData);
 		if (accountData.access_token) {
 			localStorage.setItem("refresh_token", accountData.refresh_token);
 			dispatch(setAccessToken(accountData.access_token));
@@ -50,5 +48,5 @@ export default function useRegisterUnsplash(code?: string | null) {
 		}
 	}, [accountData, dispatch]);
 
-	return { accountData, accountError, accountLoading };
+	return { accountData, accountLoading };
 }

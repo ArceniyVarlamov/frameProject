@@ -2,7 +2,7 @@ import axios, { AxiosError } from "axios";
 import { useState, useEffect, useCallback } from "react";
 import { IData } from "../../interface";
 import useMetaData from "../../utils/info/useMetaData";
-import useFramesInfo from "../../utils/info/useFramesStoreInfo";
+import useFramesStoreInfo from "../../utils/info/useFramesStoreInfo";
 import { useDispatch } from "react-redux";
 import { addFramesLoaded, resetFramesLoaded, resetFramesRedirect } from "../../store/framesSlice";
 import { addError } from "../../store/functionsSlice";
@@ -13,7 +13,7 @@ export default function useFramesList(num: number) {
 	const [load, setLoad] = useState(true);
 
 	const { unsplash } = useMetaData();
-	const { framesLoaded, framesRedirect } = useFramesInfo();
+	const { framesLoaded, framesRedirect } = useFramesStoreInfo();
 	
 	const dispatch = useDispatch()
 
@@ -40,17 +40,15 @@ export default function useFramesList(num: number) {
 					)
 				).data)]
 			);
-			// Вариант если api ограничивает запросы
-			// const heights = [400, 700, 1400, 300, 600, 500]
-
-			// let all: IData[] = [];
-			// for (let i = frames.length; i < framesLoaded * num; i++) {
-			// 	all.push({height: heights[i % heights.length]} as IData);
-			// }
-			// setFrames([...frames, ...all]);
 		} catch (err: unknown) {
 			const error = err as AxiosError;
 			addError(dispatch, `${error.message} while getting frames data`)
+			// Вариант если api ограничивает запросы
+			let all: IData[] = [];
+			for (let i = frames.length; i < framesLoaded * num; i++) {
+				all.push({height: Math.random() * (5000 - 2000) + 2000} as IData);
+			}
+			setFrames([...frames, ...all]);
 		} finally {
 			setLoad(false);
 		}

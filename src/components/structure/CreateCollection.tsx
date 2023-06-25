@@ -1,6 +1,24 @@
 import { useState } from "react";
+import { NavLink } from "react-router-dom";
+import { TextChange } from "typescript";
 
-export default function CreateCollection() {
+export default function CreateCollection({close}: {close: any}) {
+
+	const [name, setName] = useState("")
+	const [description, setDescrtiption] = useState("")
+	const [privateC, setPrivateC] = useState(false)
+
+	
+
+	const changeNameHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+		setName(e.currentTarget.value)
+	}
+	const changeDescriptionHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+		setDescrtiption(e.currentTarget.value)
+	}
+	const changePrivateHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+		setPrivateC(!privateC)
+	}
 	
 	return (
 		<div className='create-collection'>
@@ -10,6 +28,7 @@ export default function CreateCollection() {
 					<p className='create-collection__pre-text'>Name</p>
 					<textarea
 						className='create-collection__input-name'
+						onChange={changeNameHandler}
 						maxLength={60}
 					></textarea>
 				</div>
@@ -17,6 +36,7 @@ export default function CreateCollection() {
 					<p className='create-collection__pre-text'>Description (optional)</p>
 					<textarea
 						className='create-collection__input-description'
+						onChange={changeDescriptionHandler}
 						maxLength={250}
 					></textarea>
 				</div>
@@ -24,6 +44,7 @@ export default function CreateCollection() {
 				<div className='create-collection__private'>
 					<input
 						className='create-collection__checkbox'
+						onChange={changePrivateHandler}
 						type='checkbox'
 					></input>
 					<p className='create-collection__private-text'>
@@ -31,7 +52,7 @@ export default function CreateCollection() {
 					</p>
 				</div>
 				<div className='create-collection__access'>
-					<div className='create-collection__cancel blob-button'>Cancel</div>
+					<div className='create-collection__cancel blob-button' onClick={() => close(false)}>Cancel</div>
 					<div className='create-collection__create outline-outward'>Create</div>
 				</div>
 			</div>

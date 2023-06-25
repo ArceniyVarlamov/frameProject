@@ -172,6 +172,7 @@ export interface IAccountCollection {
 	title: string | null;
 	total_photos: number | null;
 	updated_at: string | null;
+	user: IAccountPublicData;
 }
 
 export interface IFirebaseUser {

@@ -29,12 +29,11 @@ export default function HeaderRegistered() {
 				/>
 				<div className='header__notifications'></div>
 				<div className='header__messages'></div>
-				<Link to='/me' className='header__account'>
-					<Image
-						className='header__img'
-						src={accountData?.profile_image?.medium}
-					></Image>
-				</Link>
+				<Image
+					to='/me'
+					className='header__account'
+					src={accountData?.profile_image?.medium}
+				></Image>
 				<div className='header__accounts'></div>
 			</div>
 		</div>

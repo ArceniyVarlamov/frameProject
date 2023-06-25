@@ -99,60 +99,62 @@ export default function Following({
 					{following
 						? followingData?.map((item) => {
 								return (
-									<>
-										<div className='following__user' key={item.id}>
-											<div className='following__img'>
-												<NavLink to={`/account/${item?.username}`}>
-													<Image src={item?.profile_image?.medium}></Image>
-												</NavLink>
-											</div>
-											<div className='following__info'>
-												<div className='following__username'>
-													{conditional({
-														src: item?.username,
-														slice: 20,
-													})}
-												</div>
-												<div className='following__bio'>
-													{conditional({
-														src: item?.bio,
-														alt: "frame user",
-														slice: 20,
-													})}
-												</div>
-											</div>
-											<div className='following__subscribe'>Subscribe</div>
+									<div className='following__user' key={item.id}>
+										<div className='following__img'>
+											<Image
+												to={`/account/${item?.username}`}
+												src={item?.profile_image?.medium}
+											></Image>
 										</div>
-									</>
+										<div className='following__info'>
+											<div className='following__username truncate'>
+												{conditional({
+													src: item?.username,
+													slice: 20,
+												})}
+											</div>
+											<div className='following__bio truncate'>
+												{conditional({
+													src: item?.bio,
+													alt: "frame user",
+													slice: 20,
+												})}
+											</div>
+										</div>
+										<div className='following__subscribe truncate'>
+											Subscribe
+										</div>
+									</div>
 								);
 						  })
 						: followersData?.map((item) => {
 								return (
-									<>
-										<div className='following__user' key={item.id}>
-											<div className='following__img'>
-												<NavLink to={`/account/${item?.username}`}>
-													<Image src={item?.profile_image?.medium}></Image>
-												</NavLink>
-											</div>
-											<div className='following__info'>
-												<div className='following__username'>
-													{conditional({
-														src: item?.username,
-														slice: 20,
-													})}
-												</div>
-												<div className='following__bio'>
-													{conditional({
-														src: item?.bio,
-														alt: "frame user",
-														slice: 20,
-													})}
-												</div>
-											</div>
-											<div className='following__subscribe'>Subscribe</div>
+									<div className='following__user' key={item.id}>
+										<div className='following__img'>
+											<Image
+												to={`/account/${item?.username}`}
+												src={item?.profile_image?.medium}
+											></Image>
 										</div>
-									</>
+										<div className='following__info'>
+											<div className='following__username truncate'>
+												{conditional({
+													src: item?.username,
+													slice: 20,
+												})}
+											</div>
+											<div className='following__bio truncate'>
+												{conditional({
+													src: item?.bio,
+													alt: "frame user",
+													slice: 20,
+												})}
+											</div>
+										</div>
+										<div className='following__subscribe truncate'>
+											Subscribe
+										</div>
+									</div>
 								);
 						  })}
 				</div>

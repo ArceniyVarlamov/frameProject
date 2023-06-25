@@ -1,25 +1,80 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:wght@200;300;400;500&display=swap");
 
-$grey178-color: rgba(178, 178, 178, 0.7);
-$grey158-color: rgba(158, 158, 158, 0.7);
-$white-05-opacity-color: rgba(255, 255, 255, 0.6);
+$grey178-07-opacity-color: rgba(178, 178, 178, 0.7);
+$grey178-01-opacity-color: rgba(178, 178, 178, 0.1);
+
+$grey158-07-opacity-color: rgba(158, 158, 158, 0.7);
+$white-06-opacity-color: rgba(255, 255, 255, 0.6);
 $grey211-02-opacity-color: rgba(211, 211, 211, 0.2);
+$grey211-07-opacity-color: rgba(211, 211, 211, 0.7);
+$grey200-color: rgb(200, 200, 200);
+$grey240-color: rgb(240, 240, 240);
+//!
+$pre-main-color: rgb(161, 84, 84);
 $main-color: rgb(162, 26, 26);
+$main-09-opacity-color: rgba(162, 26, 26, 0.9);
+$main-08-opacity-color: rgba(162, 26, 26, 0.8);
+$main-07-opacity-color: rgba(162, 26, 26, 0.7);
+$main-06-opacity-color: rgba(162, 26, 26, 0.6);
+$main-05-opacity-color: rgba(162, 26, 26, 0.5);
+$main-04-opacity-color: rgba(162, 26, 26, 0.4);
+$main-03-opacity-color: rgba(162, 26, 26, 0.3);
+$main-02-opacity-color: rgba(162, 26, 26, 0.2);
+$main-01-opacity-color: rgba(162, 26, 26, 0.1);
 // $main-color: rgba(80, 26, 162);
 // $main-color: rgb(3, 3, 3);
-$black-color: black;
+//!
+$black-color: rgb(0, 0, 0);
+$black-09-opacity-color: rgba(0, 0, 0, 0.9);
+$black-08-opacity-color: rgba(0, 0, 0, 0.8);
+$black-07-opacity-color: rgba(0, 0, 0, 0.7);
+$black-06-opacity-color: rgba(0, 0, 0, 0.6);
+$black-05-opacity-color: rgba(0, 0, 0, 0.5);
+$black-04-opacity-color: rgba(0, 0, 0, 0.4);
+$black-03-opacity-color: rgba(0, 0, 0, 0.3);
+$black-02-opacity-color: rgba(0, 0, 0, 0.2);
+$black-01-opacity-color: rgba(0, 0, 0, 0.1);
+$nothing-color: rgba(0, 0, 0, 0);
+//!
 $aliceblue-color: aliceblue;
 $white-color: white;
+//!
 $x-inc: 10px;
 $y-inc: 15px;
 :root {
-	--main-color: rgba(178, 178, 178, 0.7);
-	--pre-main-color: rgba(158, 158, 158, 0.7);
-	--page-color: rgba(255, 255, 255, 0.6);
-	--header-color: rgba(211, 211, 211, 0.2);
-	--logo-color: rgba(80, 26, 162);
-	--help-color: black;
-	--helpfull-color: aliceblue;
+	--grey178-07-opacity-color: rgba(178, 178, 178, 0.7);
+	--grey178-01-opacity-color: rgba(178, 178, 178, 0.1);
+	--grey158-07-opacity-color: rgba(158, 158, 158, 0.7);
+	--white-06-opacity-color: rgba(255, 255, 255, 0.6);
+	--grey211-02-opacity-color: rgba(211, 211, 211, 0.2);
+	--grey211-07-opacity-color: rgba(211, 211, 211, 0.7);
+	--grey200-color: rgb(200, 200, 200);
+	--grey240-color: rgb(240, 240, 240);
+	--main-color: rgb(162, 26, 26);
+	--main-09-opacity-color: rgba(162, 26, 26, 0.9);
+	--main-08-opacity-color: rgba(162, 26, 26, 0.8);
+	--main-07-opacity-color: rgba(162, 26, 26, 0.7);
+	--main-06-opacity-color: rgba(162, 26, 26, 0.6);
+	--main-05-opacity-color: rgba(162, 26, 26, 0.5);
+	--main-04-opacity-color: rgba(162, 26, 26, 0.4);
+	--main-03-opacity-color: rgba(162, 26, 26, 0.3);
+	--main-02-opacity-color: rgba(162, 26, 26, 0.2);
+	--main-01-opacity-color: rgba(162, 26, 26, 0.1);
+	// $main-color: rgba(80, 26, 162);
+	// $main-color: rgb(3, 3, 3);
+	--black-color: rgb(0, 0, 0);
+	--black-09-opacity-color: rgba(0, 0, 0, 0.9);
+	--black-08-opacity-color: rgba(0, 0, 0, 0.8);
+	--black-07-opacity-color: rgba(0, 0, 0, 0.7);
+	--black-06-opacity-color: rgba(0, 0, 0, 0.6);
+	--black-05-opacity-color: rgba(0, 0, 0, 0.5);
+	--black-04-opacity-color: rgba(0, 0, 0, 0.4);
+	--black-03-opacity-color: rgba(0, 0, 0, 0.3);
+	--black-02-opacity-color: rgba(0, 0, 0, 0.2);
+	--black-01-opacity-color: rgba(0, 0, 0, 0.1);
+	--aliceblue-color: aliceblue;
+	--white-color: white;
+	--nothing-color: rgba(0, 0, 0, 0);
 	--header-height: 70px;
 }
 
@@ -27,7 +82,7 @@ body {
 	box-sizing: border-box;
 	margin: 0;
 	font-family: "Noto Sans", sans-serif;
-	background-color: $white-05-opacity-color;
+	background-color: $white-06-opacity-color;
 	input {
 		border: none;
 	}
@@ -35,6 +90,15 @@ body {
 
 p {
 	margin: 0;
+}
+
+::-moz-selection {
+	background-color: $main-color;
+	color: #fff;
+}
+::selection {
+	background-color: $main-color;
+	color: #fff;
 }
 
 input :active,
@@ -61,7 +125,7 @@ input :active,
 		justify-content: space-between;
 		padding: 5px 10px;
 		height: 20%;
-		background-color: rgba($grey178-color, 0.1);
+		background-color: $grey178-01-opacity-color;
 		color: $black-color;
 		font-weight: 500;
 		line-height: 20px;
@@ -103,12 +167,33 @@ input :active,
 	}
 }
 
-.loading {
-	background-color: $grey178-color;
-	border-radius: 15px;
-	position: absolute;
-	top: 0;
-	animation: 1.5s infinite alternate loading linear;
+.loader {
+	width: 25px;
+	height: 25px;
+	display: grid;
+	margin: 5px auto;
+}
+.loader::before,
+.loader::after {
+	content: "";
+	grid-area: 1/1;
+	--c: radial-gradient(farthest-side, var(--main-07-opacity-color) 92%, var(--nothing-color));
+	background: var(--c) 50% 0, var(--c) 50% 100%, var(--c) 100% 50%,
+		var(--c) 0 50%;
+	background-size: 6px 6px;
+	background-repeat: no-repeat;
+	animation: s2 1s infinite;
+}
+.loader::before {
+	opacity: 0.8;
+	background-size: 6px 6px;
+	animation-timing-function: linear;
+}
+
+@keyframes s2 {
+	100% {
+		transform: rotate(0.5turn);
+	}
 }
 
 .correct {
@@ -124,7 +209,7 @@ input :active,
 	left: 20px;
 	width: 200px;
 	height: 60px;
-	background-color: $grey178-color;
+	background-color: $grey178-07-opacity-color;
 }
 
 .truncate {
@@ -160,6 +245,7 @@ input :active,
 	&__container {
 		background-color: $grey211-02-opacity-color;
 		width: 100%;
+		z-index: 2 !important;
 		gap: 10px;
 		display: flex;
 		position: fixed;
@@ -189,7 +275,7 @@ input :active,
 		text-decoration: none;
 		color: $main-color;
 		&:hover {
-			background-color: rgba($main-color, 0.9);
+			background-color: $main-09-opacity-color;
 			color: $aliceblue-color;
 		}
 	}
@@ -206,15 +292,14 @@ input :active,
 		opacity: 0.8;
 		border-radius: 50%;
 		&:hover {
-			background-color: $main-color;
-			opacity: 0.7;
+			background-color: $main-07-opacity-color;
 		}
 	}
 	&__messages,
 	&__notifications,
 	&__account,
 	&__accounts {
-		background-color: $grey178-color;
+		background-color: $grey178-07-opacity-color;
 		border-radius: 50%;
 		cursor: pointer;
 	}
@@ -233,11 +318,11 @@ input :active,
 		display: flex;
 		align-items: center;
 		text-decoration: none;
-		color: rgba($black-color, 0.8);
+		color: $black-08-opacity-color;
 
 		&:hover {
-			color: rgba($main-color, 0.8);
-			background-color: rgba($main-color, 0.2);
+			color: $main-08-opacity-color;
+			background-color: $main-02-opacity-color;
 		}
 	}
 	&__search {
@@ -245,7 +330,7 @@ input :active,
 		width: 40%;
 		border-radius: 15px;
 		padding: 0 10px;
-		box-shadow: 2px 2px 20px -2px rgba($main-color, 0.1);
+		box-shadow: 2px 2px 20px -2px $main-01-opacity-color;
 		&:focus {
 			font-weight: 500;
 			background-color: $grey211-02-opacity-color;
@@ -270,8 +355,8 @@ input :active,
 	justify-content: center;
 	&__frame {
 		padding: 0;
-    margin: $y-inc $x-inc;
-    border-radius: 16px;
+		margin: $y-inc $x-inc;
+		border-radius: 16px;
 	}
 	&__img {
 		width: 100%;
@@ -287,6 +372,7 @@ input :active,
 	}
 	&__author {
 		height: 16px;
+		margin-top: 5px;
 		display: flex;
 		align-items: center;
 		justify-content: flex-end;
@@ -300,8 +386,8 @@ input :active,
 		opacity: 0.8;
 	}
 	&__author-img {
-		width: 14px;
-		height: 14px;
+		width: 18px;
+		height: 18px;
 		border-radius: 50%;
 	}
 }
@@ -319,7 +405,7 @@ input :active,
 		height: 15px;
 		top: 0;
 		border-radius: 15px;
-		backgroun: $grey158-color;
+		backgroun: $grey158-07-opacity-color;
 	}
 	100% {
 		left: calc(100% - 50px);
@@ -330,6 +416,7 @@ input :active,
 	}
 }
 
+
 .frame {
 	margin: 2vh auto;
 	height: 900px;
@@ -338,14 +425,12 @@ input :active,
 	&__img {
 		border-top-left-radius: 15px;
 		border-bottom-left-radius: 15px;
-		height: 100%;
-		width: 50%;
 		object-fit: cover;
 		object-position: center;
 		user-select: none;
 	}
 	&__info {
-		box-shadow: inset 0px 0px 8px 0 rgba($black-color, 0.3);
+		box-shadow: inset 0px 0px 8px 0 $black-03-opacity-color;
 		border-top-right-radius: 15px;
 		border-bottom-right-radius: 15px;
 		width: 50%;
@@ -366,7 +451,7 @@ input :active,
 			align-items: center;
 			justify-content: center;
 			&:hover {
-				background-color: rgba($grey211-02-opacity-color, 1);
+				background-color: $grey211-02-opacity-color;
 			}
 		}
 		& img {
@@ -384,7 +469,7 @@ input :active,
 		padding: 0 1%;
 	}
 	&__author {
-		box-shadow: 0px 0px 10px 0px rgba($black-color, 0.2);
+		box-shadow: 0px 0px 10px 0px $black-02-opacity-color;
 		width: 80%;
 		height: auto;
 		flex-direction: column;
@@ -497,7 +582,7 @@ input :active,
 		border: none;
 		cursor: pointer;
 		transition: 0.2s linear;
-		background-color: rgba($grey211-02-opacity-color, 0.2);
+		background-color: $grey211-02-opacity-color;
 		border-radius: 10px;
 		display: flex;
 		align-items: center;
@@ -510,7 +595,7 @@ input :active,
 		color: rgba($black-color, 0.9);
 		font-size: 24px;
 		&:hover {
-			background-color: rgba($grey211-02-opacity-color, 0.7);
+			background-color: $grey211-07-opacity-color;
 		}
 	}
 	&__except {
@@ -540,7 +625,7 @@ input :active,
 	input {
 		width: 70%;
 		height: 35px;
-		background-color: rgba($main-color, 0.1);
+		background-color: $main-01-opacity-color;
 		padding-left: 10px;
 		border-radius: 5px;
 		outline: 1px solid $main-color;
@@ -603,7 +688,7 @@ input :active,
 
 .account {
 	max-width: 600px;
-	background-color: $white-05-opacity-color;
+	background-color: $white-06-opacity-color;
 	border-radius: 15px;
 	margin: 40px auto 15px;
 	word-break: break-all;
@@ -622,7 +707,7 @@ input :active,
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		background-color: $grey178-color;
+		background-color: $grey178-07-opacity-color;
 		border-radius: 50%;
 	}
 	&__info {
@@ -687,7 +772,7 @@ input :active,
 }
 
 .following {
-	z-index: 1;
+	z-index: 2;
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -696,14 +781,13 @@ input :active,
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background-color: rgba(0, 0, 0, 0.2);
+	background-color: $black-02-opacity-color;
 	&__back {
 		z-index: 2;
 		position: fixed;
 		right: 20px;
 		top: 20px;
-		width: 30px;
-		height: 30px;
+		height: 5%;
 		cursor: pointer;
 		& img {
 			width: 100%;
@@ -714,8 +798,8 @@ input :active,
 		border-radius: 10px;
 		z-index: 2;
 		margin: auto;
-		width: 60%;
-		height: 90%;
+		width: 80%;
+		height: 80%;
 		background-color: $aliceblue-color;
 		display: flex;
 		align-items: center;
@@ -739,22 +823,22 @@ input :active,
 		padding-left: 15px;
 	}
 	&__search {
-		width: 15%;
+		width: 40px;
 		height: 100%;
 		display: flex;
 		align-items: center;
 		background-color: $aliceblue-color;
 		justify-content: center;
 		& img {
-			width: 20px;
-			height: 20px;
+			max-width: 10px;
+			max-height: 10px;
 		}
 		&::before {
 			content: "";
 			width: 1px;
 			height: 60%;
 			transform: translate(-10px);
-			background-color: rgba($black-color, 0.3);
+			background-color: $black-03-opacity-color;
 		}
 	}
 	&__switch {
@@ -762,14 +846,14 @@ input :active,
 		margin-bottom: 5px;
 		display: flex;
 		justify-content: center;
+		gap: 10%;
 	}
 	&__followers,
 	&__following {
 		cursor: pointer;
-		font-size: 16px;
 		padding: 4px 5px;
 		font-weight: 600;
-		font-size: 14px;
+		font-size: 2vw;
 		text-decoration: none;
 		background-repeat: no-repeat;
 		background-image: linear-gradient($main-color, $main-color);
@@ -813,7 +897,7 @@ input :active,
 	&__users {
 		overflow-y: auto;
 		width: 90%;
-		height: calc(100% - 100px);
+		height: 80%;
 	}
 	&__user {
 		margin-top: 10px;
@@ -826,7 +910,7 @@ input :active,
 	&__img {
 		width: 40px;
 		height: 40px;
-		background-color: $grey178-color;
+		background-color: $grey178-07-opacity-color;
 		margin: 0 10px;
 		border-radius: 50%;
 		& img {
@@ -896,23 +980,145 @@ input :active,
 }
 
 .collection {
-	margin: auto;
 	width: 90%;
-	display: grid;
-	grid-auto-rows: 10px;
-	justify-content: center;
-	&__frame {
-		padding: 0;
-    margin: $y-inc $x-inc;
-		border-radius: 15px;
-	}
-	&__link {
-	}
-	&__img {
+	margin: 20px auto 0;
+	&__account {
 		width: 100%;
-		height: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		margin: 20px 0;
+		gap: 5px;
+	}
+	&__account-image {
+		width: 40px;
+		height: 40px;
+		border-radius: 50%;
+	}
+	&__by {
+		font-weight: 500;
+		font-size: 14px;
+	}
+	&__about {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: 25px;
+	}
+	&__name {
+		font-size: 28px;
+		font-weight: 600;
+	}
+	&__thinks {
+		position: relative;
+	}
+	&__arrow-down {
+		display: flex;
+		align-items: center;
+		width: 25px;
+		height: 25px;
+		padding: 5px;
+		border-radius: 50%;
+		cursor: pointer;
+		background-color: $grey211-02-opacity-color;
+		transition: 0.3s ease-in-out;
+	}
+	&__open {
+		position: absolute;
+		display: flex;
+		flex-direction: column;
 		border-radius: 15px;
-		object-fit: cover;
+		z-index: 1;
+		right: 17.5px;
+		transform: translateX(+50%);
+		top: 40px;
+		background-color: $white-color;
+		box-shadow: 0px 0px 35px -19px $black-color;
+		& * {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			user-select: none;
+			border-radius: 5px;
+			cursor: pointer;
+			height: 40px;
+			width: 150px;
+			font-size: 20px;
+			font-weight: 600;
+			color: $black-07-opacity-color;
+
+			&:hover {
+				background-color: $grey240-color;
+			}
+		}
+	}
+	&__description {
+		word-break: break-all;
+		padding: 15px 20px;
+		border-radius: 10px;
+		margin: 10px auto;
+	}
+	&__description-arrow {
+		width: 15px;
+		height: 10px;
+		margin-left: 5px;
+		cursor: pointer;
+	}
+	&__info {
+		display: flex;
+		align-items: center;
+		margin: 10px 0;
+		justify-content: space-between;
+	}
+	&__photos {
+		font-weight: 600;
+		font-size: 16px;
+		color: $black-07-opacity-color;
+	}
+	&__actions {
+		display: flex;
+		align-items: center;
+		position: relative;
+	}
+	&__settings {
+		background-color: $white-color;
+		z-index: 1;
+		position: absolute;
+		right: 0;
+		top: 30px;
+		width: 200px;
+		padding: 20px;
+		border-radius: 10px;
+		box-shadow: 0px 0px 8px 0px $black-02-opacity-color;
+	}
+	&__settings-main-text {
+		font-size: 16px;
+		font-weight: 600;
+		margin-bottom: 10px;
+		color: $black-08-opacity-color;
+	}
+	&__settings-pre-text {
+		font-size: 14px;
+		font-weight: 500;
+		color: $black-08-opacity-color;
+		margin-bottom: 5px;
+	}
+	&__toggle-img {
+		cursor: pointer;
+		height: 100%;
+		transition: 0.2s linear;
+	}
+	&__range {
+		accent-color: $main-color;
+		width: 90%;
+	}
+	&__range-value {
+		width: 100%;
+		text-align: center;
+	}
+	&__range-input {
+		width: 100%;
 	}
 }
 
@@ -952,7 +1158,7 @@ input :active,
 		transition: 0.2s linear;
 		mix-blend-mode: color-burn;
 		&:hover {
-			border-color: $white-05-opacity-color;
+			border-color: $white-06-opacity-color;
 			background-color: $grey211-02-opacity-color;
 			color: $main-color;
 			font-size: 22px;
@@ -963,17 +1169,17 @@ input :active,
 
 .create-collection {
 	width: 100%;
-	position: fixed;
+	position: absolute;
 	z-index: 1;
-	height: calc(100vh - var(--header-height));
+	height: (100% - var(--header-height));
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	&__form {
 		position: relative;
 		padding: 10px 20px;
-		min-width: 400px;
-		height: 90%;
+		margin-top: 20px;
+		width: 400px;
 		box-shadow: 2px 6px 38px -12px rgba(34, 60, 80, 0.2);
 		background-color: $white-color;
 		border-radius: 10px;
@@ -981,10 +1187,10 @@ input :active,
 	&__top-text {
 		font-size: 24px;
 		font-weight: 500;
-		padding: 10px 0 0 0;
+		padding: 40px 0 0 0;
 	}
 	&__pre-text {
-		color: rgba($black-color, 0.7);
+		color: $black-07-opacity-color;
 		padding: 5px 0;
 	}
 	&__name,
@@ -999,12 +1205,11 @@ input :active,
 		font-size: 14px;
 		word-break: keep-all;
 		&:focus {
-			box-shadow: 2px 6px 45px -10px rgba($main-color, 0.1);
-			box-shadow: inset 2px 6px 45px -10px rgba($main-color, 0.1);
+			box-shadow: inset 2px 6px 45px -10px $main-01-opacity-color;
 		}
 	}
 	&__input-name {
-		height: 28px;
+		height: 32px;
 	}
 	&__input-description {
 		height: 140px;
@@ -1023,9 +1228,9 @@ input :active,
 		font-weight: 500;
 	}
 	&__access {
-		position: absolute;
+		position: relative;
 		width: 100%;
-		bottom: 20px;
+		margin: 30px 0;
 		left: 0;
 		display: flex;
 		justify-content: center;
@@ -1117,19 +1322,9 @@ input :active,
 		}
 	}
 	.following {
-		&__container {
-			width: 100%;
-			height: 100%;
-		}
-		&__subscribe {
-			font-size: 10px;
-		}
 		&__back {
-			position: relative;
-			right: -50%;
-			transform: translate(calc(-50% - 10px), 10px);
-			top: 0;
-			justify-self: flex-end;
+			top: 5px;
+			right: 5px;
 		}
 	}
 }

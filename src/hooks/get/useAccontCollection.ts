@@ -8,8 +8,7 @@ import useAccountStoreInfo from "../../utils/info/useAccountStoreInfo";
 
 export default function useAccountCollection(id: string | undefined | null) {
 	const [dataCollection, setDataCollection] = useState<IAccountCollection>();
-	const [dataCollectionPhotos, setDataCollectionPhotos] = useState<IData[]>();
-	const [loadCollection, setLoadCollection] = useState<boolean>(false);
+	const [load, setLoad] = useState<boolean>(false);
 
 	const { accessToken } = useAccountStoreInfo();
 
@@ -25,18 +24,11 @@ export default function useAccountCollection(id: string | undefined | null) {
 						)
 					).data,
 				);
-				setDataCollectionPhotos(
-					await (
-						await axios.get(
-							`https://api.unsplash.com/collections/${id}/photos?access_token=${accessToken}`,
-						)
-					).data,
-				);
 			} catch (err: unknown) {
 				const error = err as AxiosError;
 				addError(dispatch, `${error.message} while getting collection data`)
 			} finally {
-				setLoadCollection(false);
+				setLoad(false);
 			}
 		},
 		[],
@@ -50,7 +42,6 @@ export default function useAccountCollection(id: string | undefined | null) {
 
 	return {
 		dataCollection,
-		dataCollectionPhotos,
-		loadCollection,
+		load,
 	};
 }

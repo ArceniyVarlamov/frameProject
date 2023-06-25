@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import useAccountInfo from "../hooks/get/useAccountInfo";
 import Collections from "../components/structure/Collections";
 import AccountInfo from "../components/structure/AccountInfo";
+import Loading from "../components/functional/Loading";
 
 export default function AccountPage() {
 
@@ -13,6 +14,7 @@ export default function AccountPage() {
   return (
     <>
       <Header/>
+      <Loading loading={load}></Loading>
       <AccountInfo accountData={data} />
 			<Collections username={data?.username} toShow={6} />
     </>

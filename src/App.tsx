@@ -18,7 +18,7 @@ import useFramesStoreInfo from "./utils/info/useFramesStoreInfo";
 import { addFramesRedirect } from "./store/framesSlice";
 
 function App() {
-	useCheckRegister();
+	// useCheckRegister();
 
 	return (
 		<BrowserRouter>

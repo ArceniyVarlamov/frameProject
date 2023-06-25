@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import conditional from "../../utils/functional/condition";
 import Loading from "../functional/Loading";
 import useFramesId from "./../../hooks/get/useFramesId";
@@ -7,30 +8,34 @@ export default function Image({
 	id,
 	src,
 	className,
-	style
+	style,
+	to = '',
 }: {
 	id?: string | null | undefined;
 	src?: string | null | undefined;
 	className?: string;
-	style?: any
+	style?: any;
+	to?: string;
 }) {
 	const { data, load } = useFramesId(id);
 
 	return (
 		<>
 			<Loading loading={load}></Loading>
-			<img
-				src={
-					(src ? src : data?.urls.regular)
-						? src
+			<NavLink to={to}>
+				<img
+					src={
+						(src ? src : data?.urls.regular)
 							? src
-							: data?.urls.regular
-						: "https://www.technistone.com/color-range/image-slab/Brilliant%20Black_SLAB_web.jpg"
-				}
-				alt='f'
-				className={className?.toString()}
-				style={style}
-			/>
+								? src
+								: data?.urls.regular
+							: "https://www.technistone.com/color-range/image-slab/Brilliant%20Black_SLAB_web.jpg"
+					}
+					alt='f'
+					className={className?.toString()}
+					style={style}
+				/>
+			</NavLink>
 		</>
 	);
 }

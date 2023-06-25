@@ -1,6 +1,7 @@
 import Image from "./Image";
 import useAccountCollections from "../../hooks/get/useAccountCollections";
 import { Link } from "react-router-dom";
+import Loading from "../functional/Loading";
 
 export default function Collections({
 	username,
@@ -17,17 +18,17 @@ export default function Collections({
 
 	return (
 		<>
+			<Loading loading={load}></Loading>
 			<div className={`collections ${className}`}>
 				{data ? (
 					data?.map((item, i) => {
 						return (
-							<Link
+							<Image
 								to={`/collection/${item?.id}`}
 								className='collections__collection'
 								key={item?.id}
-							>
-								<Image src={item?.cover_photo?.urls?.regular}></Image>
-							</Link>
+								src={item?.cover_photo?.urls?.regular}
+							></Image>
 						);
 					})
 				) : (

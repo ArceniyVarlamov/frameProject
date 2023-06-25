@@ -6,7 +6,7 @@ export default function Create() {
 
 	return (
 		<>
-      {collection && <CreateCollection></CreateCollection>}
+      {collection && <CreateCollection close={setCollection}></CreateCollection>}
 			<div className='create'>
 				<div className='create__collection' onClick={() => setCollection(true)}>Create new collection</div>
 			</div>

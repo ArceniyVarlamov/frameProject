@@ -3,18 +3,12 @@ import useRegisterUnsplash from "../../utils/registration/useRegisterUnsplash";
 import Loading from "../functional/Loading";
 import { AxiosError } from "axios";
 
-export default function RegisterError({
-	accountError,
-	accountLoading,
-}: {
-	accountError: any;
-	accountLoading: boolean;
-}) {
-
+export default function RegisterError() {
 	return (
 		<div className='registered'>
-			<Loading loading={accountLoading}></Loading>
-			<p className='registered__message'>{accountError.toString()}</p>
+			<p className='registered__message'>
+				An error occurred during registration
+			</p>
 			<Link className='registered__link' to='/registration'>
 				Try again
 			</Link>

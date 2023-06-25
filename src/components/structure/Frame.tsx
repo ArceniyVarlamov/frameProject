@@ -100,7 +100,7 @@ export default function Frame({ id }: { id: string }) {
 			<Loading loading={load} />
 			{!load && (
 				<div className='frame'>
-					<Image className='frame__img' src={data?.urls?.full}></Image>
+					<img className='frame__img' src={data?.urls?.full} alt="*"></img>
 					<div className='frame__info'>
 						<div className='frame__links'>
 							<div>
@@ -122,12 +122,11 @@ export default function Frame({ id }: { id: string }) {
 						</div>
 						<div className='frame__author' style={{ backgroundColor: color }}>
 							<div className='frame__user'>
-								<NavLink to={`/account/${data?.user?.username}`}>
-									<Image
-										src={data?.user?.profile_image?.small}
-										className='frame__icon'
-									></Image>
-								</NavLink>
+								<Image
+									to={`/account/${data?.user?.username}`}
+									src={data?.user?.profile_image?.small}
+									className='frame__icon'
+								></Image>
 
 								<div className='frame__user-goal'>
 									<p className='frame__username' style={{ color: color }}>

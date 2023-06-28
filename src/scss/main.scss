@@ -78,6 +78,31 @@ $y-inc: 15px;
 	--header-height: 70px;
 }
 
+::-webkit-scrollbar {
+	width: 8px;
+}
+
+::-webkit-scrollbar-track {
+	background-color: $grey240-color;
+	&:hover {
+		background-color: $grey211-07-opacity-color;
+	}
+	&:active {
+		background-color: $grey200-color;
+	}
+}
+
+::-webkit-scrollbar-thumb {
+	background-color: $main-09-opacity-color;
+	box-shadow: inset 0 0 6px $grey240-color;
+	&:hover {
+		box-shadow: inset 0 0 3px $grey240-color;
+	}
+	&:active {
+		box-shadow: inset 0 0 0px $grey240-color;
+	}
+}
+
 body {
 	box-sizing: border-box;
 	margin: 0;
@@ -415,7 +440,6 @@ input :active,
 		border-radius: 5px;
 	}
 }
-
 
 .frame {
 	margin: 2vh auto;
@@ -1028,19 +1052,18 @@ input :active,
 		position: absolute;
 		display: flex;
 		flex-direction: column;
-		border-radius: 15px;
+		border-radius: 10px;
 		z-index: 1;
 		right: 17.5px;
 		transform: translateX(+50%);
 		top: 40px;
 		background-color: $white-color;
-		box-shadow: 0px 0px 35px -19px $black-color;
+		box-shadow: 0px 0px 45px -19px $black-05-opacity-color;
 		& * {
 			display: flex;
 			align-items: center;
 			justify-content: center;
 			user-select: none;
-			border-radius: 5px;
 			cursor: pointer;
 			height: 40px;
 			width: 150px;
@@ -1051,6 +1074,13 @@ input :active,
 			&:hover {
 				background-color: $grey240-color;
 			}
+		}
+		
+	}
+	&__action {
+		border-bottom: 1px solid $black-02-opacity-color;
+		&:hover {
+			background-color: $white-color;
 		}
 	}
 	&__description {
@@ -1152,15 +1182,12 @@ input :active,
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		width: 50%;
-		height: 30%;
-		border: 3px solid $grey211-02-opacity-color;
+		padding: 50px 60px;
 		transition: 0.2s linear;
 		mix-blend-mode: color-burn;
 		&:hover {
 			border-color: $white-06-opacity-color;
 			background-color: $grey211-02-opacity-color;
-			color: $main-color;
 			font-size: 22px;
 			transform-origin: bottom;
 		}

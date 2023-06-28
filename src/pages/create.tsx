@@ -11,8 +11,8 @@ export default function CreatePage() {
 	return (
 		<>
       <Header/>
-			{!isRegistered && <Create></Create>}
-			{isRegistered && <NotRegistered />}
+			{isRegistered && <Create></Create>}
+			{!isRegistered && <NotRegistered />}
 		</>
 	);
 }

@@ -15,6 +15,7 @@ import { useDispatch } from "react-redux";
 import { setFramesCollectionsWidth } from "../../store/variablesSlice";
 import useVariablesStoreInfo from "../../utils/info/useVariablesStoreInfo";
 import Loading from "../functional/Loading";
+import EditCollection from "./EditCollection";
 
 export default function CollectionInfo({
 	id,
@@ -30,6 +31,7 @@ export default function CollectionInfo({
 	const [description, setDescription] = useState(false);
 	const [actions, setActions] = useState(false);
 	const [framesWidth, setFramesWidth] = useState(framesCollectionsWidth);
+	const [collection, setCollection] = useState(false);
 
 	const RangeRef = useRef<HTMLInputElement>(null);
 
@@ -42,6 +44,7 @@ export default function CollectionInfo({
 
 	return (
 		<>
+			{collection && <EditCollection close={setCollection} collectionData={dataCollection}></EditCollection>}
 			<Loading loading={load}></Loading>
 			<div className='collection'>
 				<div className='collection__account'>
@@ -77,23 +80,29 @@ export default function CollectionInfo({
 							<div className='collection__open'>
 								<div className='collection__action'>Actions</div>
 								<div className='collection__share'>Share</div>
+								<div className='collection__edit' onClick={() => {setCollection(true); setThinks(false)}}>Edit</div>
 							</div>
 						)}
 					</div>
 				</div>
-				{dataCollection?.description && <div className='collection__description'>
-					{conditional({
-						src: dataCollection?.description,
-						slice: description ? undefined : 100,
-					})}
-					<img
-						style={{ transform: description ? "rotate(90deg)" : "" }}
-						className='collection__description-arrow'
-						onClick={() => setDescription(!description)}
-						src={arrowDown}
-						alt='>'
-					/>
-				</div>}
+				{dataCollection?.description && (
+					<div className='collection__description'>
+						{conditional({
+							src: dataCollection?.description,
+							slice: description ? undefined : 100,
+						})}
+						<img
+							style={{
+								transform: description ? "rotate(90deg)" : "",
+								display: dataCollection?.description.length > 100 ? "" : "none",
+							}}
+							className='collection__description-arrow'
+							onClick={() => setDescription(!description)}
+							src={arrowDown}
+							alt='>'
+						/>
+					</div>
+				)}
 				<div className='collection__info'>
 					<div className='collection__photos'>
 						{dataCollection?.total_photos} frames

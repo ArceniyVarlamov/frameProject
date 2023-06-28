@@ -41,6 +41,7 @@ export default function useFramesList(num: number) {
 				).data)]
 			);
 		} catch (err: unknown) {
+			
 			const error = err as AxiosError;
 			addError(dispatch, `${error.message} while getting frames data`)
 			// Вариант если api ограничивает запросы

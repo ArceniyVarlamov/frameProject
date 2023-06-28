@@ -24,7 +24,7 @@ export default function FramePage() {
     <>
       <Header/>
       <Frame id={id}/>
-      <Main framesWidth={framesMainWidth} frames={frames} load={load}></Main>
+      {/* <Main framesWidth={framesMainWidth} frames={frames} load={load}></Main> */}
     </>
   )
 }

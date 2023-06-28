@@ -1,8 +1,15 @@
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import useCreateCollection from "../../hooks/post/useCreateCollection";
+import { IAccountCollection } from "../../interface";
 
-export default function CreateCollection({ close }: { close: any }) {
+export default function EditCollection({
+	close,
+	collectionData,
+}: {
+	close: any;
+	collectionData: IAccountCollection | undefined;
+}) {
 	const [name, setName] = useState("");
 	const [description, setDescrtiption] = useState("");
 	const [privateC, setPrivateC] = useState(false);
@@ -20,12 +27,17 @@ export default function CreateCollection({ close }: { close: any }) {
 		setPrivateC(!privateC);
 	};
 
-	const {dataCollection, load} = useCreateCollection(name, description, privateC, post)
+	const { dataCollection, load } = useCreateCollection(
+		name,
+		description,
+		privateC,
+		post,
+	);
 
 	return (
 		<div className='create-collection'>
 			<div className='create-collection__form'>
-				<p className='create-collection__top-text'>Create new collection</p>
+				<p className='create-collection__top-text'>Edit Collection {dataCollection?.title}</p>
 				<div className='create-collection__name'>
 					<p className='create-collection__pre-text'>Name</p>
 					<textarea
@@ -65,7 +77,7 @@ export default function CreateCollection({ close }: { close: any }) {
 						onClick={() => {
 							setPost(true);
 							setTimeout(() => {
-								close(false)
+								close(false);
 							}, 100);
 						}}
 					>

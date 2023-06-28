@@ -27,7 +27,7 @@ export default function HomePage() {
 	return (
 		<>
 			<Header />
-			<Main frames={frames} load={load} framesWidth={framesMainWidth}></Main>
+			{/* <Main frames={frames} load={load} framesWidth={framesMainWidth}></Main> */}
 		</>
 	);
 }

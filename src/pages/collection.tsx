@@ -9,6 +9,7 @@ import useFetchByScroll from "../hooks/functions/useFetchByScroll";
 import CollectionInfo from "../components/structure/CollectionInfo";
 import useVariablesStoreInfo from "../utils/info/useVariablesStoreInfo";
 import Loading from "../components/functional/Loading";
+import useCheckIsRegistered from "../hooks/functions/useCheckIsRegistered";
 
 export default function CollectionPage() {
 	const { id } = useParams();
@@ -16,6 +17,7 @@ export default function CollectionPage() {
 	const { framesCollectionsWidth } = useVariablesStoreInfo();
 
   useFetchByScroll();
+	useCheckIsRegistered()
 
 	const { colNum, lineNum } = useCountResize(framesCollectionsWidth);
 

@@ -5,8 +5,11 @@ import useAccountInfo from "../hooks/get/useAccountInfo";
 import Collections from "../components/structure/Collections";
 import AccountInfo from "../components/structure/AccountInfo";
 import Loading from "../components/functional/Loading";
+import useCheckIsRegistered from "../hooks/functions/useCheckIsRegistered";
 
 export default function AccountPage() {
+
+  useCheckIsRegistered()
 
   const { username } = useParams();
   const { data, load } = useAccountInfo(username)

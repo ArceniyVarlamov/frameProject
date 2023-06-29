@@ -1,13 +1,15 @@
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import useCreateCollection from "../../hooks/post/useCreateCollection";
-import { IAccountCollection } from "../../interface";
+import { IAccountCollection, ICollectionFormTitles, ICollectionProps } from "../../interface";
+import useUpdateCollection from "../../hooks/put/useUpdateCollection";
+import CollectionForm from "./CollectionForm";
 
 export default function EditCollection({
 	close,
 	collectionData,
 }: {
-	close: any;
+	close: (value: boolean) => void;
 	collectionData: IAccountCollection | undefined;
 }) {
 	const [name, setName] = useState("");
@@ -15,76 +17,38 @@ export default function EditCollection({
 	const [privateC, setPrivateC] = useState(false);
 	const [post, setPost] = useState(false);
 
-	const changeNameHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-		setName(e.currentTarget.value);
-	};
-	const changeDescriptionHandler = (
-		e: React.ChangeEvent<HTMLTextAreaElement>,
-	) => {
-		setDescrtiption(e.currentTarget.value);
-	};
-	const changePrivateHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
-		setPrivateC(!privateC);
-	};
-
-	const { dataCollection, load } = useCreateCollection(
+	const { dataCollection, load } = useUpdateCollection(
+		collectionData?.id,
 		name,
 		description,
 		privateC,
 		post,
 	);
 
-	return (
-		<div className='create-collection'>
-			<div className='create-collection__form'>
-				<p className='create-collection__top-text'>Edit Collection {dataCollection?.title}</p>
-				<div className='create-collection__name'>
-					<p className='create-collection__pre-text'>Name</p>
-					<textarea
-						className='create-collection__input-name'
-						onChange={changeNameHandler}
-						maxLength={60}
-					></textarea>
-				</div>
-				<div className='create-collection__description'>
-					<p className='create-collection__pre-text'>Description (optional)</p>
-					<textarea
-						className='create-collection__input-description'
-						onChange={changeDescriptionHandler}
-						maxLength={250}
-					></textarea>
-				</div>
+	const props: ICollectionProps = {
+		name: name,
+		description: description,
+		privateC: privateC,
+		post: post,
+		setName: setName,
+		setDescrtiption: setDescrtiption,
+		setPrivateC: setPrivateC,
+		setPost: setPost,
+	};
 
-				<div className='create-collection__private'>
-					<input
-						className='create-collection__checkbox'
-						onChange={changePrivateHandler}
-						type='checkbox'
-					></input>
-					<p className='create-collection__private-text'>
-						Make collection private
-					</p>
-				</div>
-				<div className='create-collection__access'>
-					<div
-						className='create-collection__cancel blob-button'
-						onClick={() => close(false)}
-					>
-						Cancel
-					</div>
-					<div
-						className='create-collection__create outline-outward'
-						onClick={() => {
-							setPost(true);
-							setTimeout(() => {
-								close(false);
-							}, 100);
-						}}
-					>
-						Create
-					</div>
-				</div>
-			</div>
-		</div>
+	const formTitles: ICollectionFormTitles = {
+		mainTitle: 'Edit collection',
+		nameTitle: 'New name',
+		descriptionTitle: 'Description'
+	}
+
+	return (
+		<CollectionForm
+			mainProps={props}
+			dataCollection={dataCollection}
+			load={load}
+			close={close}
+			formTitles={formTitles}
+		></CollectionForm>
 	);
 }

@@ -6,6 +6,7 @@ import useFetchByScroll from "../hooks/functions/useFetchByScroll";
 import useCountResize from "../hooks/functions/useCountResize";
 import useFramesList from "../hooks/get/useFramesList";
 import useVariablesStoreInfo from "../utils/info/useVariablesStoreInfo";
+import useCheckIsRegistered from "../hooks/functions/useCheckIsRegistered";
 
 export default function FramePage() {
   const { id = "" } = useParams();
@@ -14,6 +15,7 @@ export default function FramePage() {
 
   // Событие подзагрузки фреймов при скролле
 	useFetchByScroll();
+  useCheckIsRegistered()
 
   // Считает количество столбов и строк, которые будут на странице с определённым размером окна
   const {colNum, lineNum} = useCountResize(framesMainWidth)

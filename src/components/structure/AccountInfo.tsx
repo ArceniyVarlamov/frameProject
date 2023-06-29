@@ -18,7 +18,6 @@ export default function AccountInfo({
 	const [showFollowing, setShowFollowing] = useState(false);
 	const [following, setFollowing] = useState(true);
 	
-
 	return (
 		<>
 			<div className={`account ${className}`}>

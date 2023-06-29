@@ -4,15 +4,15 @@ import Collections from "../components/structure/Collections";
 import useAccountStoreInfo from "../utils/info/useAccountStoreInfo";
 import NotRegistered from "../components/structure/NotRegistered";
 import Create from "../components/structure/Create";
+import useCheckIsRegistered from "../hooks/functions/useCheckIsRegistered";
 
 export default function CreatePage() {
-	const { isRegistered } = useAccountStoreInfo();
+	useCheckIsRegistered()
 
 	return (
 		<>
       <Header/>
-			{isRegistered && <Create></Create>}
-			{!isRegistered && <NotRegistered />}
+			<Create/>
 		</>
 	);
 }

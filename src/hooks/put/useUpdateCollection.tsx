@@ -6,8 +6,8 @@ import { useDispatch } from "react-redux";
 import { addError } from "../../store/functionsSlice";
 import useAccountStoreInfo from "../../utils/info/useAccountStoreInfo";
 
-export default function useCreateCollection(
-  id: string | undefined,
+export default function useUpdateCollection(
+  id: string | undefined | null,
 	name: string | undefined,
 	description: string | undefined,
 	privateC: boolean,
@@ -58,7 +58,7 @@ export default function useCreateCollection(
 				addError(dispatch, `Something went wrong. Try again`);
 			}
 		}
-	}, [accessToken, description, dispatch, getInfo, name, post, privateC]);
+	}, [accessToken, description, dispatch, getInfo, id, name, post, privateC]);
 
 	return {
 		dataCollection,

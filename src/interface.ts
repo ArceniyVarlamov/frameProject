@@ -194,3 +194,23 @@ export interface IUnsplashUser {
 	created_at: number;
 	refresh_token: string;
 }
+
+export interface ICollectionProps {
+	name: string;
+	setName: (value: string) => void;
+	description: string;
+	setDescrtiption: (value: string) => void;
+	privateC: boolean;
+	setPrivateC: (value: boolean) => void;
+	post: boolean;
+	setPost: (value: boolean) => void;
+}
+
+export interface ICollectionFormTitles {
+	nameTitle: string,
+	namePlaceholder?: string,
+	descriptionTitle: string,
+	descriptionPlaceholder?: string,
+	mainTitle: string,
+
+}

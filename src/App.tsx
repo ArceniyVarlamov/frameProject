@@ -16,6 +16,7 @@ import CreatePage from "./pages/create";
 import { useEffect } from "react";
 import useFramesStoreInfo from "./utils/info/useFramesStoreInfo";
 import { addFramesRedirect } from "./store/framesSlice";
+import NotRegisteredPage from "./pages/notRegistered";
 
 function App() {
 	useCheckRegister();
@@ -35,6 +36,7 @@ function App() {
 				<Route path='/collection/:id' element={<CollectionPage />} />
 				<Route path='/collections/:username' element={<CollectionsPage />} />
 				<Route path='/create' element={<CreatePage />} />
+				<Route path='/notregistered' element={<NotRegisteredPage />} />
 			</Routes>
 		</BrowserRouter>
 	);

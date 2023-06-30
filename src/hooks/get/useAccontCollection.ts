@@ -5,12 +5,14 @@ import { IAccountCollection, IData } from "./../../interface";
 import { useDispatch } from "react-redux";
 import { addError } from "../../store/functionsSlice";
 import useAccountStoreInfo from "../../utils/info/useAccountStoreInfo";
+import useFunctionsStoreInfo from './../../utils/info/useFunctionsStoreInfo';
 
 export default function useAccountCollection(id: string | undefined | null) {
 	const [dataCollection, setDataCollection] = useState<IAccountCollection>();
 	const [load, setLoad] = useState<boolean>(false);
 
 	const { accessToken } = useAccountStoreInfo();
+	const { updateCollectionData } = useFunctionsStoreInfo()
 
 	const dispatch = useDispatch();
 
@@ -35,10 +37,12 @@ export default function useAccountCollection(id: string | undefined | null) {
 	);
 
 	useEffect(() => {
-		if (typeof accessToken === "string" && typeof id === 'string') {
+		console.log(!!accessToken && !!id);
+		
+		if (!!accessToken && !!id) {
 			getInfo(accessToken, id);
 		}
-	}, [accessToken, getInfo, id]);
+	}, [accessToken, getInfo, id, updateCollectionData]);
 
 	return {
 		dataCollection,

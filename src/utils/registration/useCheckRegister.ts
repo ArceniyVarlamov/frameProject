@@ -36,13 +36,13 @@ export default function useCheckRegister() {
 	);
 
 	useEffect(() => {
-		if (localStorage.getItem("refresh_token") && !isRegistered) {
+		if (!!localStorage.getItem("refresh_token") && !isRegistered) {
 			postRefreshUnsplash(localStorage.getItem("refresh_token"));
 		}
 	}, [accessToken.length, isRegistered, postRefreshUnsplash]);
 
 	useEffect(() => {
-		if (accountData.access_token) {
+		if (!!accountData.access_token) {
 			localStorage.setItem("refresh_token", accountData.refresh_token);
 			dispatch(setAccessToken(accountData.access_token));
 			dispatch(setIsRegistered(true));

@@ -150,7 +150,7 @@ input :active,
 		justify-content: space-between;
 		padding: 5px 10px;
 		height: 20%;
-		background-color: $grey178-01-opacity-color;
+		background-color: $grey240-color;
 		color: $black-color;
 		font-weight: 500;
 		line-height: 20px;
@@ -162,11 +162,12 @@ input :active,
 	}
 	& img {
 		cursor: pointer;
-		opacity: 0.6;
-		mix-blend-mode: overlay;
+		mix-blend-mode: hard-light;
 		width: 15px;
 		height: 15px;
 		align-self: flex-start;
+		position: relative;
+		top: 0px;
 	}
 }
 
@@ -202,7 +203,11 @@ input :active,
 .loader::after {
 	content: "";
 	grid-area: 1/1;
-	--c: radial-gradient(farthest-side, var(--main-07-opacity-color) 92%, var(--nothing-color));
+	--c: radial-gradient(
+		farthest-side,
+		var(--main-07-opacity-color) 92%,
+		var(--nothing-color)
+	);
 	background: var(--c) 50% 0, var(--c) 50% 100%, var(--c) 100% 50%,
 		var(--c) 0 50%;
 	background-size: 6px 6px;
@@ -244,7 +249,6 @@ input :active,
 }
 
 .underline {
-	font-size: 16px;
 	color: $main-color;
 	top: 5px;
 	left: calc(10% + 15px);
@@ -1075,7 +1079,6 @@ input :active,
 				background-color: $grey240-color;
 			}
 		}
-		
 	}
 	&__action {
 		border-bottom: 1px solid $black-02-opacity-color;
@@ -1312,6 +1315,57 @@ input :active,
 			background-color: $white-color;
 			color: $main-color;
 			outline: 1px solid $main-color;
+		}
+	}
+}
+
+.access {
+	padding: 6vh 4vw;
+	height: 12vh;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 2;
+	background-color: $grey240-color;
+	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 2vh;
+	&__title {
+		display: flex;
+		align-items: center;
+		font-size: 4vmin;
+		height: 5vmin;
+	}
+	&__choose {
+		margin: 2vh 0;
+		height: 4vmin;
+		display: flex;
+		font-size: 3vmin;
+		align-items: center;
+		gap: 3vw;
+		justify-content: space-between;
+	}
+	&__no {
+		cursor: pointer;
+		padding: 1vh 1vw;
+		transition: 0.4s linear;
+		&:hover {
+			background-color: $grey211-07-opacity-color;
+		}
+	}
+	&__yes {
+		cursor: pointer;
+		padding: 1vh 1vw;
+		background-color: $main-07-opacity-color;
+		color: $grey240-color;
+		transition: 0.4s ease-in;
+		&:hover {
+			color: $main-07-opacity-color;
+			background-color: $nothing-color;
+			outline: 1px solid $main-07-opacity-color;
 		}
 	}
 }

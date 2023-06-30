@@ -7,6 +7,7 @@ import { addError } from "../../store/functionsSlice";
 import useAccountStoreInfo from "../../utils/info/useAccountStoreInfo";
 import { resetFramesLoaded, resetFramesRedirect } from "../../store/framesSlice";
 import useFramesStoreInfo from "../../utils/info/useFramesStoreInfo";
+import useFunctionsStoreInfo from "../../utils/info/useFunctionsStoreInfo";
 
 export default function useAccountCollectionPhotoes(
 	id: string | undefined | null,
@@ -18,6 +19,7 @@ export default function useAccountCollectionPhotoes(
   const { framesLoaded, framesRedirect } = useFramesStoreInfo()
 
 	const { accessToken } = useAccountStoreInfo();
+	const { updateCollectionData } = useFunctionsStoreInfo()
 
 	const dispatch = useDispatch();
 
@@ -55,10 +57,10 @@ export default function useAccountCollectionPhotoes(
 	}, [framesLoaded]);
 
 	useEffect(() => {
-		if (typeof accessToken === "string" && typeof id === "string") {
+		if (!!accessToken && !!id) {
 			getInfo(accessToken, id);
 		}
-	}, [accessToken, getInfo, id, framesLoaded]);
+	}, [accessToken, getInfo, id, framesLoaded, updateCollectionData]);
 
 	return {
 		dataCollectionPhotos,

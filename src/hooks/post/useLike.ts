@@ -26,7 +26,7 @@ export default function useLike(id: string, like: boolean | undefined) {
 	}, []);
 
 	useEffect(() => {
-		if (like && accessToken) {
+		if (!!like && !!accessToken) {
 			postLike(id);
 		}
 	}, [like, accessToken]);

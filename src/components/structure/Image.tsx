@@ -9,13 +9,15 @@ export default function Image({
 	src,
 	className,
 	style,
-	to = '',
+	to = "",
+	color,
 }: {
 	id?: string | null | undefined;
 	src?: string | null | undefined;
 	className?: string;
 	style?: any;
 	to?: string;
+	color?: string;
 }) {
 	const { data, load } = useFramesId(id);
 
@@ -25,11 +27,11 @@ export default function Image({
 			<NavLink to={to}>
 				<img
 					src={
-						(src ? src : data?.urls.regular)
-							? src
-								? src
-								: data?.urls.regular
-							: "https://www.technistone.com/color-range/image-slab/Brilliant%20Black_SLAB_web.jpg"
+						src ||
+						data?.urls.regular ||
+						(!!!color &&
+							"https://upload.wikimedia.org/wikipedia/commons/5/59/Empty.png?20091205084734") ||
+						'https://www.technistone.com/color-range/image-slab/Brilliant%20Black_SLAB_web.jpg'
 					}
 					alt='f'
 					className={className?.toString()}

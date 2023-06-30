@@ -33,7 +33,7 @@ export default function useAccountCurrent() {
 	}, []);
 
 	useEffect(() => {
-		if (typeof accessToken === 'string') {
+		if (!!accessToken) {
 			getInfo(accessToken);
 		}
 	}, [accessToken, getInfo]);

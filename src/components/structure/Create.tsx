@@ -2,13 +2,13 @@ import { useState } from "react";
 import CreateCollection from './CreateCollection';
 
 export default function Create() {
-	const [collection, setCollection] = useState(false);
+	const [createForm, setCreateForm] = useState(false);
 
 	return (
 		<>
-      {collection && <CreateCollection close={setCollection}></CreateCollection>}
+      <CreateCollection show={createForm} setShow={setCreateForm}/>
 			<div className='create'>
-				<div className='create__collection' onClick={() => setCollection(true)}>Create new collection</div>
+				<div className='create__collection' onClick={() => setCreateForm(true)}>Create new collection</div>
 			</div>
 		</>
 	);

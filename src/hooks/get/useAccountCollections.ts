@@ -34,7 +34,7 @@ export default function useAccountCollections(
 	}, []);
 
 	useEffect(() => {
-		if (typeof accessToken === "string" && typeof username === "string") {
+		if (!!accessToken && !!username) {
 			getInfo(accessToken, username);
 		}
 	}, [accessToken, getInfo, username]);

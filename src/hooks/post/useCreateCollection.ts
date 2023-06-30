@@ -5,12 +5,14 @@ import { IAccountCollection, IData } from "../../interface";
 import { useDispatch } from "react-redux";
 import { addError } from "../../store/functionsSlice";
 import useAccountStoreInfo from "../../utils/info/useAccountStoreInfo";
+import { useNavigate } from "react-router-dom";
 
 export default function useCreateCollection(
 	name: string | undefined,
 	description: string | undefined,
 	privateC: boolean,
 	post: boolean,
+	setPost: (value: boolean) => void,
 ) {
 	const [dataCollection, setDataCollection] = useState<IAccountCollection>();
 	const [load, setLoad] = useState<boolean>(false);
@@ -18,13 +20,14 @@ export default function useCreateCollection(
 	const { accessToken } = useAccountStoreInfo();
 
 	const dispatch = useDispatch();
+	const navigate = useNavigate();
 
-	const getInfo = useCallback(
+	const postInfo = useCallback(
 		async (
 			accessToken: string,
 			name: string,
-			description="",
-			privateC=false,
+			description = "",
+			privateC = false,
 		) => {
 			try {
 				setDataCollection(
@@ -45,20 +48,22 @@ export default function useCreateCollection(
 	);
 
 	useEffect(() => {
-		console.log(
-				post,
-		);
-		if (post) {
-			if (
-				accessToken &&
-				name
-			) {
-				getInfo(accessToken, name, description, privateC);
-			} else {
+		if (!!post && !!accessToken && !!name) {
+			setPost(false)
+			postInfo(accessToken, name, description, privateC);
+		} else {
+			if (!!post) {
+				setPost(false)
 				addError(dispatch, `Something went wrong. Try again`);
 			}
 		}
-	}, [accessToken, description, dispatch, getInfo, name, post, privateC]);
+	}, [accessToken, description, dispatch, name, post, postInfo, privateC, setPost]);
+
+	useEffect(() => {
+    if (!!dataCollection) {
+      navigate(`/collection/${dataCollection?.id}`);
+    }
+  }, [dataCollection]);
 
 	return {
 		dataCollection,

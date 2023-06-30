@@ -10,7 +10,7 @@ export interface IVariablesState {
 const accountState: IVariablesState = {
   framesMainWidth: 220,
   framesCollectionsWidth: 220,
-  framesHeightConst: 2,
+  framesHeightConst: 1.5,
 };
 
 const variablesSlice = createSlice({

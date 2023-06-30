@@ -5,9 +5,11 @@ import CollectionForm from "./CollectionForm";
 import { ICollectionFormTitles, ICollectionProps } from "../../interface";
 
 export default function CreateCollection({
-	close,
+	show,
+	setShow,
 }: {
-	close: (value: boolean) => void;
+	show: boolean;
+	setShow: (value: boolean) => void;
 }) {
 	const [name, setName] = useState("");
 	const [description, setDescrtiption] = useState("");
@@ -19,6 +21,7 @@ export default function CreateCollection({
 		description,
 		privateC,
 		post,
+		setPost
 	);
 
 	const props: ICollectionProps = {
@@ -33,18 +36,20 @@ export default function CreateCollection({
 	};
 
 	const formTitles: ICollectionFormTitles = {
-		mainTitle: 'Create new collection',
-		nameTitle: 'Name',
-		descriptionTitle: 'Description'
-	}
+		mainTitle: "Create new collection",
+		nameTitle: "Name",
+		descriptionTitle: "Description",
+	};
 
 	return (
-		<CollectionForm
-			mainProps={props}
-			dataCollection={dataCollection}
-			load={load}
-			close={close}
-			formTitles={formTitles}
-		></CollectionForm>
+		<>
+			{show && <CollectionForm
+				mainProps={props}
+				dataCollection={dataCollection}
+				load={load}
+				setShow={setShow}
+				titles={formTitles}
+			></CollectionForm>}
+		</>
 	);
 }

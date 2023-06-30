@@ -5,17 +5,17 @@ import { IAccountCollection, ICollectionFormTitles, ICollectionProps } from "../
 import useUnpdateCollection from "../../hooks/put/useUpdateCollection";
 
 export default function CollectionForm({
-	close,
+	setShow,
 	dataCollection,
   load,
 	mainProps,
-  formTitles,
+  titles,
 }: {
   dataCollection: IAccountCollection | undefined;
-	close: (value: boolean) => void;
+	setShow: (value: boolean) => void;
   load: boolean;
 	mainProps: ICollectionProps;
-  formTitles: ICollectionFormTitles;
+  titles: ICollectionFormTitles;
 }) {
 	
 	const changeNameHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -33,23 +33,23 @@ export default function CollectionForm({
 	return (
 		<div className='create-collection'>
 			<div className='create-collection__form'>
-				<p className='create-collection__top-text'>{formTitles.mainTitle}</p>
+				<p className='create-collection__top-text'>{titles.mainTitle}</p>
 				<div className='create-collection__name'>
-					<p className='create-collection__pre-text'>{formTitles.nameTitle}</p>
+					<p className='create-collection__pre-text'>{titles.nameTitle}</p>
 					<textarea
 						className='create-collection__input-name'
-            placeholder={formTitles.namePlaceholder}
+            placeholder={titles.namePlaceholder}
             autoFocus={true}
 						onChange={changeNameHandler}
 						maxLength={60}
 					></textarea>
 				</div>
 				<div className='create-collection__description'>
-					<p className='create-collection__pre-text'>{formTitles.descriptionTitle}</p>
+					<p className='create-collection__pre-text'>{titles.descriptionTitle}</p>
 					<textarea
 						className='create-collection__input-description'
 						onChange={changeDescriptionHandler}
-            placeholder={formTitles.descriptionPlaceholder}
+            placeholder={titles.descriptionPlaceholder}
 						maxLength={250}
 					></textarea>
 				</div>
@@ -67,7 +67,7 @@ export default function CollectionForm({
 				<div className='create-collection__access'>
 					<div
 						className='create-collection__cancel blob-button'
-						onClick={() => close(false)}
+						onClick={() => setShow(false)}
 					>
 						Cancel
 					</div>
@@ -75,7 +75,7 @@ export default function CollectionForm({
 						className='create-collection__create outline-outward'
 						onClick={() => {
 							mainProps.setPost(true);
-							close(load);
+							setShow(false);
 						}}
 					>
 						Create

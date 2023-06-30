@@ -3,10 +3,14 @@ import { useDispatch } from "react-redux";
 
 export interface IFunctionsState {
 	errors: string[];
+	updateCollectionData: number;
+	updateFrameData: number;
 }
 
 const functionsState: IFunctionsState = {
 	errors: [],
+	updateCollectionData: 1,
+	updateFrameData: 1,
 };
 
 const functionsSlice = createSlice({
@@ -21,10 +25,16 @@ const functionsSlice = createSlice({
 				state.errors.splice(action.payload, action.payload + 1);
 			}
 		},
+		incUpdateCollectionData(state) {
+			state.updateCollectionData += 1
+		},
+		incUpdateFrameData(state) {
+			state.updateFrameData += 1
+		}
 	},
 });
 
-export const { incError, removeError } = functionsSlice.actions;
+export const { incError, removeError, incUpdateCollectionData, incUpdateFrameData } = functionsSlice.actions;
 
 export const addError = (dispatch: any, text: string): void => {
 	

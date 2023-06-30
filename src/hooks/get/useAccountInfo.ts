@@ -32,7 +32,7 @@ export default function useAccountInfo(username: string | undefined) {
 	}, []);
 
   useEffect(() => {
-    if (typeof username === "string" && typeof accessToken === 'string') {
+    if (!!username && !!accessToken) {
       getInfo(accessToken, username);
     }
   }, [accessToken, getInfo, username]);

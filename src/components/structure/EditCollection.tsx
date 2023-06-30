@@ -1,21 +1,28 @@
 import { useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
 import useCreateCollection from "../../hooks/post/useCreateCollection";
-import { IAccountCollection, ICollectionFormTitles, ICollectionProps } from "../../interface";
+import {
+	IAccountCollection,
+	ICollectionFormTitles,
+	ICollectionProps,
+} from "../../interface";
 import useUpdateCollection from "../../hooks/put/useUpdateCollection";
 import CollectionForm from "./CollectionForm";
 
 export default function EditCollection({
-	close,
+	show,
+	setShow,
 	collectionData,
 }: {
-	close: (value: boolean) => void;
+	show: boolean;
+	setShow: (value: boolean) => void;
 	collectionData: IAccountCollection | undefined;
 }) {
 	const [name, setName] = useState("");
 	const [description, setDescrtiption] = useState("");
 	const [privateC, setPrivateC] = useState(false);
 	const [post, setPost] = useState(false);
+	
 
 	const { dataCollection, load } = useUpdateCollection(
 		collectionData?.id,
@@ -23,6 +30,7 @@ export default function EditCollection({
 		description,
 		privateC,
 		post,
+		setPost
 	);
 
 	const props: ICollectionProps = {
@@ -37,18 +45,22 @@ export default function EditCollection({
 	};
 
 	const formTitles: ICollectionFormTitles = {
-		mainTitle: 'Edit collection',
-		nameTitle: 'New name',
-		descriptionTitle: 'Description'
-	}
+		mainTitle: "Edit collection",
+		nameTitle: "New name",
+		descriptionTitle: "Description",
+	};
 
 	return (
-		<CollectionForm
-			mainProps={props}
-			dataCollection={dataCollection}
-			load={load}
-			close={close}
-			formTitles={formTitles}
-		></CollectionForm>
+		<>
+			{show && (
+				<CollectionForm
+					mainProps={props}
+					dataCollection={dataCollection}
+					load={load}
+					setShow={setShow}
+					titles={formTitles}
+				></CollectionForm>
+			)}
+		</>
 	);
 }

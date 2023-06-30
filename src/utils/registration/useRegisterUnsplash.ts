@@ -35,13 +35,13 @@ export default function useRegisterUnsplash(code?: string | null) {
 	}, [app.URL, unsplash.ACCESS_KEY, unsplash.SECRET_KEY]);
 
 	useEffect(() => {
-		if (code) {
+		if (!!code) {
 			postRegisterUnsplash(code);
 		}
 	}, [code, postRegisterUnsplash]);
 
 	useEffect(() => {
-		if (accountData.access_token) {
+		if (!!accountData.access_token) {
 			localStorage.setItem("refresh_token", accountData.refresh_token);
 			dispatch(setAccessToken(accountData.access_token));
 			dispatch(setIsRegistered(true));

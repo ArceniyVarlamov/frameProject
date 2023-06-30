@@ -6,7 +6,7 @@ export default function useCheckIsRegistered() {
 	const { isRegistered } = useAccountStoreInfo();
   const navigate = useNavigate();
   useEffect(() => {
-    if (!isRegistered) {
+    if (!localStorage.getItem("refresh_token") && !isRegistered) {
       navigate('/notregistered');
     }
   }, []);

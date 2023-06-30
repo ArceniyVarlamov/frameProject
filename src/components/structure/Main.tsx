@@ -52,6 +52,12 @@ export default function Main({
 												backgroundColor: item?.color,
 											}}
 										/>
+										<div className="main__options">
+											<div className="main__options-save">Save</div>
+											<div className="main__options-thinks"></div>
+											<div className="main__download"></div>
+										</div>
+										
 									</div>
 									<NavLink
 										className='main__author'

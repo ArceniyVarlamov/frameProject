@@ -212,5 +212,10 @@ export interface ICollectionFormTitles {
 	descriptionTitle: string,
 	descriptionPlaceholder?: string,
 	mainTitle: string,
+}
 
+export interface IAccessTitles {
+	mainTitle: string,
+	yesTitle: string,
+	noTitle: string,
 }

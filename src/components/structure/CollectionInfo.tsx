@@ -6,7 +6,7 @@ import Following from "./Following";
 import Image from "./Image";
 import useAccountCollections from "../../hooks/get/useAccountCollections";
 import useAccountCollection from "../../hooks/get/useAccontCollection";
-import { IAccountCollection, IData } from "../../interface";
+import { IAccessTitles, IAccountCollection, IData } from "../../interface";
 import { Link } from "react-router-dom";
 import useAccountCollectionPhotoes from "../../hooks/get/useAccountCollectionPhotoes";
 import arrowDown from "../../images/Arrow-down.png";
@@ -16,6 +16,8 @@ import { setFramesCollectionsWidth } from "../../store/variablesSlice";
 import useVariablesStoreInfo from "../../utils/info/useVariablesStoreInfo";
 import Loading from "../functional/Loading";
 import EditCollection from "./EditCollection";
+import Access from "./Access";
+import useDeleteCollection from "../../hooks/delete/useDeleteCollection";
 
 export default function CollectionInfo({
 	id,
@@ -27,24 +29,52 @@ export default function CollectionInfo({
 
 	const { framesCollectionsWidth } = useVariablesStoreInfo();
 
+	// Открытие/закрытие действий с коллекцией
 	const [thinks, setThinks] = useState(false);
+	// Открытие/закрытие описания
 	const [description, setDescription] = useState(false);
+	// Открытие/закрытие действий с фреймами коллекции
 	const [actions, setActions] = useState(false);
 	const [framesWidth, setFramesWidth] = useState(framesCollectionsWidth);
-	const [collection, setCollection] = useState(false);
+	// Открытие/закрытие формы эдита коллекции
+	const [showEditForm, setShowEditForm] = useState(false);
+	// Открытие/закрытие формы подтверждения удаления
+	const [showDeleteCollection, setShowDeleteCollection] = useState(false);
+	// Переменная удаления коллекции
+	const [postDeleteCollection, setPostDeleteCollection] = useState(false);
+
+	const deleteTitles: IAccessTitles = {
+		mainTitle: "Delete collection?",
+		yesTitle: "Delete",
+		noTitle: "Cancel",
+	};
 
 	const RangeRef = useRef<HTMLInputElement>(null);
 
 	const dispatch = useDispatch();
 
+	// При изменении длины, изменяет глобально
 	const onChangeRange = (e: React.FormEvent<HTMLInputElement>) => {
 		dispatch(setFramesCollectionsWidth(RangeRef?.current?.value));
 		setFramesWidth(+e.currentTarget.value);
 	};
 
+	const { dataCollection: dataDeleteCollection, load: loadDeleteCollection } =
+		useDeleteCollection(id, postDeleteCollection, setPostDeleteCollection);
+
 	return (
 		<>
-			{collection && <EditCollection close={setCollection} collectionData={dataCollection}></EditCollection>}
+			<Access
+				show={showDeleteCollection}
+				setShow={setShowDeleteCollection}
+				toAccess={setPostDeleteCollection}
+				titles={deleteTitles}
+			/>
+			<EditCollection
+				show={showEditForm}
+				setShow={setShowEditForm}
+				collectionData={dataCollection}
+			/>
 			<Loading loading={load}></Loading>
 			<div className='collection'>
 				<div className='collection__account'>
@@ -80,7 +110,24 @@ export default function CollectionInfo({
 							<div className='collection__open'>
 								<div className='collection__action'>Actions</div>
 								<div className='collection__share'>Share</div>
-								<div className='collection__edit' onClick={() => {setCollection(true); setThinks(false)}}>Edit</div>
+								<div
+									className='collection__delete'
+									onClick={() => {
+										setShowDeleteCollection(true);
+										setThinks(false);
+									}}
+								>
+									Delete
+								</div>
+								<div
+									className='collection__edit'
+									onClick={() => {
+										setShowEditForm(true);
+										setThinks(false);
+									}}
+								>
+									Edit
+								</div>
 							</div>
 						)}
 					</div>

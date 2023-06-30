@@ -32,7 +32,7 @@ export default function useAccountFollowing(username: string | null | undefined)
 	}, [dispatch, username]);
 
 	useEffect(() => {
-		if (typeof accessToken === 'string' && typeof username === 'string') {
+		if (!!accessToken && !!username) {
 			getInfo(accessToken, username);
 		}
 	}, [accessToken, getInfo, username]);

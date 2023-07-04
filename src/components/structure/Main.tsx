@@ -4,6 +4,10 @@ import Image from "./Image";
 import { useDispatch } from "react-redux";
 import { IData } from "../../interface";
 import Loading from "./../functional/Loading";
+import download from "../../images/download.png";
+import dots from "../../images/dots.png";
+import { useState } from "react";
+import MainFrame from "./MainFrame";
 
 export default function Main({
 	framesWidth,
@@ -14,8 +18,7 @@ export default function Main({
 	frames: IData[];
 	load: boolean;
 }) {
-	const dispatch = useDispatch();
-
+	
 	return (
 		<>
 			<div
@@ -24,54 +27,12 @@ export default function Main({
 					// Отвечает за длину каждого фрейма
 					gridTemplateColumns: `repeat(auto-fill, ${framesWidth}px)`,
 				}}
-			>
+				>
 				{frames?.map((item, i) => {
 					return (
 						<>
 							{!load && (
-								<div
-									className='main__frame'
-									style={{
-										backgroundColor: item?.color,
-										// Отвечает за высоту каждого фрейма
-										gridRowEnd: `span ${Math.round(
-											item?.height / 100 <= 25 ? 35 : item?.height / 100,
-										)}`,
-									}}
-									key={item?.id}
-								>
-									<div
-										onClick={() => dispatch(addFramesRedirect())}
-										className='main__link'
-									>
-										<Image
-											to={`/frame/${item?.id}`}
-											src={item?.urls?.regular}
-											className='main__img'
-											style={{
-												backgroundColor: item?.color,
-											}}
-										/>
-										<div className="main__options">
-											<div className="main__options-save">Save</div>
-											<div className="main__options-thinks"></div>
-											<div className="main__download"></div>
-										</div>
-										
-									</div>
-									<NavLink
-										className='main__author'
-										to={`/account/${item?.user?.username}`}
-									>
-										<p className='main__author-username'>
-											{item?.user?.username}
-										</p>
-										<Image
-											src={item?.user?.profile_image?.medium}
-											className='main__author-img'
-										/>
-									</NavLink>
-								</div>
+								<MainFrame item={item} load={load}></MainFrame>
 							)}
 						</>
 					);

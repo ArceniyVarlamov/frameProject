@@ -52,6 +52,7 @@ export default function useFramesList(num: number) {
 					color: `rgba(${Math.random() * 125}, ${Math.random() * 125}, ${
 						Math.random() * 125
 					}, ${Math.random() + 0.2})`,
+					blur_hash: "LB84i6~q-;t7ofRjM{fQxuofayWB",
 				} as IData);
 			}
 			setFrames([...frames, ...all]);

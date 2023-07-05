@@ -7,17 +7,28 @@ import Loading from "./../functional/Loading";
 import download from "../../images/download.png";
 import dots from "../../images/dots.png";
 import { useState } from "react";
+import { Blurhash } from "react-blurhash";
 
 export default function MainFrame({
 	item,
 	load,
+	frameWidth,
 }: {
 	item: IData;
 	load: boolean;
+	frameWidth: number;
 }) {
 	const dispatch = useDispatch();
+	// Переменная появления опций на фрейме при наведении
 	const [frameOptions, setFrameOptions] = useState(false);
-  const [frameActions, setFrameActions] = useState(false)
+	// Переменная событий фрейма
+	const [frameActions, setFrameActions] = useState(false);
+	// Переменная хеша (сужения качества) картинки
+	const [frameHash, setFrameHash] = useState(false);
+
+	const frameHeight = Math.round(
+		item?.height / 100 <= 25 ? 35 : item?.height / 100,
+	);
 
 	return (
 		<>
@@ -26,15 +37,11 @@ export default function MainFrame({
 				style={{
 					backgroundColor: item?.color,
 					// Отвечает за высоту каждого фрейма
-					gridRowEnd: `span ${Math.round(
-						item?.height / 100 <= 25 ? 35 : item?.height / 100,
-					)}`,
+					gridRowEnd: `span ${frameHeight}`,
 				}}
 				key={item?.id}
 			>
 				<div
-        //TODO здесь проблема, решить
-					onClick={() => dispatch(addFramesRedirect())}
 					onMouseEnter={() => {
 						setFrameOptions(true);
 					}}
@@ -43,35 +50,67 @@ export default function MainFrame({
 					}}
 					className='main__link'
 				>
-					<Image
-						to={`/frame/${item?.id}`}
-						src={item?.urls?.regular}
-						className='main__img'
-						style={{
-							backgroundColor: item?.color,
-						}}
-					/>
-
-					{(frameOptions || frameActions) && (
+					{!frameHash && (
+						<Image
+							to={`/frame/${item?.id}`}
+							src={item?.urls?.regular}
+							className='main__img'
+							style={{
+								backgroundColor: item?.color,
+							}}
+						/>
+					)}
+					{frameHash && (
+						<Blurhash
+							className='main__img'
+							style={{
+								height: "100%",
+								width: "100%",
+								borderRadius: "var(--main-frames-border-radius)",
+							}}
+							hash={item?.blur_hash}
+							resolutionX={32}
+							resolutionY={32}
+							punch={1}
+						/>
+					)}
+					{(frameOptions || frameActions) && !frameHash && (
 						<>
 							<div className='main__options-save'>Save</div>
 							<div className='main__options-bottom'>
-								<div className='main__options-actions' onClick={() => setFrameActions(!frameActions)}>
+								<div
+									className='main__options-actions'
+									onClick={() => setFrameActions(!frameActions)}
+								>
 									<img src={dots} alt='...' />
 								</div>
 								<div className='main__download'>
 									<img src={download} alt='...' />
 								</div>
 							</div>
-              {frameActions && (
-                <div className="main__actions">
-                  <div className="main__actions-title">Actions</div>
-                  <div className="main__actions-hide">Hide frame</div>
-                  
-                </div>
-                
-              )}
+							{frameActions && (
+								<div className='main__actions'>
+									<div className='main__actions-title'>Actions</div>
+									<div
+										className='main__actions-hide'
+										onClick={() => {
+											setFrameActions(false);
+											setFrameHash(!frameHash);
+										}}
+									>
+										Hide frame
+									</div>
+								</div>
+							)}
 						</>
+					)}
+					{frameHash && (
+						<div className='main__hash'>
+							<div className='main__hash-text'>
+								It's clear! You will no longer see this Frame.
+							</div>
+							<div className="main__hash-cancel" onClick={() => setFrameHash(false)}>Cancel</div>
+						</div>
 					)}
 				</div>
 				<NavLink

@@ -32,7 +32,7 @@ export default function Main({
 					return (
 						<>
 							{!load && (
-								<MainFrame item={item} load={load}></MainFrame>
+								<MainFrame item={item} load={load} frameWidth={framesWidth}></MainFrame>
 							)}
 						</>
 					);

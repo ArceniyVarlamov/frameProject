@@ -11,20 +11,22 @@ export default function Image({
 	style,
 	to = "",
 	color,
+	onClick,
 }: {
 	id?: string | null | undefined;
 	src?: string | null | undefined;
 	className?: string;
-	style?: any;
+	style?: React.CSSProperties;
 	to?: string;
 	color?: string;
+	onClick?: React.MouseEventHandler<HTMLAnchorElement>
 }) {
 	const { data, load } = useFramesId(id);
 
 	return (
 		<>
 			<Loading loading={load}></Loading>
-			<NavLink to={to}>
+			{to && <NavLink to={to} onClick={onClick}>
 				<img
 					src={
 						src ||
@@ -37,7 +39,21 @@ export default function Image({
 					className={className?.toString()}
 					style={style}
 				/>
-			</NavLink>
+			</NavLink>}
+			{!to && (
+				<img
+					src={
+						src ||
+						data?.urls.regular ||
+						(!!!color &&
+							"https://upload.wikimedia.org/wikipedia/commons/5/59/Empty.png?20091205084734") ||
+						'https://www.technistone.com/color-range/image-slab/Brilliant%20Black_SLAB_web.jpg'
+					}
+					alt='f'
+					className={className?.toString()}
+					style={style}
+				/>
+			)}
 		</>
 	);
 }

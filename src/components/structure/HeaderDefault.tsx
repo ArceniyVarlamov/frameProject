@@ -12,11 +12,11 @@ export default function HeaderDefault() {
 	return (
 		<div className='header'>
 			<div className='header__container '>
-				<Link
+				<Image
 					to='/'
 					className='header__logo truncate'
 					onClick={() => dispatch(addFramesRedirect())}
-				></Link>
+				></Image>
 				<Link to='/create' className='header__create truncate'>
 					Create
 				</Link>

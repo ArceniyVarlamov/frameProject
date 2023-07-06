@@ -10,8 +10,8 @@ export default function Header() {
 
 	return (
 		<>
-			{!isRegistered && <HeaderDefault />}
-			{isRegistered && <HeaderRegistered />}
+			{!!isRegistered && <HeaderDefault />}
+			{!!!isRegistered && <HeaderRegistered />}
 		</>
 	);
 }

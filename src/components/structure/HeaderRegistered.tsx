@@ -5,6 +5,8 @@ import Image from "./Image";
 import { addFramesRedirect } from "../../store/framesSlice";
 import { useDispatch } from "react-redux";
 import useAccountCurrent from "../../hooks/get/useAccountCurrent";
+import bell from "../../images/bell.png";
+import mail from "../../images/mail.png";
 
 export default function HeaderRegistered() {
 	const { meData: accountData, load } = useAccountCurrent();
@@ -14,11 +16,11 @@ export default function HeaderRegistered() {
 	return (
 		<div className='header'>
 			<div className='header__container '>
-				<Link
+				<Image
 					to='/'
 					className='header__logo truncate'
 					onClick={() => dispatch(addFramesRedirect())}
-				></Link>
+				></Image>
 				<Link to='/create' className='header__create truncate'>
 					Create
 				</Link>
@@ -27,13 +29,20 @@ export default function HeaderRegistered() {
 					placeholder='Search'
 					className='truncate header__search'
 				/>
-				<div className='header__notifications'></div>
-				<div className='header__messages'></div>
-				<Image
-					to='/me'
-					className='header__account'
-					src={accountData?.profile_image?.medium}
-				></Image>
+				<div className='header__notifications'>
+					<Image
+						src={bell}
+					></Image>
+				</div>
+				<div className='header__messages'>
+					<Image
+						src={mail}
+					></Image>
+				</div>
+				<div className='header__account'>
+					<Image to='/me' src={accountData?.profile_image?.medium}></Image>
+				</div>
+
 				<div className='header__accounts'></div>
 			</div>
 		</div>

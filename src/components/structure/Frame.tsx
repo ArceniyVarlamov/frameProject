@@ -5,8 +5,7 @@ import useFramesId from "../../hooks/get/useFramesId";
 import useColor from "./../../hooks/functions/useColor";
 import download from "../../images/download.png";
 import share from "../../images/share.png";
-import likeUnactive from "../../images/like_unactive.svg";
-import likeActive from "../../images/like_active.svg";
+import likeImg from "../../images/heart.svg";
 import useLike from "../../hooks/post/useLike";
 import conditional from "../../utils/functional/condition";
 import Image from "./Image";
@@ -15,83 +14,10 @@ import { NavLink } from "react-router-dom";
 export default function Frame({ id }: { id: string }) {
 	// own hooks
 	const { data, load } = useFramesId(id);
-	console.log(data);
 
-	// let data = {
-	// 	id: 12,
-	// 	color: "color",
-	// 	description:
-	// 		"descriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescription",
-	// 	categories: [
-	// 		"categories",
-	// 		"categories",
-	// 		"categories",
-	// 		"categories",
-	// 		"categories",
-	// 		"categories",
-	// 		"categories",
-	// 		"categories",
-	// 		"categories",
-	// 		"categories",
-	// 		"categories",
-	// 		"categories",
-	// 		"categories",
-	// 		"categories",
-	// 		"categories",
-	// 	],
-	// 	likes: 120000,
-	// 	liked_by_user: true,
-	// 	urls: {
-	// 		full: "",
-	// 	},
-	// 	current_user_collections: [],
-	// 	user: {
-	// 		id: 14,
-	// 		updated_at: 214,
-	// 		username: "username",
-	// 		location: "location",
-	// 		portfolio_url: "portfolio_url",
-	// 		bio: "bio",
-	// 		total_photos: 100,
-	// 		total_likes: 320000,
-	// 		profile_image: {
-	// 			small: "",
-	// 		},
-	// 	},
-	// 	location: {
-	// 		name: "location_name",
-	// 		city: "location_city",
-	// 		country: "location_country",
-	// 	},
-	// 	views: 12415,
-	// 	downloads: 715415,
-	// 	topics: [
-	// 		"topics",
-	// 		"topics",
-	// 		"topics",
-	// 		"topics",
-	// 		"topics",
-	// 		"topics",
-	// 		"topics",
-	// 		"topics",
-	// 		"topics",
-	// 		"topics",
-	// 		"topics",
-	// 		"topics",
-	// 		"topics",
-	// 		"topics",
-	// 	],
-	// };
-	// let error = "";
-	// let load = false;
 	const color = useColor(data?.color);
 
 	const [like, setLike] = useState(data?.liked_by_user);
-
-	// component functions
-	const liked = () => {
-		setLike(!like);
-	};
 
 	// const { frameData, frameError, frameLoading } = useLike(id, like);
 
@@ -100,7 +26,11 @@ export default function Frame({ id }: { id: string }) {
 			<Loading loading={load} />
 			{!load && (
 				<div className='frame'>
-					<img className='frame__img' src={data?.urls?.full} alt="*"></img>
+					<Image
+						className='frame__img'
+						src={data?.urls?.full}
+						style={{ backgroundColor: data?.color }}
+					></Image>
 					<div className='frame__info'>
 						<div className='frame__links'>
 							<div>
@@ -120,7 +50,7 @@ export default function Frame({ id }: { id: string }) {
 								})}
 							</p>
 						</div>
-						<div className='frame__author' style={{ backgroundColor: color }}>
+						<div className='frame__author'>
 							<div className='frame__user'>
 								<Image
 									to={`/account/${data?.user?.username}`}
@@ -129,12 +59,12 @@ export default function Frame({ id }: { id: string }) {
 								></Image>
 
 								<div className='frame__user-goal'>
-									<p className='frame__username' style={{ color: color }}>
+									<p className='truncate frame__username'>
 										{conditional({ src: data?.user?.username })}
 									</p>
-									<p className='frame__total-photos'>
+									<p className='truncat frame__total-photos'>
 										{conditional({
-											src: data?.user?.total_photos + " total photos",
+											src: data?.user?.total_photos + " photos",
 										})}
 									</p>
 								</div>
@@ -147,12 +77,23 @@ export default function Frame({ id }: { id: string }) {
 						</div>
 						<div className='frame__likes'>
 							<div>
-								<img
-									src={conditional({ src: like ? likeActive : likeUnactive })}
-									alt='heart'
-									onClick={liked}
-								/>
-								<p>{conditional({ src: data?.likes })}</p>
+								<p>
+									{!!data?.likes &&
+										conditional({
+											src: data?.likes + " likes",
+										})}
+								</p>
+								<svg
+									style={{ fill: like ? data?.color : "var(--grey180-color)" }}
+									onClick={() => setLike(!like)}
+									viewBox='0 0 16 16'
+								>
+									{" "}
+									<path
+										fill-rule='evenodd'
+										d='M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z'
+									/>{" "}
+								</svg>
 							</div>
 							<div className='frame__location'>
 								<p>
@@ -164,23 +105,10 @@ export default function Frame({ id }: { id: string }) {
 								</p>
 							</div>
 						</div>
-						{data?.user?.username && (
-							<div className='frame__unsplash'>
-								<p>Photo by </p>
-
-								<a
-									href={`https://unsplash.com/@${data?.user?.username}?utm_source=vello&utm_medium=referral`}
-								>
-									{data?.user?.username}
-								</a>
-								<p>on </p>
-
-								<a href='https://unsplash.com/?utm_source=vello&utm_medium=referral'>
-									Unsplash
-								</a>
-							</div>
-						)}
-						<div className='frame__comments'></div>
+						
+						<div className='frame__add'>
+							<div className='frame__add'></div>
+						</div>
 					</div>
 				</div>
 			)}

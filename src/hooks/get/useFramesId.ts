@@ -31,23 +31,25 @@ export default function useFramesId(id: string | null | undefined) {
 			const error = err as AxiosError;
 			addError(dispatch, `${error.message} while getting frame data`);
 			setData({
-				color: "#6E633A",
-				views: 14124124,
-				downloads: 23414,
-				description:
-					"descriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescriptiondescription",
-        user: {
-          username: 'Arceniy',
-          location: 'Moon',
-          bio: 'biobiobiobiobiobiobiobiobiobiobiobiobiobiobiobiobio',
-          total_photos: 24142,
-          total_likes: 1249762,
-        },
-        likes: 1732141,
-        location: {
-          name: 'Moon'
-        }
-      } as IData);
+				height: Math.round(Math.random() * (4000 - 0) + 0),
+				color: `rgba(${Math.random() * 125}, ${Math.random() * 125}, ${
+					Math.random() * 125
+				}, ${Math.random() + 0.2})`,
+				views: Math.round(Math.random() * (10000000 - 0) + 0),
+				downloads: Math.round(Math.random() * (10000000 - 0) + 0),
+				description: "0".repeat(Math.round(Math.random() * (250 - 0) + 0)),
+				user: {
+					username: "Arceniy",
+					location: "Moon",
+					bio: "1".repeat(Math.round(Math.random() * (250 - 0) + 0)),
+					total_photos: Math.round(Math.random() * (10000 - 0) + 0),
+					total_likes: Math.round(Math.random() * (10000000 - 0) + 0),
+				},
+				likes: Math.round(Math.random() * (1000000 - 0) + 0),
+				location: {
+					name: "Moon",
+				},
+			} as IData);
 		} finally {
 			setLoad(false);
 		}

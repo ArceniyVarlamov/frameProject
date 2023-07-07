@@ -111,8 +111,10 @@ $y-inc: 15px;
 	--aliceblue-color: aliceblue;
 	--white-color: white;
 	--nothing-color: rgba(0, 0, 0, 0);
-	--header-height: 4vmax;
+	--header-height: 6vmax;
 	--main-frames-border-radius: 15px;
+	--frame-height-full: 100vmax;
+	--frame-height-mobile: 200vmax;
 }
 
 ::-webkit-scrollbar {
@@ -325,23 +327,15 @@ input :active,
 		height: var(--header-height);
 		z-index: 1;
 	}
-	&__account,
-	&__accounts {
-		height: 4vmin;
-		width: 4vmin;
-	}
 	&__messages,
 	&__notifications,
 	&__account,
 	&__accounts {
 		border-radius: 50%;
 		cursor: pointer;
-		height: 4vmax;
-		width: 4vmax;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		
 		& img {
 			width: 70%;
 			height: 70%;
@@ -350,20 +344,27 @@ input :active,
 			background-color: $grey200-color;
 		}
 	}
-	&__messages, &__notifications {
-		height: 3vmax;
-		width: 3vmax;
-	}
-	&__logo,
 	&__messages,
 	&__notifications {
-		cursor: pointer;
+		height: calc(var(--header-height) / 1.5);
+		width: calc(var(--header-height) / 1.5);
+	}
+	&__account,
+	&__accounts {
+		height: calc(var(--header-height) / 2);
+		width: calc(var(--header-height) / 2);
+	}
+	&__accounts {
+		& img {
+			width: 80%;
+			height: 40%;
+		}
 	}
 	&__logo {
 		display: flex;
 		align-items: center;
-		height: 3vmax;
-		width: 3vmax;
+		height: calc(var(--header-height) / 1.4);
+		width: calc(var(--header-height) / 1.4);
 		background-color: $main-color;
 		border-radius: 50%;
 		&:hover {
@@ -395,12 +396,14 @@ input :active,
 		font-size: 1.5vmax;
 		border-radius: 15px;
 		padding: 0 1vmax;
-		box-shadow: 2px 2px 20px -2px $main-01-opacity-color;
+		box-shadow: 2px 2px 15px -2px $grey190-color;
 		&:focus {
 			font-weight: 500;
 			background-color: $grey230-color;
+			box-shadow: none;
 		}
 		&:hover {
+			background-color: $grey240-color;
 		}
 	}
 	&__register,
@@ -420,16 +423,15 @@ input :active,
 			color: $aliceblue-color;
 		}
 	}
-	&__register {
-	}
-	&__login {
-	}
 	&__img {
 		width: 100%;
 		height: 100%;
 		border-radius: 50%;
 		object-fit: cover;
 		object-position: center;
+	}
+	&__create-reg {
+		width: 10%;
 	}
 }
 
@@ -602,23 +604,73 @@ input :active,
 }
 
 .frame {
-	position: relative;
 	margin: 2vh auto;
-	height: 70vmax;
 	width: 90%;
+	height: var(--frame-height-full);
 	display: flex;
-	&__img {
+	&__main {
+		position: relative;
+		width: 50%;
+		height: 100%;
+		box-shadow: 0px 0px 0.5vmax 0 $black-03-opacity-color;
 		border-top-left-radius: 15px;
 		border-bottom-left-radius: 15px;
+	}
+	&__main-options {
+		display: flex;
+		position: absolute;
+		top: 0;
+		height: 100%;
+		width: 100%;
+		border-radius: inherit;
+	}
+	&__main-container {
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+		gap: 1vmax;
+		height: 6vmax;
+		width: 90%;
+		margin: 0 auto;
+		position: sticky;
+		bottom: 0;
+		align-self: flex-end;
+	}
+	&__main-like {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 3vmax;
+		width: 3vmax;
+		cursor: pointer;
+	}
+	&__main-add {
+		border-radius: 50%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 4vmax;
+		width: 4vmax;
+		cursor: pointer;
+		& img {
+			width: 90%;
+			height: 90%;
+		}
+		&:hover {
+			background-color: $grey178-01-opacity-color;
+		}
+	}
+	&__img {
+		position: absolute;
+		border-radius: inherit;
+		width: 100%;
+		height: 100%;
 		object-fit: cover;
 		object-position: center;
 		user-select: none;
-		width: 50%;
-		box-shadow: 0px 0px 0.5vmax 0 $black-03-opacity-color;
 	}
 	&__info {
-		padding: 1vmax 0;
-		position: relative;
+		height: 100%;
 		justify-content: flex-start;
 		box-shadow: 0px 0px 0.5vmax 0 $black-03-opacity-color;
 		border-top-right-radius: 15px;
@@ -632,7 +684,7 @@ input :active,
 		position: sticky;
 		top: var(--header-height);
 		z-index: 1;
-		height: 4vmax;
+		height: 6vmax;
 		background-color: $white-color;
 		display: flex;
 		align-items: center;
@@ -642,8 +694,8 @@ input :active,
 		margin: 0 auto;
 		& div {
 			cursor: pointer;
-			width: 3vmax;
-			height: 3vmax;
+			width: 6vmax;
+			height: 6vmax;
 			border-radius: 50%;
 			display: flex;
 			transition: 0.2s linear;
@@ -654,8 +706,8 @@ input :active,
 			}
 		}
 		& img {
-			width: 1.5vmax;
-			height: 1.5vmax;
+			width: 40%;
+			height: 40%;
 			user-select: none;
 		}
 	}
@@ -668,17 +720,16 @@ input :active,
 		padding: 0 1%;
 	}
 	&__author {
-		height: 50%;
 		box-shadow: 0px 0px 10px 0px $black-02-opacity-color;
 		width: 80%;
-		height: auto;
+		margin: 0 auto;
 		display: flex;
 		flex-direction: column;
-		margin: 0 auto;
 		justify-content: space-around;
-		padding: 20px;
+		gap: 1vmax;
 		border-radius: 10px;
 		font-size: 1.5vmax;
+		padding: 1vmax 0;
 	}
 	&__user {
 		display: flex;
@@ -707,7 +758,7 @@ input :active,
 		font-weight: 700;
 	}
 	&__description {
-		font-size: 1.2vmax;
+		font-size: 2vmax;
 		font-weight: 500;
 		margin: auto;
 		width: 90%;
@@ -1532,15 +1583,17 @@ input :active,
 		--header-height: 8vmin;
 	}
 	.frame {
-		height: 700px;
+		display: flex;
 		flex-direction: column;
-		&__img {
+		height: var(--frame-height-mobile);
+		&__main {
 			border-radius: 0;
 			border-top-left-radius: 15px;
 			border-top-right-radius: 15px;
 			width: 100%;
 			height: 50%;
-			object-fit: cover;
+		}
+		&__img {
 		}
 		&__info {
 			border-radius: 0;
@@ -1548,58 +1601,18 @@ input :active,
 			border-bottom-right-radius: 15px;
 			width: 100%;
 			height: 50%;
+			gap: 5vmax;
 		}
-	}
-	.header {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		height: var(--header-height);
-		&__messages,
-		&__notifications {
-			height: 6vmin;
-			width: 6vmin;
+		&__views,
+		&__downloads {
+			text-align: center;
+			font-size: 2.2vmax;
 		}
-		&__account,
-		&__accounts {
-			height: 4vmin;
-			width: 4vmin;
+		&__author {
+			font-size: 2vmax;
 		}
-		&__messages,
-		&__notifications,
-		&__account,
-		&__accounts {
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			border-radius: 50%;
-			cursor: pointer;
-		}
-
-		&__logo,
-		&__messages,
-		&__notifications {
-			cursor: pointer;
-		}
-		&__logo {
-			height: 3vmax;
-			width: 3vmax;
-		}
-		&__create {
-			font-size: 3vmin;
-		}
-		&__search {
-			font-size: 2vmin;
-		}
-		&__register,
-		&__login {
-			font-size: 2.5vmin;
-		}
-		.following {
-			&__back {
-				top: 5px;
-				right: 5px;
-			}
+		&__description {
+			font-size: 2vmax;
 		}
 	}
 }

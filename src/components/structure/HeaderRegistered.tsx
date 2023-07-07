@@ -7,6 +7,7 @@ import { useDispatch } from "react-redux";
 import useAccountCurrent from "../../hooks/get/useAccountCurrent";
 import bell from "../../images/bell.png";
 import mail from "../../images/mail.png";
+import arrow from '../../images/Arrow-down.png'
 
 export default function HeaderRegistered() {
 	const { meData: accountData, load } = useAccountCurrent();
@@ -21,7 +22,7 @@ export default function HeaderRegistered() {
 					className='header__logo truncate'
 					onClick={() => dispatch(addFramesRedirect())}
 				></Image>
-				<Link to='/create' className='header__create truncate'>
+				<Link to='/create' className='header__create header__create-reg truncate'>
 					Create
 				</Link>
 				<input
@@ -43,7 +44,11 @@ export default function HeaderRegistered() {
 					<Image to='/me' src={accountData?.profile_image?.medium}></Image>
 				</div>
 
-				<div className='header__accounts'></div>
+				<div className='header__accounts'>
+					<Image
+						src={arrow}
+					></Image>
+				</div>
 			</div>
 		</div>
 	);

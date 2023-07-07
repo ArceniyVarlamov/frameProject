@@ -5,6 +5,7 @@ import useFramesId from "../../hooks/get/useFramesId";
 import useColor from "./../../hooks/functions/useColor";
 import download from "../../images/download.png";
 import share from "../../images/share.png";
+import plus from "../../images/plus.png";
 import likeImg from "../../images/heart.svg";
 import useLike from "../../hooks/post/useLike";
 import conditional from "../../utils/functional/condition";
@@ -26,11 +27,33 @@ export default function Frame({ id }: { id: string }) {
 			<Loading loading={load} />
 			{!load && (
 				<div className='frame'>
-					<Image
-						className='frame__img'
-						src={data?.urls?.full}
-						style={{ backgroundColor: data?.color }}
-					></Image>
+					<div className='frame__main'>
+						<Image
+							className='frame__img'
+							src={data?.urls?.full}
+							style={{ backgroundColor: data?.color }}
+						></Image>
+						<div className='frame__main-options'>
+							<div className='frame__main-container'>
+								<svg
+									className='frame__main-like'
+									style={{ fill: like ? data?.color : "var(--grey180-color)" }}
+									onClick={() => setLike(!like)}
+									viewBox='0 0 16 16'
+								>
+									{" "}
+									<path
+										fill-rule='evenodd'
+										d='M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z'
+									/>{" "}
+								</svg>
+								<div className='frame__main-add'>
+									<Image src={plus}></Image>
+								</div>
+							</div>
+						</div>
+					</div>
+
 					<div className='frame__info'>
 						<div className='frame__links'>
 							<div>
@@ -83,17 +106,6 @@ export default function Frame({ id }: { id: string }) {
 											src: data?.likes + " likes",
 										})}
 								</p>
-								<svg
-									style={{ fill: like ? data?.color : "var(--grey180-color)" }}
-									onClick={() => setLike(!like)}
-									viewBox='0 0 16 16'
-								>
-									{" "}
-									<path
-										fill-rule='evenodd'
-										d='M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z'
-									/>{" "}
-								</svg>
 							</div>
 							<div className='frame__location'>
 								<p>
@@ -105,7 +117,7 @@ export default function Frame({ id }: { id: string }) {
 								</p>
 							</div>
 						</div>
-						
+
 						<div className='frame__add'>
 							<div className='frame__add'></div>
 						</div>

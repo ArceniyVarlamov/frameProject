@@ -41,7 +41,7 @@ export default function HeaderRegistered() {
 					></Image>
 				</div>
 				<div className='header__account'>
-					<Image to='/me' src={accountData?.profile_image?.medium}></Image>
+					<Image to='/me' src={accountData?.profile_image?.medium} color={"var(--main-color)"}></Image>
 				</div>
 
 				<div className='header__accounts'>

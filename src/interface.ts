@@ -34,6 +34,9 @@ export interface IData {
 			large: string;
 		};
 	};
+	links: {
+		download: string
+	}
 	location: {
 		name: string;
 		city: string;
@@ -164,7 +167,7 @@ export interface IAccountCollection {
 		photos: string | null;
 		related: string | null;
 	};
-	preview_photos: ICollectionsFrame[];
+	preview_photos: ICollectionsFrame[] | null;
 	private: boolean;
 	published_at: string | null;
 	share_key: string | null;

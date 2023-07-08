@@ -10,9 +10,11 @@ import { IAccountPublicData } from "../../interface";
 export default function AccountInfo({
 	accountData,
 	className,
+	me = false
 }: {
   accountData: IAccountPublicData | undefined;
 	className?: string;
+	me?: boolean
 }) {
 	const [close, setClose] = useState(true);
 	const [showFollowing, setShowFollowing] = useState(false);
@@ -38,7 +40,7 @@ export default function AccountInfo({
 							<div className='account__username truncate'>
 								{conditional({ src: accountData?.username, alt: "noname" })}
 							</div>
-							<div className='account__subscribe truncate'>Subscribe</div>
+							{!me && <div className='account__subscribe truncate'>Subscribe</div>}
 						</div>
 						<div className='account__numbers'>
 							<div className='account__downloads truncate'>

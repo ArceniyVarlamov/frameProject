@@ -111,10 +111,12 @@ $y-inc: 15px;
 	--aliceblue-color: aliceblue;
 	--white-color: white;
 	--nothing-color: rgba(0, 0, 0, 0);
-	--header-height: 6vmax;
+	--header-height: 4vmax;
 	--main-frames-border-radius: 15px;
 	--frame-height-full: 100vmax;
-	--frame-height-mobile: 200vmax;
+	--frame-options-height: 6vmax;
+	--account-height: 30vmax;
+	--frame-options-margin: 10px;
 }
 
 ::-webkit-scrollbar {
@@ -158,6 +160,7 @@ body {
 p {
 	margin: 0;
 }
+
 
 ::-moz-selection {
 	background-color: $main-color;
@@ -306,18 +309,19 @@ input :active,
 }
 
 .header {
+	position: relative;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	height: var(--header-height);
+	z-index: 20000;
 	& * {
 		transition: 0.3s linear;
 	}
 	&__container {
 		background-color: $white-color;
 		width: 100%;
-		z-index: 2 !important;
-		gap: 10px;
+		z-index: 2;
 		display: flex;
 		position: fixed;
 		justify-content: space-around;
@@ -353,6 +357,22 @@ input :active,
 	&__accounts {
 		height: calc(var(--header-height) / 2);
 		width: calc(var(--header-height) / 2);
+	}
+	&__account {
+		position: relative;
+		& img {
+			position: absolute;
+			width: 100%;
+			height: 100%;
+			top: 0;
+			left: 0;
+			display: block;
+			text-decoration: none;
+			border-radius: 50%;
+			width: 100%;
+			height: 100%;
+			object-fit: cover;
+		}
 	}
 	&__accounts {
 		& img {
@@ -453,6 +473,7 @@ input :active,
 		border-radius: var(--main-frames-border-radius);
 		object-fit: cover;
 		object-position: center;
+		
 		cursor: zoom-in;
 		& * {
 			border-radius: inherit;
@@ -462,8 +483,22 @@ input :active,
 		position: relative;
 		width: 100%;
 		height: 100%;
+		display: flex;
+		justify-content: space-evenly;
 		& img {
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
 			border-radius: var(--main-frames-border-radius);
+		}
+		& a {
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
 		}
 	}
 	&__author {
@@ -485,60 +520,74 @@ input :active,
 		width: 18px;
 		height: 18px;
 		border-radius: 50%;
+		overflow: hidden;
 	}
 	&__options-save {
-		cursor: pointer;
-		position: absolute;
-		right: 10px;
-		top: 15px;
+		align-self: flex-start;
+		position: sticky;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		top: calc(var(--header-height) + 10px);
 		border-radius: 20px;
-		background-color: $main-08-opacity-color;
-		color: $aliceblue-color;
-		padding: 12px 20px;
+		margin: 10px 0;
+		width: 40%;
+		height: 50px;
+		background-color: $main-07-opacity-color;
+		color: $white-color;
 		user-select: none;
+		cursor: pointer;
 		&:hover {
 			filter: brightness(110%);
 		}
 	}
 	&__options-bottom {
-		position: absolute;
-		bottom: 15px;
-		right: 10px;
+		position: sticky;
+		align-self: flex-end;
 		display: flex;
+		bottom: 10px;
+		display: flex;
+		margin: 10px 0;
+		align-items: center;
+		justify-content: center;
 		gap: 10px;
+		height: 50px;
 		& div {
 			cursor: pointer;
-			display: flex;
 			position: relative;
-			align-items: center;
-			justify-content: center;
 			border-radius: 50%;
-			width: 20px;
-			height: 20px;
-			padding: 10px;
+			width: 40px;
+			height: 40px;
 			background-color: $grey211-02-opacity-color;
 			&:hover {
 				background-color: $grey211-07-opacity-color;
 			}
 		}
 		& img {
-			width: 100%;
-			height: 100%;
+			position: absolute;
+			top: 50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			width: 50%;
+			height: 50%;
 		}
+	}
+	&__options-actions {
+		position: relative;
 	}
 	&__actions {
 		border-radius: 10px;
-		z-index: 1;
+		z-index: 4;
 		position: absolute;
 		right: 0;
-		background-color: $grey240-color;
+		bottom: -200%;	
+		background-color: $grey230-color;
 		display: flex;
-		transform: translateX(-25%);
 		flex-direction: column;
 		justify-content: center;
 		align-items: center;
 		& * {
-			padding: 10px;
+			height: 20px;
 			cursor: pointer;
 		}
 		& div:first-of-type {
@@ -628,8 +677,8 @@ input :active,
 		display: flex;
 		align-items: center;
 		justify-content: flex-end;
-		gap: 1vmax;
-		height: 6vmax;
+		gap: 3vmax;
+		height: var(--frame-options-height);
 		width: 90%;
 		margin: 0 auto;
 		position: sticky;
@@ -640,24 +689,29 @@ input :active,
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		height: 3vmax;
-		width: 3vmax;
+		height: calc(var(--frame-options-height) / 2.5);
+		width: calc(var(--frame-options-height) / 2.5);
 		cursor: pointer;
+		transition: 0.1s ease;
+		filter: hue-rotate(30deg) brightness(140%);
 	}
 	&__main-add {
+		user-select: none;
 		border-radius: 50%;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		height: 4vmax;
-		width: 4vmax;
+		height: calc(var(--frame-options-height) / 1.6);
+		width: calc(var(--frame-options-height) / 1.6);
 		cursor: pointer;
+		transition: 0.3s linear;
+		background-color: $grey230-color;
 		& img {
-			width: 90%;
-			height: 90%;
+			width: 70%;
+			height: 70%;
 		}
 		&:hover {
-			background-color: $grey178-01-opacity-color;
+			background-color: $grey240-color;
 		}
 	}
 	&__img {
@@ -681,21 +735,22 @@ input :active,
 		width: 50%;
 	}
 	&__links {
+		align-items: flex-start;
 		position: sticky;
 		top: var(--header-height);
 		z-index: 1;
-		height: 6vmax;
+		height: var(--frame-options-height);
 		background-color: $white-color;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		gap: 1vmax;
-		width: 100%;
+		width: calc(100% - 1vmax);
 		margin: 0 auto;
 		& div {
 			cursor: pointer;
-			width: 6vmax;
-			height: 6vmax;
+			width: calc(var(--frame-options-height) / 1.2);
+			height: calc(var(--frame-options-height) / 1.2);
 			border-radius: 50%;
 			display: flex;
 			transition: 0.2s linear;
@@ -923,22 +978,21 @@ input :active,
 }
 
 .account {
-	max-width: 600px;
-	background-color: $white-06-opacity-color;
+	width: 100%;
 	border-radius: 15px;
-	margin: 40px auto 15px;
+	margin: 2vmax auto;
 	word-break: break-all;
 	&__about {
-		padding-bottom: 30px;
 		width: 90%;
 		display: flex;
 		align-items: center;
-		margin: auto;
-		justify-content: space-around;
+		margin: 0 auto;
+		gap: 1vmax;
+		justify-content: center;
 	}
 	&__image {
-		width: 10vmax;
-		height: 10vmax;
+		width: calc(var(--account-height) / 2);
+		height: calc(var(--account-height) / 2);
 		object-fit: cover;
 		display: flex;
 		align-items: center;
@@ -948,24 +1002,27 @@ input :active,
 	}
 	&__info {
 		padding: 0 5%;
-		width: 70%;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		gap: 1vmax;
 	}
 	&__author {
 		width: 100%;
 		display: flex;
 		align-items: center;
-		gap: 20px;
-		margin: 0 0 15px 0;
+		gap: 3vmax;
 		padding-left: 5px;
 	}
 	&__username {
-		font-size: 20px;
+		font-weight: 500;
+		font-size: 2.5vmax;
 	}
 	&__subscribe {
 		border-radius: 5px;
-		font-size: 18px;
+		font-size: 2.5vmax;
 		font-weight: 500;
-		padding: 5px 15px;
+		padding: 1vmax 3vmax;
 		background-color: $main-color;
 		color: $aliceblue-color;
 		cursor: pointer;
@@ -979,11 +1036,11 @@ input :active,
 	&__numbers {
 		display: flex;
 		width: 110%;
-		gap: 20px;
-		margin-bottom: 20px;
+		font-size: 2vmax;
+		gap: 2vmax;
 		& div {
 			display: flex;
-			gap: 5px;
+			gap: 0.5vmax;
 		}
 	}
 	&__bio {
@@ -1021,8 +1078,8 @@ input :active,
 	&__back {
 		z-index: 2;
 		position: fixed;
-		right: 20px;
-		top: 20px;
+		right: 1vmax;
+		top: 1vmax;
 		height: 5%;
 		cursor: pointer;
 		& img {
@@ -1036,65 +1093,64 @@ input :active,
 		margin: auto;
 		width: 80%;
 		height: 80%;
-		background-color: $aliceblue-color;
+		background-color: $white-color;
 		display: flex;
 		align-items: center;
 		flex-direction: column;
 	}
 
 	&__find {
-		outline: 1px $black-color solid;
+		outline: 0.3vmax $black-color solid;
 		border-radius: 10px;
 		display: flex;
 		width: 90%;
 		align-items: center;
 		justify-content: center;
-		height: 40px;
-		margin: 20px 0 10px 0;
+		height: 6vmax;
+		margin: 1vmax;
 	}
 	&__input {
 		width: 85%;
 		height: 100%;
-		background-color: $aliceblue-color;
+		background-color: $white-color;
 		padding-left: 15px;
 	}
 	&__search {
-		width: 40px;
+		width: 15%;
 		height: 100%;
 		display: flex;
 		align-items: center;
-		background-color: $aliceblue-color;
+		background-color: $white-color;
 		justify-content: center;
 		& img {
-			max-width: 10px;
-			max-height: 10px;
+			max-width: 3vmax;
+			max-height: 3vmax;
 		}
 		&::before {
 			content: "";
-			width: 1px;
+			width: 0.2vmax;
 			height: 60%;
-			transform: translate(-10px);
+			transform: translate(-1vmax);
 			background-color: $black-03-opacity-color;
 		}
 	}
 	&__switch {
 		width: 100%;
-		margin-bottom: 5px;
+		margin-bottom: 2vmax;
 		display: flex;
 		justify-content: center;
-		gap: 10%;
 	}
 	&__followers,
 	&__following {
 		cursor: pointer;
-		padding: 4px 5px;
+		padding: 1vmax 2vmax;
 		font-weight: 600;
 		font-size: 2vw;
 		text-decoration: none;
 		background-repeat: no-repeat;
 		background-image: linear-gradient($main-color, $main-color);
 		transition: background-size 0.5s ease-in-out;
-		background-size: 100% 2px;
+		background-size: 100% 0.2vmax;
 	}
 	&__followers {
 		background-position: 100% 100%;
@@ -1116,18 +1172,18 @@ input :active,
 	}
 	@keyframes slide-in {
 		0% {
-			background-size: 0% 2px;
+			background-size: 0% 0.2vmax;
 		}
 		100% {
-			background-size: 100% 2px;
+			background-size: 100% 0.2vmax;
 		}
 	}
 	@keyframes slide-out {
 		0% {
-			background-size: 100% 2px;
+			background-size: 100% 0.2vmax;
 		}
 		100% {
-			background-size: 0% 2px;
+			background-size: 0% 0.2vmax;
 		}
 	}
 	&__users {
@@ -1186,37 +1242,72 @@ input :active,
 }
 
 .collections {
-	width: 80%;
 	margin: auto;
+	position: relative;
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
-	gap: 10px;
+	margin: 0 auto;
+	gap: 2vmax;
+	width: 90%;
 	&__collection {
+		position: relative;
+		margin: 1vmax 0;
 		cursor: pointer;
-		width: 35vh;
-		height: 25vh;
-		& img {
-			width: 100%;
-			border-radius: 15px;
-			height: 100%;
-			object-fit: cover;
+		width: 25vmax;
+		height: 25vmax;
+		border-radius: 15px;
+		background-color: $grey220-color;
+		&:hover {
+			filter: brightness(105%);
 		}
 	}
+	&__collection-photo1,
+	&__collection-photo2,
+	&__collection-photo3 {
+		position: absolute;
+		object-fit: cover;
+	}
+	&__collection-photo1 {
+		width: 50%;
+		height: 100%;
+		left: 0;
+		top: 0;
+		border-top-left-radius: 15px;
+		border-bottom-left-radius: 15px;
+	}
+	&__collection-photo2 {
+		width: 50%;
+		height: 50%;
+		right: 0;
+		top: 0;
+		border-top-right-radius: 15px;
+	}
+	&__collection-photo3 {
+		width: 50%;
+		height: 50%;
+		right: 0;
+		bottom: 0;
+		border-bottom-right-radius: 15px;
+	}
 	&__more {
-		height: 40px;
 		display: block;
 		text-decoration: none;
 		color: $main-color;
-		margin: 0 0 10px 0;
-		width: 75%;
-		margin: auto;
+		width: 80%;
+		margin: 2vmax auto;
 		text-align: right;
+		font-size: 2vmax;
+		transition: 0.1s linear;
+		&:hover {
+			font-size: 2.2vmax;
+		}
 	}
 }
 
 .collection {
 	width: 90%;
+	height: 100%;
 	margin: 20px auto 0;
 	&__account {
 		width: 100%;
@@ -1388,18 +1479,20 @@ input :active,
 	align-items: center;
 	justify-content: center;
 	font-weight: 600;
+	
 	& * {
+		position: relative;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
 		cursor: pointer;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		padding: 50px 60px;
 		transition: 0.2s linear;
-		mix-blend-mode: color-burn;
+		font-size: 3vmax;
 		&:hover {
-			border-color: $white-06-opacity-color;
-			background-color: $grey211-02-opacity-color;
-			font-size: 22px;
+			font-size: 2.8vmax;
 			transform-origin: bottom;
 		}
 	}
@@ -1407,69 +1500,80 @@ input :active,
 
 .create-collection {
 	width: 100%;
-	position: absolute;
+	height: 100%;
+	position: relative;
+	margin: 1vmax 0;
 	z-index: 1;
-	height: (100% - var(--header-height));
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	&__form {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		gap: 3vmax;
 		position: relative;
-		padding: 10px 20px;
-		margin-top: 20px;
-		width: 400px;
-		box-shadow: 2px 6px 38px -12px rgba(34, 60, 80, 0.2);
+		width: 80%;
+		height: 100%;
+		padding: 7vmax 0;
+		box-shadow: 2px 6px 38px -12px $black-04-opacity-color;
 		background-color: $white-color;
 		border-radius: 10px;
 	}
 	&__top-text {
-		font-size: 24px;
+		font-size: 3vmax;
 		font-weight: 500;
-		padding: 40px 0 0 0;
 	}
 	&__pre-text {
 		color: $black-07-opacity-color;
-		padding: 5px 0;
 	}
 	&__name,
 	&__description {
-		margin: 10px 0;
+		width: 90%;
+		margin: 0 auto;
+		display: flex;
+		flex-direction: column;
+		gap: 1vmax;
+		font-size: 3vmax;
 	}
 
 	&__input-name,
 	&__input-description {
 		resize: none;
 		width: 100%;
-		font-size: 14px;
+		font-size: 2.5vmax;
 		word-break: keep-all;
 		&:focus {
 			box-shadow: inset 2px 6px 45px -10px $main-01-opacity-color;
 		}
 	}
 	&__input-name {
-		height: 32px;
+		height: 5vmax;
 	}
 	&__input-description {
-		height: 140px;
+		height: 15vmax;
 	}
 	&__private {
 		display: flex;
-		gap: 10px;
+		gap: 1vmax;
+		width: 90%;
+		margin-left: 5%;
+		align-self: flex-start;
 		align-items: center;
 	}
 	&__checkbox {
 		accent-color: $main-color;
-		width: 18px;
-		height: 18px;
+		width: 3vmax;
+		height: 3vmax;
 	}
 	&__private-text {
 		font-weight: 500;
+		font-size: 2vmax;
 	}
 	&__access {
 		position: relative;
 		width: 100%;
-		margin: 30px 0;
-		left: 0;
 		display: flex;
 		justify-content: center;
 		gap: 30%;
@@ -1478,19 +1582,19 @@ input :active,
 	&__cancel,
 	&__create {
 		width: 30%;
-		height: 50px;
+		height: 5vmax;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 		cursor: pointer;
-		font-size: 20px;
+		font-size: 2vmax;
 		font-weight: 500;
 		transition: 0.5s cubic-bezier(0.39, 0.575, 0.565, 1);
 	}
 	&__create {
 		color: $main-color;
-		$outerBorderWidth: 2px;
-		$innerBorderWidth: 2px;
+		$outerBorderWidth: 0.4vmax;
+		$innerBorderWidth: 0.4vmax;
 
 		&:before {
 			content: "";
@@ -1513,7 +1617,7 @@ input :active,
 		}
 		&:hover {
 			transition: 0.2s;
-			font-size: 22px;
+			font-size: 2.2vmax;
 		}
 	}
 	&__cancel {
@@ -1580,18 +1684,29 @@ input :active,
 
 @media (max-width: 867px) {
 	:root {
-		--header-height: 8vmin;
+		--header-height: 8vmax;
+		--frame-height-full: 150vmax;
+		--frame-options-height: 9vmax;
+	}
+	.header {
+		gap: 0;
+		z-index: 20;
+		&__search {
+			width: 15%;
+		}
+		&__create {
+			width: 10%;
+		}
 	}
 	.frame {
 		display: flex;
 		flex-direction: column;
-		height: var(--frame-height-mobile);
 		&__main {
 			border-radius: 0;
 			border-top-left-radius: 15px;
 			border-top-right-radius: 15px;
 			width: 100%;
-			height: 50%;
+			height: 60%;
 		}
 		&__img {
 		}
@@ -1600,7 +1715,7 @@ input :active,
 			border-bottom-left-radius: 15px;
 			border-bottom-right-radius: 15px;
 			width: 100%;
-			height: 50%;
+			height: 40%;
 			gap: 5vmax;
 		}
 		&__views,
@@ -1614,5 +1729,7 @@ input :active,
 		&__description {
 			font-size: 2vmax;
 		}
+	}
+	.account {
 	}
 }

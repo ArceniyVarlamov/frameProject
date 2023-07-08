@@ -12,7 +12,7 @@ export default function MePage() {
     <>
       <Header/>
       <Loading loading={load}></Loading>
-      <AccountInfo accountData={meData} />
+      <AccountInfo me={true} accountData={meData} />
 			<Collections username={meData?.username} toShow={6} />
     </>
   )

@@ -76,32 +76,32 @@ export default function MainFrame({
 					)}
 					{(frameOptions || frameActions) && !frameHash && (
 						<>
-							<div className='main__options-save'>Save</div>
+							<div className='main__options-save truncate'>Save</div>
 							<div className='main__options-bottom'>
 								<div
 									className='main__options-actions'
 									onClick={() => setFrameActions(!frameActions)}
 								>
-									<img src={dots} alt='...' />
+									<Image src={dots} />
+									{frameActions && (
+										<div className='main__actions'>
+											<div className='main__actions-title'>Actions</div>
+											<div
+												className='main__actions-hide'
+												onClick={() => {
+													setFrameActions(false);
+													setFrameHash(!frameHash);
+												}}
+											>
+												Hide frame
+											</div>
+										</div>
+									)}
 								</div>
 								<div className='main__download'>
-									<img src={download} alt='...' />
+									<Image src={download} to={item?.links?.download} />
 								</div>
 							</div>
-							{frameActions && (
-								<div className='main__actions'>
-									<div className='main__actions-title'>Actions</div>
-									<div
-										className='main__actions-hide'
-										onClick={() => {
-											setFrameActions(false);
-											setFrameHash(!frameHash);
-										}}
-									>
-										Hide frame
-									</div>
-								</div>
-							)}
 						</>
 					)}
 					{frameHash && (
@@ -109,7 +109,12 @@ export default function MainFrame({
 							<div className='main__hash-text'>
 								It's clear! You will no longer see this Frame.
 							</div>
-							<div className="main__hash-cancel" onClick={() => setFrameHash(false)}>Cancel</div>
+							<div
+								className='main__hash-cancel'
+								onClick={() => setFrameHash(false)}
+							>
+								Cancel
+							</div>
 						</div>
 					)}
 				</div>

@@ -37,7 +37,7 @@ export default function Frame({ id }: { id: string }) {
 							<div className='frame__main-container'>
 								<svg
 									className='frame__main-like'
-									style={{ fill: like ? data?.color : "var(--grey180-color)" }}
+									style={{ fill: like ? data?.color : "var(--black-color)"  }}
 									onClick={() => setLike(!like)}
 									viewBox='0 0 16 16'
 								>

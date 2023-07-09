@@ -55,6 +55,12 @@ export default function MainFrame({
 							to={`/frame/${item?.id}`}
 							src={item?.urls?.regular}
 							className='main__img'
+							onClick={() =>
+								window.scrollTo({
+									top: 0,
+									behavior: "smooth",
+								})
+							}
 							style={{
 								backgroundColor: item?.color,
 							}}
@@ -77,7 +83,14 @@ export default function MainFrame({
 					{(frameOptions || frameActions) && !frameHash && (
 						<>
 							<div className='main__options-save truncate'>Save</div>
-							<div className='main__options-bottom'>
+							<div
+								className='main__options-bottom'
+								style={{
+									margin: !frameActions
+										? "10px 0"
+										: "calc(var(--frame-options-bottom-height) + var(--frame-options-margin)) 0 var(--frame-options-margin) 0",
+								}}
+							>
 								<div
 									className='main__options-actions'
 									onClick={() => setFrameActions(!frameActions)}
@@ -98,7 +111,7 @@ export default function MainFrame({
 										</div>
 									)}
 								</div>
-								<div className='main__download'>
+								<div className='main__options-download'>
 									<Image src={download} to={item?.links?.download} />
 								</div>
 							</div>

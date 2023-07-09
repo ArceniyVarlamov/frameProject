@@ -117,6 +117,8 @@ $y-inc: 15px;
 	--frame-options-height: 6vmax;
 	--account-height: 30vmax;
 	--frame-options-margin: 10px;
+	--frame-options-bottom-height: 70px;
+	--add-collection-column-height: 10vh;
 }
 
 ::-webkit-scrollbar {
@@ -160,7 +162,6 @@ body {
 p {
 	margin: 0;
 }
-
 
 ::-moz-selection {
 	background-color: $main-color;
@@ -314,14 +315,13 @@ input :active,
 	justify-content: center;
 	align-items: center;
 	height: var(--header-height);
-	z-index: 20000;
+	z-index: 10;
 	& * {
 		transition: 0.3s linear;
 	}
 	&__container {
 		background-color: $white-color;
 		width: 100%;
-		z-index: 2;
 		display: flex;
 		position: fixed;
 		justify-content: space-around;
@@ -473,7 +473,7 @@ input :active,
 		border-radius: var(--main-frames-border-radius);
 		object-fit: cover;
 		object-position: center;
-		
+
 		cursor: zoom-in;
 		& * {
 			border-radius: inherit;
@@ -547,22 +547,10 @@ input :active,
 		display: flex;
 		bottom: 10px;
 		display: flex;
-		margin: 10px 0;
 		align-items: center;
 		justify-content: center;
 		gap: 10px;
 		height: 50px;
-		& div {
-			cursor: pointer;
-			position: relative;
-			border-radius: 50%;
-			width: 40px;
-			height: 40px;
-			background-color: $grey211-02-opacity-color;
-			&:hover {
-				background-color: $grey211-07-opacity-color;
-			}
-		}
 		& img {
 			position: absolute;
 			top: 50%;
@@ -572,25 +560,39 @@ input :active,
 			height: 50%;
 		}
 	}
-	&__options-actions {
+	&__options-actions,
+	&__options-download {
+		cursor: pointer;
 		position: relative;
+		border-radius: 50%;
+		width: 40px;
+		height: 40px;
+		background-color: $grey211-02-opacity-color;
+		&:hover {
+			background-color: $grey211-07-opacity-color;
+		}
 	}
 	&__actions {
-		border-radius: 10px;
-		z-index: 4;
 		position: absolute;
 		right: 0;
-		bottom: -200%;	
-		background-color: $grey230-color;
+		bottom: calc(100% + var(--frame-options-margin));
+		background-color: $grey240-color;
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
+		justify-content: space-evenly;
 		align-items: center;
-		& * {
-			height: 20px;
+		border-radius: 10px;
+		height: var(--frame-options-bottom-height);
+		& div {
+			display: flex;
+			padding: 0 10px;
+			align-items: center;
+			height: calc(var(--frame-options-height) / 2);
+			white-space: nowrap;
 			cursor: pointer;
 		}
 		& div:first-of-type {
+			cursor: default;
 			border-bottom: 2px solid $grey190-color;
 		}
 		& div:last-of-type {
@@ -821,7 +823,7 @@ input :active,
 		overflow-wrap: break-word;
 	}
 	&__likes {
-		font-size: 2vh;
+		font-size: 1.5vmax;
 		font-weight: 600;
 		display: flex;
 		justify-content: space-between;
@@ -843,7 +845,7 @@ input :active,
 	}
 	&__location {
 		font-weight: 600;
-		font-size: 2vh;
+		font-size: 1.5vmax;
 	}
 }
 
@@ -1462,7 +1464,7 @@ input :active,
 	justify-content: center;
 	flex-direction: column;
 	gap: 10px;
-	font-size: 22px;
+	font-size: 2vmax;
 	font-weight: 600;
 	opacity: 0.8;
 
@@ -1479,7 +1481,7 @@ input :active,
 	align-items: center;
 	justify-content: center;
 	font-weight: 600;
-	
+
 	& * {
 		position: relative;
 		top: 50%;
@@ -1678,6 +1680,111 @@ input :active,
 			color: $main-07-opacity-color;
 			background-color: $nothing-color;
 			outline: 1px solid $main-07-opacity-color;
+		}
+	}
+}
+
+.collection-add {
+	position: fixed;
+	top: 0;
+	left: 0;
+	z-index: 20;
+	width: 100%;
+	height: 100%;
+	background-color: $black-01-opacity-color;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	::-webkit-scrollbar-track {
+		background-color: $white-color;
+	}
+	::-webkit-scrollbar-thumb {
+		background-color: $black-08-opacity-color;
+		box-shadow: none;
+		&:hover {
+			background-color: $black-09-opacity-color;
+			box-shadow: none;
+		}
+		&:active {
+			background-color: $black-color;
+			box-shadow: none;
+		}
+	}
+
+	&__back {
+		cursor: pointer;
+		position: absolute;
+		top: 1vmax;
+		right: 1vmax;
+		width: 3vmax;
+		height: 3vmax;
+	}
+	&__container {
+		border-radius: 1vmax;
+		width: 50vmax;
+		height: 90%;
+		display: flex;
+		flex-direction: column;
+		background-color: $white-color;
+		overflow: auto;
+		box-shadow: 0 0 1.5vmax 0.5vmax $black-03-opacity-color;
+	}
+	&__title {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 2vmax 0;
+		font-size: 2vmax;
+		font-weight: 600;
+		height: 10%;
+	}
+	&__collections {
+		height: 90%;
+		width: 100%;
+		margin: 0 auto;
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-start;
+		overflow: auto;
+	}
+	&__collection {
+		margin: 1vmax 2vmax;
+		display: flex;
+		height: 10vmax;
+		align-items: center;
+		justify-content: space-between;
+	}
+	&__info {
+		display: flex;
+		align-items: center;
+		gap: 2vmax;
+	}
+	&__image {
+		background-color: $grey220-color;
+		width: 10vmax;
+		height: 10vmax;
+		object-fit: cover;
+	}
+	&__name {
+		font-size: 2vmax;
+		font-weight: 500;
+	}
+	&__save {
+		width: 3.5vmax;
+		height: 3.5vmax;
+		justify-self: flex-end;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		border-radius: 50%;
+		background-color: $grey240-color;
+		cursor: pointer;
+		& img {
+			width: 60%;
+			height: 60%;
+		}
+		&:hover {
+			background-color: $grey210-color;
 		}
 	}
 }

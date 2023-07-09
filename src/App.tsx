@@ -19,7 +19,7 @@ import { addFramesRedirect } from "./store/framesSlice";
 import NotRegisteredPage from "./pages/notRegistered";
 
 function App() {
-	// useCheckRegister();
+	useCheckRegister();
 
 	return (
 		<BrowserRouter>

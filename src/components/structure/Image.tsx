@@ -19,14 +19,14 @@ export default function Image({
 	style?: React.CSSProperties;
 	to?: string;
 	color?: string;
-	onClick?: React.MouseEventHandler<HTMLAnchorElement>
+	onClick?: React.MouseEventHandler<HTMLElement>
 }) {
 	const { data, load } = useFramesId(id);
 
 	return (
 		<>
 			<Loading loading={load}></Loading>
-			{to && <NavLink to={to} onClick={onClick}>
+			{to && <NavLink to={to} onClick={onClick} style={{color: color}}>
 				<img
 					src={
 						src ||
@@ -42,6 +42,7 @@ export default function Image({
 			</NavLink>}
 			{!to && (
 				<img
+					onClick={onClick}
 					src={
 						src ||
 						data?.urls.regular ||

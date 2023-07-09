@@ -11,19 +11,36 @@ import useLike from "../../hooks/post/useLike";
 import conditional from "../../utils/functional/condition";
 import Image from "./Image";
 import { NavLink } from "react-router-dom";
+import Collections from "./Collections";
+import useAccountCurrent from "../../hooks/get/useAccountCurrent";
+import { IAccountPublicData } from "../../interface";
+import CollectionAdd from "./CollectionAdd";
 
-export default function Frame({ id }: { id: string }) {
+export default function Frame({
+	id,
+	accountData,
+}: {
+	id: string;
+	accountData: IAccountPublicData | undefined;
+}) {
 	// own hooks
 	const { data, load } = useFramesId(id);
 
 	const color = useColor(data?.color);
 
 	const [like, setLike] = useState(data?.liked_by_user);
+	const [showCollection, setShowCollection] = useState(false);
 
 	// const { frameData, frameError, frameLoading } = useLike(id, like);
 
 	return (
 		<>
+			<CollectionAdd
+				username={accountData?.username}
+				frameInfo={data}
+				show={showCollection}
+				setShow={setShowCollection}
+			></CollectionAdd>
 			<Loading loading={load} />
 			{!load && (
 				<div className='frame'>
@@ -37,7 +54,7 @@ export default function Frame({ id }: { id: string }) {
 							<div className='frame__main-container'>
 								<svg
 									className='frame__main-like'
-									style={{ fill: like ? data?.color : "var(--black-color)"  }}
+									style={{ fill: like ? data?.color : "var(--black-color)" }}
 									onClick={() => setLike(!like)}
 									viewBox='0 0 16 16'
 								>
@@ -47,7 +64,10 @@ export default function Frame({ id }: { id: string }) {
 										d='M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z'
 									/>{" "}
 								</svg>
-								<div className='frame__main-add'>
+								<div
+									className='frame__main-add'
+									onClick={() => setShowCollection(true)}
+								>
 									<Image src={plus}></Image>
 								</div>
 							</div>

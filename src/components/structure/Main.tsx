@@ -8,6 +8,7 @@ import download from "../../images/download.png";
 import dots from "../../images/dots.png";
 import { useState } from "react";
 import MainFrame from "./MainFrame";
+import useAccountCurrent from "../../hooks/get/useAccountCurrent";
 
 export default function Main({
 	framesWidth,

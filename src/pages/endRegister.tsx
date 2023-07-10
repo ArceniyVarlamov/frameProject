@@ -16,11 +16,11 @@ export default function EndRegister() {
 		<>
 			<Header />
 			<Loading loading={accountLoading}></Loading>
-			{accountData && (
+			{!!!accountData && (
 				<RegisterError
 				/>
 			)}
-			{!accountData && (
+			{!!accountData && (
 				<RegisterSuccess
 				/>
 			)}

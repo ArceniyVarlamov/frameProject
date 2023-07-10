@@ -5,10 +5,14 @@ import Loading from "../functional/Loading";
 export default function RegisterSuccess() {
 	return (
 		<div className='registered'>
-			<p className='registered__message'>Registration completed successfully</p>
-			<Link className='registered__link' to='/'>
-				Back to main page
-			</Link>
+			<div className='registered__container'>
+				<p className='registered__message'>
+					Registration completed successfully
+				</p>
+				<Link className='registered__link underline' to='/'>
+					Back to main page
+				</Link>
+			</div>
 		</div>
 	);
 }

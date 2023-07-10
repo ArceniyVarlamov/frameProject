@@ -3,6 +3,7 @@ import accountReducer from "./accountSlice";
 import framesReducer from "./framesSlice";
 import functionsReducer from "./functionsSlice";
 import variablesReducer from "./variablesSlice";
+import searchReducer from "./searchSlice";
 
 const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ const store = configureStore({
     account: accountReducer,
     functions: functionsReducer,
     variables: variablesReducer,
+    search: searchReducer,
   },
 });
 

@@ -32,21 +32,18 @@ export default function useFramesList(num: number) {
 
 	const getInfo = useCallback(async () => {
 		try {
-			setFrames(
-				[...frames, ...(await (
-					await axios.get(
-						`https://api.unsplash.com/photos/random?count=${framesLoaded * num - frames.length}`,
-						{
-							headers: {
-								Authorization: `Client-ID ${unsplash.ACCESS_KEY}`,
-							},
-						},
-					)
-				).data)]
-			);
-		} catch (err: unknown) {
-			const error = err as AxiosError;
-			addError(dispatch, `${error.message} while getting frames data`);
+			// setFrames(
+			// 	[...frames, ...(await (
+			// 		await axios.get(
+			// 			`https://api.unsplash.com/photos/random?count=${framesLoaded * num - frames.length}`,
+			// 			{
+			// 				headers: {
+			// 					Authorization: `Client-ID ${unsplash.ACCESS_KEY}`,
+			// 				},
+			// 			},
+			// 		)
+			// 	).data)]
+			// );
 			// Вариант если api ограничивает запросы
 			let all: IData[] = [];
 			for (let i = frames.length; i < framesLoaded * num; i++) {
@@ -59,6 +56,10 @@ export default function useFramesList(num: number) {
 				} as IData);
 			}
 			setFrames([...frames, ...all]);
+		} catch (err: unknown) {
+			const error = err as AxiosError;
+			addError(dispatch, `${error.message} while getting frames data`);
+			
 		} finally {
 			setLoad(false);
 		}

@@ -8,9 +8,10 @@ import useAccountCurrent from "../../hooks/get/useAccountCurrent";
 import bell from "../../images/bell.png";
 import mail from "../../images/mail.png";
 import arrow from '../../images/Arrow-down.png'
+import useAccountStoreInfo from "../../utils/info/useAccountStoreInfo";
 
 export default function HeaderRegistered() {
-	const { meData: accountData, load } = useAccountCurrent();
+	const { accountInfo } = useAccountStoreInfo()
 
 	const dispatch = useDispatch();
 
@@ -41,7 +42,7 @@ export default function HeaderRegistered() {
 					></Image>
 				</div>
 				<div className='header__account'>
-					<Image to='/me' src={accountData?.profile_image?.medium} color={"var(--main-color)"}></Image>
+					<Image to='/me' src={accountInfo?.profile_image?.medium} color={"var(--main-color)"}></Image>
 				</div>
 
 				<div className='header__accounts'>

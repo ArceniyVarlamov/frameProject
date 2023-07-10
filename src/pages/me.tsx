@@ -3,17 +3,17 @@ import Header from '../components/structure/Header';
 import useAccountCurrent from '../hooks/get/useAccountCurrent';
 import Collections from '../components/structure/Collections';
 import Loading from '../components/functional/Loading';
+import useAccountStoreInfo from '../utils/info/useAccountStoreInfo';
 
 export default function MePage() {
 
-  const {meData, load} = useAccountCurrent()
+  const { accountInfo } = useAccountStoreInfo()
 
   return (
     <>
       <Header/>
-      <Loading loading={load}></Loading>
-      <AccountInfo me={true} accountData={meData} />
-			<Collections username={meData?.username} toShow={6} />
+      <AccountInfo me={true} accountData={accountInfo} />
+			<Collections username={accountInfo?.username} toShow={6} />
     </>
   )
 }

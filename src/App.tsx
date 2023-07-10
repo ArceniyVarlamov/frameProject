@@ -17,9 +17,11 @@ import { useEffect } from "react";
 import useFramesStoreInfo from "./utils/info/useFramesStoreInfo";
 import { addFramesRedirect } from "./store/framesSlice";
 import NotRegisteredPage from "./pages/notRegistered";
+import useAccountCurrent from "./hooks/get/useAccountCurrent";
 
 function App() {
-	useCheckRegister();
+	// useCheckRegister();
+	// useAccountCurrent();
 
 	return (
 		<BrowserRouter>

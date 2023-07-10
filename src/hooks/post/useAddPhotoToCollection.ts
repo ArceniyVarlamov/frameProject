@@ -19,7 +19,6 @@ export default function useAddPhotoToCollections(
 	const { accessToken } = useAccountStoreInfo();
 
 	const dispatch = useDispatch();
-	const navigate = useNavigate();
 
 	const postInfo = useCallback(
 		async (accessToken: string, photoId: string, collectionId: string) => {

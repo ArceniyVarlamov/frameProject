@@ -12,7 +12,6 @@ import useAccountCurrent from "../hooks/get/useAccountCurrent";
 
 export default function FramePage() {
   const { id = "" } = useParams();
-  const { meData: accountData } = useAccountCurrent();
   
   // const { framesMainWidth } = useVariablesStoreInfo();
   
@@ -28,7 +27,7 @@ export default function FramePage() {
   return (
     <>
       <Header/>
-      <Frame id={id} accountData={accountData}/>
+      <Frame id={id}/>
       {/* <Main framesWidth={framesMainWidth} frames={frames} load={load}></Main> */}
     </>
   )

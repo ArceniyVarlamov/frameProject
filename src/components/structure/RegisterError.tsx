@@ -6,12 +6,14 @@ import { AxiosError } from "axios";
 export default function RegisterError() {
 	return (
 		<div className='registered'>
-			<p className='registered__message'>
-				An error occurred during registration
-			</p>
-			<Link className='registered__link' to='/registration'>
-				Try again
-			</Link>
+			<div className='registered__container'>
+				<p className='registered__message'>
+					An error occurred during registration
+				</p>
+				<Link className='registered__link underline' to='/registration'>
+					Try again
+				</Link>
+			</div>
 		</div>
 	);
 }

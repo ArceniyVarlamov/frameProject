@@ -8,6 +8,8 @@ import download from "../../images/download.png";
 import dots from "../../images/dots.png";
 import { useState } from "react";
 import { Blurhash } from "react-blurhash";
+import CollectionAdd from "./CollectionAdd";
+import useAccountStoreInfo from "../../utils/info/useAccountStoreInfo";
 
 export default function MainFrame({
 	item,
@@ -18,20 +20,29 @@ export default function MainFrame({
 	load: boolean;
 	frameWidth: number;
 }) {
-	const dispatch = useDispatch();
 	// Переменная появления опций на фрейме при наведении
 	const [frameOptions, setFrameOptions] = useState(false);
 	// Переменная событий фрейма
 	const [frameActions, setFrameActions] = useState(false);
 	// Переменная хеша (сужения качества) картинки
 	const [frameHash, setFrameHash] = useState(false);
+	// Переменная добавления фрейма в коллекцию
+	const [showCollection, setShowCollection] = useState(false);
 
 	const frameHeight = Math.round(
 		item?.height / 100 <= 25 ? 35 : item?.height / 100,
 	);
 
+	const { accountInfo, isRegistered } = useAccountStoreInfo()
+
 	return (
 		<>
+			<CollectionAdd
+				username={accountInfo?.username}
+				frameInfo={item}
+				show={showCollection}
+				setShow={setShowCollection}
+			></CollectionAdd>
 			<div
 				className='main__frame'
 				style={{
@@ -82,7 +93,7 @@ export default function MainFrame({
 					)}
 					{(frameOptions || frameActions) && !frameHash && (
 						<>
-							<div className='main__options-save truncate'>Save</div>
+							{!!isRegistered && <div className='main__options-save truncate' onClick={() => setShowCollection(true)}>Save</div>}
 							<div
 								className='main__options-bottom'
 								style={{

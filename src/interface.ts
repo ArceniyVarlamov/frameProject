@@ -222,3 +222,9 @@ export interface IAccessTitles {
 	yesTitle: string,
 	noTitle: string,
 }
+
+export interface ISearchPhotoes {
+	total: number,
+	total_pages: number,
+	results: IData[]
+}

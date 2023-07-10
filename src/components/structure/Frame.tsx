@@ -15,28 +15,27 @@ import Collections from "./Collections";
 import useAccountCurrent from "../../hooks/get/useAccountCurrent";
 import { IAccountPublicData } from "../../interface";
 import CollectionAdd from "./CollectionAdd";
+import useAccountStoreInfo from "../../utils/info/useAccountStoreInfo";
 
 export default function Frame({
 	id,
-	accountData,
 }: {
 	id: string;
-	accountData: IAccountPublicData | undefined;
 }) {
 	// own hooks
 	const { data, load } = useFramesId(id);
-
-	const color = useColor(data?.color);
-
+	// const { frameData, frameError, frameLoading } = useLike(id, like);
+	
 	const [like, setLike] = useState(data?.liked_by_user);
 	const [showCollection, setShowCollection] = useState(false);
+	
 
-	// const { frameData, frameError, frameLoading } = useLike(id, like);
+	const { accountInfo } = useAccountStoreInfo()
 
 	return (
 		<>
 			<CollectionAdd
-				username={accountData?.username}
+				username={accountInfo?.username}
 				frameInfo={data}
 				show={showCollection}
 				setShow={setShowCollection}

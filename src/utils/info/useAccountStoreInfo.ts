@@ -2,9 +2,9 @@ import { useSelector } from "react-redux";
 import { IAccountState } from "../../store/accountSlice";
 
 export default function useAccountStoreInfo() {
-  const { isRegistered, registeredWith, accessToken } = useSelector(
+  const { isRegistered, registeredWith, accessToken, accountInfo } = useSelector(
     (state: { account: IAccountState }) => state.account
   );
   
-  return { isRegistered, registeredWith, accessToken };
+  return { isRegistered, registeredWith, accessToken, accountInfo };
 }

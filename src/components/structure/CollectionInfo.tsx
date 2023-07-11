@@ -8,7 +8,7 @@ import useAccountCollections from "../../hooks/get/useAccountCollections";
 import useAccountCollection from "../../hooks/get/useAccontCollection";
 import { IAccessTitles, IAccountCollection, IData } from "../../interface";
 import { Link } from "react-router-dom";
-import useAccountCollectionPhotoes from "../../hooks/get/useAccountCollectionPhotoes";
+import useAccountCollectionPhotos from "../../hooks/get/useAccountCollectionPhotos";
 import arrowDown from "../../images/Arrow-down.png";
 import options from "../../images/options.png";
 import { useDispatch } from "react-redux";

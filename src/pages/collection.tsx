@@ -3,7 +3,7 @@ import Header from "../components/structure/Header";
 import { useParams } from "react-router-dom";
 import Collection from "../components/structure/CollectionInfo";
 import useCountResize from "../hooks/functions/useCountResize";
-import useAccountCollectionPhotoes from "../hooks/get/useAccountCollectionPhotoes";
+import useAccountCollectionPhotos from "../hooks/get/useAccountCollectionPhotos";
 import Main from "../components/structure/Main";
 import useFetchByScroll from "../hooks/functions/useFetchByScroll";
 import CollectionInfo from "../components/structure/CollectionInfo";
@@ -21,7 +21,7 @@ export default function CollectionPage() {
 
 	const { colNum, lineNum } = useCountResize(framesCollectionsWidth);
 
-	const { dataCollectionPhotos, loadPhotoes } = useAccountCollectionPhotoes(
+	const { dataCollectionPhotos, loadPhotos } = useAccountCollectionPhotos(
 		id,
 		colNum * lineNum,
 	);
@@ -30,8 +30,8 @@ export default function CollectionPage() {
 		<>
 			<Header />
       <CollectionInfo id={id}></CollectionInfo>
-			<Main framesWidth={framesCollectionsWidth} frames={dataCollectionPhotos} load={loadPhotoes}/>
-			<Loading loading={loadPhotoes}></Loading>
+			<Main framesWidth={framesCollectionsWidth} frames={dataCollectionPhotos} load={loadPhotos}/>
+			<Loading loading={loadPhotos}></Loading>
 		</>
 	);
 }

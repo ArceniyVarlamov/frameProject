@@ -1,14 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { IAccountPublicData, ISearchPhotoes } from "../interface";
+import { IAccountPublicData, ISearchPhotos } from "../interface";
 
 export interface ISearchState {
-  searchInfo: ISearchPhotoes;
-  searchHistory: ISearchPhotoes[]
+  searchInfo: ISearchPhotos;
+  searchHistory: ISearchPhotos[]
 }
 
 const searchState: ISearchState = {
-  searchInfo: {} as ISearchPhotoes,
-  searchHistory: [{}] as ISearchPhotoes[],
+  searchInfo: {} as ISearchPhotos,
+  searchHistory: [{}] as ISearchPhotos[],
 };
 
 const searchSlice = createSlice({

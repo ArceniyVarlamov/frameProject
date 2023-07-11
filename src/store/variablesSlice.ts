@@ -5,12 +5,14 @@ export interface IVariablesState {
   framesMainWidth: number;
   framesCollectionsWidth: number;
   framesHeightConst: number;
+  searchPerSearch: number;
 }
 
 const accountState: IVariablesState = {
   framesMainWidth: 220,
   framesCollectionsWidth: 220,
   framesHeightConst: 1.5,
+  searchPerSearch: 5,
 };
 
 const variablesSlice = createSlice({

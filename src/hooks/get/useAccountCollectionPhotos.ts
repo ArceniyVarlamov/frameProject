@@ -1,7 +1,7 @@
 import axios, { AxiosError } from "axios";
 import { useState } from "react";
 import { useEffect, useCallback } from "react";
-import { IAccountCollection, IData } from "./../../interface";
+import { IAccountCollection, IData } from "../../interface";
 import { useDispatch } from "react-redux";
 import { addError } from "../../store/functionsSlice";
 import useAccountStoreInfo from "../../utils/info/useAccountStoreInfo";
@@ -9,12 +9,12 @@ import { resetFramesLoaded, resetFramesRedirect } from "../../store/framesSlice"
 import useFramesStoreInfo from "../../utils/info/useFramesStoreInfo";
 import useFunctionsStoreInfo from "../../utils/info/useFunctionsStoreInfo";
 
-export default function useAccountCollectionPhotoes(
+export default function useAccountCollectionPhotos(
 	id: string | undefined | null,
   num: number,
 ) {
 	const [dataCollectionPhotos, setDataCollectionPhotos] = useState<IData[]>([]);
-	const [loadPhotoes, setLoadPhotoes] = useState<boolean>(false);
+	const [loadPhotos, setLoadPhotos] = useState<boolean>(false);
 
   const { framesLoaded, framesRedirect } = useFramesStoreInfo()
 
@@ -52,7 +52,7 @@ export default function useAccountCollectionPhotoes(
 			}
       setDataCollectionPhotos([...dataCollectionPhotos, ...all]);
 		} finally {
-			setLoadPhotoes(false);
+			setLoadPhotos(false);
 		}
 	}, [framesLoaded]);
 
@@ -64,7 +64,7 @@ export default function useAccountCollectionPhotoes(
 
 	return {
 		dataCollectionPhotos,
-		loadPhotoes,
+		loadPhotos,
 	};
 }
 

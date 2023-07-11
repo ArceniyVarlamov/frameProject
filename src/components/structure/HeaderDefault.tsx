@@ -5,8 +5,12 @@ import Image from "./Image";
 import { addFramesRedirect } from "../../store/framesSlice";
 import { useDispatch } from "react-redux";
 import useAccountCurrent from "../../hooks/get/useAccountCurrent";
+import { useState } from "react";
+import useSearchPhotos from "../../hooks/get/useSearchPhotos";
+import useVariablesStoreInfo from "../../utils/info/useVariablesStoreInfo";
 
 export default function HeaderDefault() {
+
 	const dispatch = useDispatch();
 
 	return (
@@ -24,7 +28,9 @@ export default function HeaderDefault() {
 					type='text'
 					placeholder='Search'
 					className='truncate header__search'
-				/>
+				>
+					
+				</input>
 				<Link to='/registration' className='header__register truncate'>
 					Register
 				</Link>

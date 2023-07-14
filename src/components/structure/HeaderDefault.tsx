@@ -8,9 +8,9 @@ import useAccountCurrent from "../../hooks/get/useAccountCurrent";
 import { useState } from "react";
 import useSearchPhotos from "../../hooks/get/useSearchPhotos";
 import useVariablesStoreInfo from "../../utils/info/useVariablesStoreInfo";
+import search from "../../images/search.png";
 
 export default function HeaderDefault() {
-
 	const dispatch = useDispatch();
 
 	return (
@@ -24,13 +24,10 @@ export default function HeaderDefault() {
 				<Link to='/create' className='header__create truncate'>
 					Create
 				</Link>
-				<input
-					type='text'
-					placeholder='Search'
-					className='truncate header__search'
-				>
-					
-				</input>
+				<div className='header__search'>
+					<input className='truncate header__search-input' type='text' placeholder='Search' />
+					<Image className='header__search-img' src={search}></Image>
+				</div>
 				<Link to='/registration' className='header__register truncate'>
 					Register
 				</Link>

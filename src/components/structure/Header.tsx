@@ -5,13 +5,13 @@ import { useDispatch } from "react-redux";
 import HeaderDefault from "./HeaderDefault";
 import HeaderRegistered from "./HeaderRegistered";
 
-export default function Header() {
+export default function Header({headerValue = ''}: {headerValue?: string}) {
 	const { isRegistered } = useAccountInfo();
 
 	return (
 		<>
 			{!!!isRegistered && <HeaderDefault />}
-			{!!isRegistered && <HeaderRegistered />}
+			{!!isRegistered && <HeaderRegistered headerValue={headerValue}/>}
 		</>
 	);
 }

@@ -11,7 +11,7 @@ import useFunctionsStoreInfo from "../../utils/info/useFunctionsStoreInfo";
 
 export default function useAccountCollectionPhotos(
 	id: string | undefined | null,
-  num: number,
+  perLoad: number,
 ) {
 	const [dataCollectionPhotos, setDataCollectionPhotos] = useState<IData[]>([]);
 	const [loadPhotos, setLoadPhotos] = useState<boolean>(false);
@@ -25,10 +25,9 @@ export default function useAccountCollectionPhotos(
 
   useEffect(() => {
 		if (framesRedirect) {
-			window.scrollTo(0, 0)
 			dispatch(resetFramesLoaded())
 			dispatch(resetFramesRedirect())
-			setDataCollectionPhotos(dataCollectionPhotos.slice(dataCollectionPhotos.length - framesLoaded * num))
+			setDataCollectionPhotos(dataCollectionPhotos.slice(dataCollectionPhotos.length - framesLoaded * perLoad))
 		}
 	}, [framesRedirect]);
 
@@ -38,7 +37,7 @@ export default function useAccountCollectionPhotos(
 				...dataCollectionPhotos,
 				...(await (
 					await axios.get(
-						`https://api.unsplash.com/collections/${id}/photos?access_token=${accessToken}&per_page=${num}&page=${framesLoaded}`,
+						`https://api.unsplash.com/collections/${id}/photos?access_token=${accessToken}&per_page=${perLoad}&page=${framesLoaded}`,
 					)
 				).data),
 			]);
@@ -47,7 +46,7 @@ export default function useAccountCollectionPhotos(
 			const error = err as AxiosError;
 			addError(dispatch, `${error.message} while getting collection data`);
 			let all: IData[] = [];
-			for (let i = dataCollectionPhotos.length; i < framesLoaded * num; i++) {
+			for (let i = dataCollectionPhotos.length; i < framesLoaded * perLoad; i++) {
 				all.push({height: Math.random() * (5000 - 2000) + 2000} as IData);
 			}
       setDataCollectionPhotos([...dataCollectionPhotos, ...all]);

@@ -18,10 +18,11 @@ import useFramesStoreInfo from "./utils/info/useFramesStoreInfo";
 import { addFramesRedirect } from "./store/framesSlice";
 import NotRegisteredPage from "./pages/notRegistered";
 import useAccountCurrent from "./hooks/get/useAccountCurrent";
+import SearchPage from "./pages/search";
 
 function App() {
 	// useCheckRegister();
-	// useAccountCurrent();
+	useAccountCurrent();
 
 	return (
 		<BrowserRouter>
@@ -39,6 +40,7 @@ function App() {
 				<Route path='/collections/:username' element={<CollectionsPage />} />
 				<Route path='/create' element={<CreatePage />} />
 				<Route path='/notregistered' element={<NotRegisteredPage />} />
+				<Route path='/search' element={<SearchPage />} />
 			</Routes>
 		</BrowserRouter>
 	);

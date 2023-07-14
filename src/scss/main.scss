@@ -111,7 +111,7 @@ $y-inc: 15px;
 	--aliceblue-color: aliceblue;
 	--white-color: white;
 	--nothing-color: rgba(0, 0, 0, 0);
-	--header-height: 4vmax;
+	--header-height: 5vmax;
 	--main-frames-border-radius: 15px;
 	--frame-height-full: 100vmax;
 	--frame-options-height: 6vmax;
@@ -324,7 +324,7 @@ input :active,
 		width: 100%;
 		display: flex;
 		position: fixed;
-		justify-content: space-around;
+		justify-content: space-evenly;
 		align-items: center;
 		top: 0;
 		left: 0;
@@ -393,7 +393,7 @@ input :active,
 	}
 	&__create {
 		height: 80%;
-		width: 15%;
+		width: 5%;
 		cursor: pointer;
 		border-radius: 20px;
 		font-size: 2vmax;
@@ -411,12 +411,22 @@ input :active,
 		}
 	}
 	&__search {
+		position: relative;
 		height: 80%;
 		width: 30%;
-		font-size: 1.5vmax;
 		border-radius: 15px;
-		padding: 0 1vmax;
+		font-size: 1.5vmax;
 		box-shadow: 2px 2px 15px -2px $grey190-color;
+		&:hover {
+			background-color: $grey240-color;
+		}
+	}
+	&__search-input {
+		font-size: 1.5vmax;
+		padding: 0 1vmax;
+		border-radius: 15px;
+		width: 100%;
+		height: 100%;
 		&:focus {
 			font-weight: 500;
 			background-color: $grey230-color;
@@ -426,15 +436,24 @@ input :active,
 			background-color: $grey240-color;
 		}
 	}
+	&__search-img {
+		cursor: pointer;
+		position: absolute;
+		right: 0;
+		top: 50%;
+		transform: translateY(-50%);
+		height: calc(var(--header-height) / 4);
+		width: calc(var(--header-height) / 4);
+	}
 	&__register,
 	&__login {
 		height: 80%;
-		width: 15%;
+		width: 10%;
 		border-radius: 15px;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		font-size: 1.5vmax;
+		font-size: 2vmax;
 		font-weight: 500;
 		text-decoration: none;
 		color: $main-color;
@@ -1798,6 +1817,39 @@ input :active,
 	}
 }
 
+.search {
+	margin: 2vmax auto;
+	width: 90%;
+	display: flex;
+	flex-direction: column;
+	gap: 1.5vmax;
+	&__choose {
+		width: 100%;
+		display: flex;
+		gap: 1.5vmax;
+		overflow: auto;
+		& div {
+			user-select: none;
+			cursor: pointer;
+			font-size: 2vmax;
+			font-weight: 500;
+			background-color: $grey230-color;
+			border-radius: 10px;
+			padding: 0.5vmax 1vmax;
+			&:hover {
+				background-color: $grey220-color;
+			}
+		}
+	}
+	&__active {
+		background-color: $grey190-color !important;
+	}
+	&__info {
+		font-size: 2.5vmax;
+		font-weight: 600;
+	}
+}
+
 @media (max-width: 867px) {
 	:root {
 		--header-height: 8vmax;
@@ -1808,10 +1860,10 @@ input :active,
 		gap: 0;
 		z-index: 20;
 		&__search {
-			width: 15%;
+			width: 25%;
 		}
 		&__create {
-			width: 10%;
+			width: 5%;
 		}
 	}
 	.frame {

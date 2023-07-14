@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { addFramesRedirect } from "../../store/framesSlice";
 import Image from "./Image";
 import { useDispatch } from "react-redux";
@@ -34,6 +34,8 @@ export default function MainFrame({
 	);
 
 	const { accountInfo, isRegistered } = useAccountStoreInfo()
+
+	const navigate = useNavigate();
 
 	return (
 		<>
@@ -122,7 +124,7 @@ export default function MainFrame({
 										</div>
 									)}
 								</div>
-								<div className='main__options-download'>
+								<div className='main__options-download' onClick={() => navigate(item?.links?.download)}>
 									<Image src={download} to={item?.links?.download} />
 								</div>
 							</div>

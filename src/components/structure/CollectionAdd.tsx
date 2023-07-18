@@ -5,29 +5,37 @@ import Loading from "../functional/Loading";
 import { IAccountCollection, ICollectionsFrame, IData } from "../../interface";
 import plus from "../../images/plus.png";
 import cross from "../../images/black_bold_cross.png";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import useAddPhotoToCollections from "../../hooks/post/useAddPhotoToCollection";
+import useFetchByScroll from "../../hooks/functions/useFetchByScroll";
 
 export default function CollectionAdd({
 	username,
 	className = "",
+	frameId,
 	show,
 	setShow,
-	frameInfo,
 }: {
 	username: string | null | undefined;
 	className?: string;
-	show: boolean;
+	frameId: string | undefined;
+	show: boolean,
 	setShow: (value: boolean) => void;
-	frameInfo: IData | undefined;
 }) {
-	const { data, load } = useAccountCollections(username);
+
+	
+	const [scrollRef, setScrollRef] = useState<HTMLDivElement | null>(null)
+
+	const { dataLoaded } = useFetchByScroll(scrollRef);
+
+	const { collections, load } = useAccountCollections(dataLoaded, 6, username);
+	
 	const [post, setPost] = useState(false);
 	const [collectionId, setCollectionId] = useState<string | null | undefined>();
 
 	const { dataCollection, load: loadCollection } = useAddPhotoToCollections(
 		collectionId,
-		frameInfo?.id,
+		frameId,
 		post,
 		setPost,
 	);
@@ -45,8 +53,8 @@ export default function CollectionAdd({
 								onClick={() => setShow(false)}
 							></Image>
 							<div className='collection-add__title'>Collections</div>
-							<div className='collection-add__collections'>
-								{data?.map((item, i) => {
+							<div ref={(element) => setScrollRef(element)} className='collection-add__collections'>
+								{collections?.map((item, i) => {
 									return (
 										<div className='collection-add__collection'>
 											<div className='collection-add__info'>

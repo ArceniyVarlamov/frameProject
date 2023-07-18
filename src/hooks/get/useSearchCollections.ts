@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import {
 	IAccountPublicData,
 	ISearchCollections,
-	ISearchPhotos,
+	ISearchFrames,
 } from "../../interface";
 import { addError } from "../../store/functionsSlice";
 import useAccountStoreInfo from "../../utils/info/useAccountStoreInfo";
@@ -56,7 +56,7 @@ export default function useSearchCollections(options: {
 			try {
 				const data = (await (
 					await axios.get(
-						`https://api.unsplash.com/search/collections?access_token=${accessToken}&page=${framesLoaded}&query=${q}&per_page=${perPage}`,
+						`https://api.unsplash.com/search/collections?access_token=${accessToken}&page=${framesLoaded}&per_page=${perPage}&query=${q}`,
 					)
 				).data) as ISearchCollections;
 				setFrames({

@@ -15,36 +15,34 @@ export default function MainFrame({
 	item,
 	load,
 	frameWidth,
+	setFrameId,
+	setCollectionAddShow,
 }: {
 	item: IData;
 	load: boolean;
 	frameWidth: number;
+	setCollectionAddShow: (value: boolean) => void;
+	setFrameId?: (value: string) => void;
 }) {
+	const { isRegistered } = useAccountStoreInfo();
+
 	// Переменная появления опций на фрейме при наведении
 	const [frameOptions, setFrameOptions] = useState(false);
 	// Переменная событий фрейма
 	const [frameActions, setFrameActions] = useState(false);
 	// Переменная хеша (сужения качества) картинки
 	const [frameHash, setFrameHash] = useState(false);
-	// Переменная добавления фрейма в коллекцию
-	const [showCollection, setShowCollection] = useState(false);
+	// Переменная отправки лайка
+	const [postLike, setPostLike] = useState(item?.liked_by_user);
 
 	const frameHeight = Math.round(
 		item?.height / 100 <= 25 ? 35 : item?.height / 100,
 	);
 
-	const { accountInfo, isRegistered } = useAccountStoreInfo()
-
 	const navigate = useNavigate();
 
 	return (
 		<>
-			<CollectionAdd
-				username={accountInfo?.username}
-				frameInfo={item}
-				show={showCollection}
-				setShow={setShowCollection}
-			></CollectionAdd>
 			<div
 				className='main__frame'
 				style={{
@@ -95,7 +93,30 @@ export default function MainFrame({
 					)}
 					{(frameOptions || frameActions) && !frameHash && (
 						<>
-							{!!isRegistered && <div className='main__options-save truncate' onClick={() => setShowCollection(true)}>Save</div>}
+							{!!!isRegistered && setFrameId && (
+								<div
+									className='main__options-save truncate'
+									onClick={() => setCollectionAddShow(true)}
+								>
+									Save
+								</div>
+							)}
+							{!!!isRegistered && (
+								<svg
+									className='main__options-like'
+									style={{
+										fill: postLike ? "var(--grey250-color)" : "var(--grey190-color)",
+									}}
+									onClick={() => setPostLike(!postLike)}
+									viewBox='0 0 16 16'
+								>
+									{" "}
+									<path
+										fill-rule='evenodd'
+										d='M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z'
+									/>{" "}
+								</svg>
+							)}
 							<div
 								className='main__options-bottom'
 								style={{
@@ -124,7 +145,10 @@ export default function MainFrame({
 										</div>
 									)}
 								</div>
-								<div className='main__options-download' onClick={() => navigate(item?.links?.download)}>
+								<div
+									className='main__options-download'
+									onClick={() => navigate(item?.links?.download)}
+								>
 									<Image src={download} to={item?.links?.download} />
 								</div>
 							</div>

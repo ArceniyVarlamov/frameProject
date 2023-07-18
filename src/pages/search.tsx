@@ -15,6 +15,9 @@ import useCountResize from "../hooks/functions/useCountResize";
 import useSearchPhotos from "../hooks/get/useSearchPhotos";
 import useCheckIsRegistered from "../hooks/functions/useCheckIsRegistered";
 import useSearchCollections from "../hooks/get/useSearchCollections";
+import useSearchFrames from "../hooks/get/useSearchPhotos";
+import SearchParams from "./../components/structure/SearchParams";
+import Collections from "../components/structure/Collections";
 
 export default function SearchPage() {
 	const [active, setActive] = useState("collections");
@@ -29,14 +32,14 @@ export default function SearchPage() {
 	const { colNum, lineNum } = useCountResize(framesMainWidth);
 	// const { searchPerSearch } = useVariablesStoreInfo();
 
-	const { frames: PhotosData, load: photosLoad } = useSearchPhotos({
+	const { frames: framesData, load: framesLoad } = useSearchFrames({
 		perLoad: colNum * lineNum,
 		q: searchParams.get("q"),
 		post: active === "photos",
 	});
 
 	const { frames: collectionsData, load: collectionsLoad } = useSearchCollections({
-		perLoad: colNum * lineNum,
+		perLoad: 2,
 		q: searchParams.get("q"),
 		post: active === "collections",
 	});
@@ -44,38 +47,21 @@ export default function SearchPage() {
 	return (
 		<>
 			<Header />
-			<div className='search'>
-				<div className='search__choose'>
-					<div
-						className={`${active === "photos" ? "search__active" : ""}`}
-						onClick={() => setActive("photos")}
-					>
-						Photos
-					</div>
-					<div
-						className={`${active === "collections" ? "search__active" : ""}`}
-						onClick={() => setActive("collections")}
-					>
-						Collections
-					</div>
-					<div
-						className={`${active === "users" ? "search__active" : ""}`}
-						onClick={() => setActive("users")}
-					>
-						Users
-					</div>
-				</div>
-				<div className='search__info'>
-					<p className='search__total'>
-						{PhotosData?.total} {active}
-					</p>
-				</div>
-			</div>
-			<Main
-				frames={PhotosData.results}
-				load={photosLoad}
+			<SearchParams
+				active={active}
+				setActive={setActive}
+				framesData={framesData || collectionsData}
+			></SearchParams>
+			{active === "photos" && <Main
+				frames={framesData.results}
+				load={framesLoad}
 				framesWidth={framesMainWidth}
-			></Main>
+			></Main>}
+			{active === "collections" && <Collections
+				toShow={Infinity}
+				collectionsLoad={collectionsLoad}
+				collectionsData={collectionsData?.results}
+			/>}
 		</>
 	);
 }

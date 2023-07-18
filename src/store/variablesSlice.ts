@@ -9,8 +9,8 @@ export interface IVariablesState {
 }
 
 const accountState: IVariablesState = {
-  framesMainWidth: 220,
-  framesCollectionsWidth: 220,
+  framesMainWidth: 290,
+  framesCollectionsWidth: 290,
   framesHeightConst: 1.5,
   searchPerSearch: 5,
 };

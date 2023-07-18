@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import {
 	IAccountPublicData,
 	ISearchCollections,
-	ISearchPhotos,
+	ISearchFrames,
 } from "../../interface";
 import { addError } from "../../store/functionsSlice";
 import useAccountStoreInfo from "../../utils/info/useAccountStoreInfo";
@@ -15,7 +15,7 @@ import {
 	resetFramesRedirect,
 } from "../../store/framesSlice";
 
-export default function useSearchPhotos(options: {
+export default function useSearchFrames(options: {
 	perLoad: number;
 	q: string | undefined | null;
 	collections?: string | undefined | null;
@@ -25,11 +25,11 @@ export default function useSearchPhotos(options: {
 	const { accessToken } = useAccountStoreInfo();
 
 	//! Separating by comma
-	const [frames, setFrames] = useState<ISearchPhotos>({
+	const [frames, setFrames] = useState<ISearchFrames>({
 		results: [],
 		total: 100,
 		total_pages: 100,
-	} as ISearchPhotos);
+	} as ISearchFrames);
 	const [load, setLoad] = useState<boolean>(false);
 
 	const dispatch = useDispatch();
@@ -63,7 +63,7 @@ export default function useSearchPhotos(options: {
 							orderBy ? orderBy : ""
 						}`,
 					)
-				).data) as ISearchPhotos;
+				).data) as ISearchFrames;
 				setFrames({
 					...data,
 					results: [...frames.results, ...data.results],
@@ -78,7 +78,7 @@ export default function useSearchPhotos(options: {
 		[framesLoaded],
 	);
 
-	const getPhotosCollection = useCallback(
+	const getFramesCollection = useCallback(
 		async (
 			accessToken: string,
 			q: string,
@@ -109,10 +109,15 @@ export default function useSearchPhotos(options: {
 	);
 
 	useEffect(() => {
-		if (!!accessToken && !!options?.post && !!options?.q && !!!options?.collections) {
+		if (
+			!!accessToken &&
+			!!options?.post &&
+			!!options?.q &&
+			!!!options?.collections
+		) {
 			getPhotoInfo(accessToken, options?.q, options?.perLoad, options?.orderBy);
 		} else if (!!accessToken && !!options?.q && !!options?.collections) {
-			getPhotosCollection(
+			getFramesCollection(
 				accessToken,
 				options?.q,
 				options?.perLoad,
@@ -120,7 +125,17 @@ export default function useSearchPhotos(options: {
 				options?.collections,
 			);
 		}
-	}, [accessToken, options?.collections, options?.orderBy, framesLoaded, getPhotoInfo, getPhotosCollection, options?.q, options?.perLoad, options?.post]);
+	}, [
+		accessToken,
+		options?.collections,
+		options?.orderBy,
+		framesLoaded,
+		getPhotoInfo,
+		getFramesCollection,
+		options?.q,
+		options?.perLoad,
+		options?.post,
+	]);
 
 	return { frames, load };
 }

@@ -11,16 +11,13 @@ import arrow from "../../images/Arrow-down.png";
 import search from "../../images/search.png";
 import useAccountStoreInfo from "../../utils/info/useAccountStoreInfo";
 import { Key, useEffect, useState } from "react";
-import useVariablesStoreInfo from "../../utils/info/useVariablesStoreInfo";
-import useSearchPhotos from "../../hooks/get/useSearchPhotos";
-import { ISearchPhotos } from "../../interface";
 
 export default function HeaderRegistered({headerValue = ''}: {headerValue: string}) {
 	const dispatch = useDispatch();
 
 	const [q, setQ] = useState(headerValue);
 
-	const { accountInfo } = useAccountStoreInfo();
+	const { accountData } = useAccountStoreInfo();
 
 	const navigate = useNavigate();
 
@@ -67,7 +64,7 @@ export default function HeaderRegistered({headerValue = ''}: {headerValue: strin
 				<div className='header__account'>
 					<Image
 						to='/me'
-						src={accountInfo?.profile_image?.medium}
+						src={accountData?.profile_image?.medium}
 						color={"var(--main-color)"}
 					></Image>
 				</div>

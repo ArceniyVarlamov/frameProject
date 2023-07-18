@@ -4,7 +4,7 @@ import { useSearchParams } from "react-router-dom";
 import useRegisterUnsplash from "../utils/registration/useRegisterUnsplash";
 import Loading from "../components/functional/Loading";
 import useAccountInfo from "../utils/info/useAccountStoreInfo";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import useCheckRegister from "./../utils/registration/useCheckRegister";
 import { useDispatch } from "react-redux";
 import { addFramesRedirect } from "../store/framesSlice";
@@ -14,15 +14,17 @@ import useVariablesStoreInfo from "../utils/info/useVariablesStoreInfo";
 import useCountResize from "../hooks/functions/useCountResize";
 
 export default function HomePage() {
+
 	const { framesMainWidth } = useVariablesStoreInfo();
 
 	// Событие подзагрузки фреймов при скролле
-	useFetchByScroll();
+	const {dataLoaded} = useFetchByScroll();
 
 	// Считает количество столбов и строк, которые будут на странице с определённым размером окна
 	const { colNum, lineNum } = useCountResize(framesMainWidth);
 
-	const { frames, load } = useFramesList(colNum * lineNum);
+	const { frames, load } = useFramesList(dataLoaded, colNum * lineNum);
+
 
 	return (
 		<>

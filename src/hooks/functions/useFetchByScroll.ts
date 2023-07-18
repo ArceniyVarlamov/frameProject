@@ -4,20 +4,19 @@ import { addFramesLoaded } from "../../store/framesSlice";
 import { IFramesState } from "./../../store/framesSlice";
 import useFramesInfo from "../../utils/info/useFramesStoreInfo";
 
-export default function useFetchByScroll() {
+export default function useFetchByScroll(element?: HTMLDivElement | null) {
 	const [fetching, setFetching] = useState<boolean>(false);
+	const [dataLoaded, setDataLoaded] = useState(1);
 
 	const dispatch = useDispatch();
 
-	const { framesLoaded } = useFramesInfo();
-
 	// Условие при котором меняется фетчинг
 
-	const scrollHandler = useCallback((e: any) => {
+	const documentScrollHandler = useCallback((e: any) => {
 		if (
-			e.target.documentElement.scrollHeight -
-				(e.target.documentElement.scrollTop + window.innerHeight) <
-				50 &&
+			e.target.scrollingElement.scrollHeight -
+				(e.target.scrollingElement.scrollTop + window.innerHeight) <
+				100 &&
 			!fetching
 		) {
 			setFetching(true);
@@ -25,22 +24,36 @@ export default function useFetchByScroll() {
 			setFetching(false);
 		}
 	}, []);
+
+	const elementScrollHandler = useCallback((e: any) => {
+		if (
+			e.target.scrollHeight - (e.target.scrollTop + window.innerHeight) < 100 &&
+			!fetching
+			) {
+			setFetching(true);
+			
+		} else {
+			setFetching(false);
+		}
+	}, []);
+
 	// Добавление слушателя скролла
 	useEffect(() => {
-		document.addEventListener("scroll", scrollHandler);
-
-		return () => {
-			document.removeEventListener("scroll", scrollHandler);
-		};
-	}, [scrollHandler]);
+		if (!!element) {
+			element.addEventListener("scroll", elementScrollHandler);
+		} else if (!!!element) {
+			document.addEventListener("scroll", documentScrollHandler);
+		}
+	}, [documentScrollHandler, element, elementScrollHandler]);
 
 	useEffect(() => {
-		if (fetching) {
+		
+		if (!!fetching) {
 			// Увеличивает количество групп фреймов в колонке
-			dispatch(addFramesLoaded());
+			setDataLoaded(dataLoaded + 1);
 			setFetching(false);
 		}
 	}, [dispatch, fetching]);
 
-	return { framesLoaded };
+	return { dataLoaded };
 }

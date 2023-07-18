@@ -8,19 +8,21 @@ export default function Collections({
 	username,
 	className = "",
 	toShow = -1,
+	collectionsData,
+	collectionsLoad = false,
 }: {
-	username: string | null | undefined;
+	username?: string | null | undefined;
 	className?: string;
 	toShow?: number;
+	collectionsData: IAccountCollection[] | undefined;
+	collectionsLoad?: boolean;
 }) {
 	
-	const { data, load } = useAccountCollections(username);
-
 	return (
 		<>
-			<Loading loading={load}></Loading>
+			<Loading loading={collectionsLoad}></Loading>
 			<div className={`collections ${className}`}>
-				{data?.slice(0, toShow).map((item, i) => {
+				{collectionsData?.slice(0, toShow).map((item, i) => {
 					let photo0;
 					let photo1;
 					let photo2;
@@ -60,7 +62,7 @@ export default function Collections({
 					);
 				})}
 			</div>
-			{data?.length! > toShow ? (
+			{collectionsData?.length! > toShow ? (
 				<Link className='collections__more' to={`/collections/${username}`}>
 					Show more
 				</Link>

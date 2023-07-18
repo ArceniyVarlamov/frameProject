@@ -223,7 +223,7 @@ export interface IAccessTitles {
 	noTitle: string,
 }
 
-export interface ISearchPhotos {
+export interface ISearchFrames {
 	total: number,
 	total_pages: number,
 	results: IData[],

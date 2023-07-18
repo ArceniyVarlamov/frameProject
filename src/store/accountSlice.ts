@@ -5,14 +5,14 @@ export interface IAccountState {
   isRegistered: boolean;
   registeredWith: string;
   accessToken: string;
-  accountInfo: IAccountPublicData;
+  accountData: IAccountPublicData;
 }
 
 const accountState: IAccountState = {
   isRegistered: false,
   registeredWith: "",
   accessToken: "",
-  accountInfo: {} as IAccountPublicData,
+  accountData: {} as IAccountPublicData,
 };
 
 const accountSlice = createSlice({
@@ -29,7 +29,7 @@ const accountSlice = createSlice({
       state.accessToken = action.payload
     },
     setInfo(state, action) {
-      state.accountInfo = action.payload
+      state.accountData = action.payload
     },
   },
 });

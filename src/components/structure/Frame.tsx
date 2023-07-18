@@ -22,23 +22,22 @@ export default function Frame({
 }: {
 	id: string;
 }) {
-	// own hooks
+	const { accountData } = useAccountStoreInfo()
 	const { data, load } = useFramesId(id);
-	// const { frameData, frameError, frameLoading } = useLike(id, like);
-	
-	const [like, setLike] = useState(data?.liked_by_user);
-	const [showCollection, setShowCollection] = useState(false);
-	
 
-	const { accountInfo } = useAccountStoreInfo()
+	const [postLike, setPostLike] = useState(data?.liked_by_user);
+	const [showAddCollection, setShowAddCollection] = useState(false);
+
+	// own hooks
+	const { frameData, frameError, frameLoading } = useLike(id, postLike);
 
 	return (
 		<>
 			<CollectionAdd
-				username={accountInfo?.username}
-				frameInfo={data}
-				show={showCollection}
-				setShow={setShowCollection}
+				username={accountData?.username}
+				frameId={id}
+				show={showAddCollection}
+				setShow={setShowAddCollection}
 			></CollectionAdd>
 			<Loading loading={load} />
 			{!load && (
@@ -53,8 +52,8 @@ export default function Frame({
 							<div className='frame__main-container'>
 								<svg
 									className='frame__main-like'
-									style={{ fill: like ? data?.color : "var(--black-color)" }}
-									onClick={() => setLike(!like)}
+									style={{ fill: postLike ? data?.color : "var(--black-color)" }}
+									onClick={() => setPostLike(!postLike)}
 									viewBox='0 0 16 16'
 								>
 									{" "}
@@ -65,7 +64,7 @@ export default function Frame({
 								</svg>
 								<div
 									className='frame__main-add'
-									onClick={() => setShowCollection(true)}
+									onClick={() => setShowAddCollection(true)}
 								>
 									<Image src={plus}></Image>
 								</div>

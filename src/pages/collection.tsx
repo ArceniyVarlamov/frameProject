@@ -16,12 +16,13 @@ export default function CollectionPage() {
 
 	const { framesCollectionsWidth } = useVariablesStoreInfo();
 
-  useFetchByScroll();
+  const {dataLoaded} = useFetchByScroll();
 	useCheckIsRegistered()
 
 	const { colNum, lineNum } = useCountResize(framesCollectionsWidth);
 
 	const { dataCollectionPhotos, loadPhotos } = useAccountCollectionPhotos(
+		dataLoaded,
 		id,
 		colNum * lineNum,
 	);

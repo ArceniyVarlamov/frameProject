@@ -23,7 +23,7 @@ export default function useFetchByScroll(element?: HTMLDivElement | null) {
 		} else {
 			setFetching(false);
 		}
-	}, []);
+	}, [fetching]);
 
 	const elementScrollHandler = useCallback((e: any) => {
 		if (
@@ -35,16 +35,24 @@ export default function useFetchByScroll(element?: HTMLDivElement | null) {
 		} else {
 			setFetching(false);
 		}
-	}, []);
+	}, [fetching]);
 
 	// Добавление слушателя скролла
 	useEffect(() => {
 		if (!!element) {
 			element.addEventListener("scroll", elementScrollHandler);
+			return () => {
+				element.removeEventListener("scroll", documentScrollHandler);
+				setDataLoaded(1)
+			}
 		} else if (!!!element) {
 			document.addEventListener("scroll", documentScrollHandler);
+			return () => {
+				document.removeEventListener("scroll", documentScrollHandler);
+				setDataLoaded(1)
+			}
 		}
-	}, [documentScrollHandler, element, elementScrollHandler]);
+	}, [element]);
 
 	useEffect(() => {
 		
@@ -53,7 +61,7 @@ export default function useFetchByScroll(element?: HTMLDivElement | null) {
 			setDataLoaded(dataLoaded + 1);
 			setFetching(false);
 		}
-	}, [dispatch, fetching]);
+	}, [dataLoaded, dispatch, fetching]);
 
-	return { dataLoaded };
+	return {dataLoaded, setDataLoaded}
 }

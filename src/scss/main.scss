@@ -153,7 +153,7 @@ body {
 	box-sizing: border-box;
 	margin: 0;
 	font-family: "Noto Sans", sans-serif;
-	background-color: $white-06-opacity-color;
+	background-color: $white-color;
 	input {
 		border: none;
 	}
@@ -416,7 +416,7 @@ input :active,
 		width: 30%;
 		border-radius: 15px;
 		font-size: 1.5vmax;
-		box-shadow: 2px 2px 15px -2px $grey190-color;
+		
 		&:hover {
 			background-color: $grey240-color;
 		}
@@ -582,6 +582,7 @@ input :active,
 		}
 	}
 	&__options-like {
+		cursor: pointer;
 		margin: 0 0;
 		top: calc(var(--header-height));
 		align-self: flex-start;
@@ -608,6 +609,7 @@ input :active,
 	&__actions {
 		position: absolute;
 		right: 0;
+		
 		bottom: calc(100% + var(--frame-options-margin));
 		background-color: $grey240-color;
 		display: flex;
@@ -620,6 +622,7 @@ input :active,
 			display: flex;
 			padding: 0 10px;
 			align-items: center;
+			color: $black-color;
 			height: calc(var(--frame-options-height) / 2);
 			white-space: nowrap;
 			cursor: pointer;
@@ -1282,29 +1285,25 @@ input :active,
 }
 
 .collections {
-	margin: auto;
 	position: relative;
 	display: flex;
 	flex-wrap: wrap;
-	justify-content: center;
+	justify-content: space-around;
+	gap: 10px;
+	width: 100%;
 	margin: 0 auto;
-	gap: 2vmax;
-	width: 90%;
 	&__collection {
+		height: 250px;
 		position: relative;
-		margin: 1vmax 0;
+		margin: 0 0 2vmax 0;
 		cursor: pointer;
-		width: 25vmax;
-		height: 25vmax;
-		border-radius: 15px;
-		background-color: $grey220-color;
-		&:hover {
-			filter: brightness(105%);
-		}
+		border-radius: 1vmax;
+		
 	}
 	&__collection-photo1,
 	&__collection-photo2,
 	&__collection-photo3 {
+		cursor: zoom-in;
 		position: absolute;
 		object-fit: cover;
 	}
@@ -1313,22 +1312,22 @@ input :active,
 		height: 100%;
 		left: 0;
 		top: 0;
-		border-top-left-radius: 15px;
-		border-bottom-left-radius: 15px;
+		border-top-left-radius: 1vmax;
+		border-bottom-left-radius: 1vmax;
 	}
 	&__collection-photo2 {
 		width: 50%;
 		height: 50%;
 		right: 0;
 		top: 0;
-		border-top-right-radius: 15px;
+		border-top-right-radius: 1vmax;
 	}
 	&__collection-photo3 {
 		width: 50%;
 		height: 50%;
 		right: 0;
 		bottom: 0;
-		border-bottom-right-radius: 15px;
+		border-bottom-right-radius: 1vmax;
 	}
 	&__more {
 		display: block;
@@ -1342,6 +1341,52 @@ input :active,
 		&:hover {
 			font-size: 2.2vmax;
 		}
+	}
+	&__info {
+		position: absolute;
+		bottom: 1vmax;
+		left: 1vmax;
+		display: flex;
+		width: 90%;
+		gap: 1vmax;
+		align-items: center;
+		justify-content: flex-end;
+	}
+	
+	&__private, &__edit {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 2.5vmax;
+		height: 2.5vmax;
+		border-radius: 50%;
+		background-color: $grey220-color;
+		transition: 0.2s linear;
+		& img {
+			width: 50%;
+			height: 50%;
+		}
+		&:hover {
+			background-color: $grey190-color;
+		}
+	}
+	&__private {
+		cursor: default;
+		&:hover {
+			background-color: $grey220-color;
+		}
+	}
+	&__total {
+		cursor: default;
+		font-size: 1vmax;
+		font-weight: 500;
+		height: 2vmax;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0 1vmax;
+		background-color: $grey220-color;
+		border-radius: 0.2vmax;
 	}
 }
 
@@ -1543,24 +1588,30 @@ input :active,
 }
 
 .create-collection {
-	width: 100%;
-	height: 100%;
-	position: relative;
-	margin: 1vmax 0;
-	z-index: 1;
-	display: flex;
-	align-items: center;
-	justify-content: center;
+	width: 60%;
+	height: 90%;
+	top: 5%;
+	left: 20%;
+	position: fixed;
+	z-index: 20;
+	overflow: auto;
+	&__back {
+		cursor: pointer;
+		width: 3vmax;
+		height: 3vmax;
+		position: fixed;
+		top: 1vmax;
+		right: 1vmax;
+	}
 	&__form {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
 		gap: 3vmax;
+		padding: 2vmax 0;
 		position: relative;
-		width: 80%;
-		height: 100%;
-		padding: 7vmax 0;
+		width: 100%;
 		box-shadow: 2px 6px 38px -12px $black-04-opacity-color;
 		background-color: $white-color;
 		border-radius: 10px;
@@ -1832,24 +1883,30 @@ input :active,
 }
 
 .search {
-	margin: 2vmax auto;
-	width: 90%;
+	position: sticky;
+	z-index: 1;
+	top: calc(var(--header-height));
+	background-color: $white-color;
+	left: 0;
+	width: 100%;
+	padding: 1vmax 0;
+	margin: 0 auto;
 	display: flex;
-	flex-direction: column;
 	gap: 1.5vmax;
+	justify-content: space-between;
 	&__choose {
-		width: 100%;
+		margin-left: 5%;
 		display: flex;
 		gap: 1.5vmax;
 		overflow: auto;
 		& div {
 			user-select: none;
 			cursor: pointer;
-			font-size: 2vmax;
+			font-size: 1.5vmax;
 			font-weight: 500;
 			background-color: $grey230-color;
-			border-radius: 10px;
-			padding: 0.5vmax 1vmax;
+			border-radius: 0.2vmax;
+			padding: 0.3vmax 0.5vmax;
 			&:hover {
 				background-color: $grey220-color;
 			}
@@ -1859,8 +1916,14 @@ input :active,
 		background-color: $grey190-color !important;
 	}
 	&__info {
-		font-size: 2.5vmax;
+		margin-right: 5%;
+		justify-self: flex-end;
+		width:max-content;
+		font-size: 1.5vmax;
 		font-weight: 600;
+		& p {
+			border-radius: 0.3vmax;
+		}
 	}
 }
 

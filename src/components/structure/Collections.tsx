@@ -2,7 +2,19 @@ import Image from "./Image";
 import useAccountCollections from "../../hooks/get/useAccountCollections";
 import { Link } from "react-router-dom";
 import Loading from "../functional/Loading";
-import { IAccountCollection, ICollectionsFrame } from "../../interface";
+import {
+	IAccountCollection,
+	ICollectionProps,
+	ICollectionsFrame,
+} from "../../interface";
+import lock from "../../images/lock.png";
+import lockOpen from "../../images/lock-open.png";
+import pencil from "../../images/pencil.png";
+import { useEffect, useState } from "react";
+import EditCollection from "./EditCollection";
+import CollectionsCollection from "./CollectionsCollection";
+import useCountResize from "../../hooks/functions/useCountResize";
+import useVariablesStoreInfo from "../../utils/info/useVariablesStoreInfo";
 
 export default function Collections({
 	username,
@@ -14,51 +26,41 @@ export default function Collections({
 	username?: string | null | undefined;
 	className?: string;
 	toShow?: number;
-	collectionsData: IAccountCollection[] | undefined;
+	collectionsData: IAccountCollection[];
 	collectionsLoad?: boolean;
 }) {
+
+	const [showEditForm, setShowEditForm] = useState(false);
+	const [collectionData, setCollectionData] = useState<IAccountCollection>();
+	const { framesCollectionsWidth } = useVariablesStoreInfo();
+	const [randWidth, setRandWidth] = useState<number[]>([])
+	useEffect(() => {
+		for (let i = randWidth.length; i < collectionsData?.length; i++) {
+			setRandWidth([...randWidth, framesCollectionsWidth + Math.floor(Math.random() * (80 - 40) + 40)])
+		}
+	}, [collectionsData, randWidth]);
 	
 	return (
 		<>
+			{showEditForm && (
+				<EditCollection
+					show={showEditForm}
+					setShow={setShowEditForm}
+					collectionData={collectionData}
+				/>
+			)}
 			<Loading loading={collectionsLoad}></Loading>
 			<div className={`collections ${className}`}>
 				{collectionsData?.slice(0, toShow).map((item, i) => {
-					let photo0;
-					let photo1;
-					let photo2;
-					if (!!item?.preview_photos) {
-						photo0 = item?.preview_photos[0]?.urls?.regular;
-						photo1 = item?.preview_photos[1]?.urls?.regular;
-						photo2 = item?.preview_photos[2]?.urls?.regular;
-					}
-
+					
 					return (
-						<div className='collections__collection' key={item?.id}>
-							<Image
-								to={`/collection/${item?.id}`}
-								className='collections__collection-photo1'
-								src={photo0}
-								style={{
-									width: !!!photo1 ? "100%" : "50%",
-									borderTopRightRadius: !!!photo1 ? "15px" : "0",
-									borderBottomRightRadius: !!!photo1 ? "15px" : "0",
-								}}
-							></Image>
-							<Image
-								to={`/collection/${item?.id}`}
-								className='collections__collection-photo2'
-								style={{
-									height: !!!photo2 ? "100%" : "50%",
-									borderBottomRightRadius: !!!photo2 ? "15px" : "0",
-								}}
-								src={photo1}
-							></Image>
-							<Image
-								to={`/collection/${item?.id}`}
-								className='collections__collection-photo3'
-								src={photo2}
-							></Image>
-						</div>
+						<CollectionsCollection
+							randWidth={randWidth[i]}
+							key={item?.id}
+							item={item}
+							setCollectionData={setCollectionData}
+							setShowEditForm={setShowEditForm}
+						></CollectionsCollection>
 					);
 				})}
 			</div>

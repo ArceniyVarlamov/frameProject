@@ -10,7 +10,7 @@ export default function Header({headerValue = ''}: {headerValue?: string}) {
 
 	return (
 		<>
-			{!!!isRegistered && <HeaderDefault />}
+			{!!!isRegistered && <HeaderDefault headerValue={headerValue}/>}
 			{!!isRegistered && <HeaderRegistered headerValue={headerValue}/>}
 		</>
 	);

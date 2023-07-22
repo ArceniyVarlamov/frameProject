@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useEffect, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import {
+	IAccountCollection,
 	IAccountPublicData,
 	ISearchCollections,
 	ISearchFrames,
@@ -17,13 +18,13 @@ import {
 
 export default function useSearchCollections(options: {
 	perLoad: number;
+	page: number;
 	q: string | undefined | null;
 	post: boolean;
 }) {
 	const { accessToken } = useAccountStoreInfo();
 
-	//! Separating by comma
-	const [frames, setFrames] = useState<ISearchCollections>({
+	const [collections, setCollections] = useState<ISearchCollections>({
 		results: [],
 		total: 100,
 		total_pages: 100,
@@ -32,36 +33,37 @@ export default function useSearchCollections(options: {
 
 	const dispatch = useDispatch();
 
-	const { framesLoaded, framesRedirect } = useFramesStoreInfo();
-
-	useEffect(() => {
-		if (framesRedirect) {
-			dispatch(resetFramesLoaded());
-			dispatch(resetFramesRedirect());
-			setFrames({
-				...frames,
-				results: frames.results.slice(
-					frames.results.length - framesLoaded * options?.perLoad,
-				),
-			});
-		}
-	}, [framesRedirect]);
-
 	const getCollectionsInfo = useCallback(
-		async (
-			accessToken: string,
-			q: string,
-			perPage: number,
-		) => {
+		async (page: number, accessToken: string, q: string, perLoad: number) => {
 			try {
-				const data = (await (
-					await axios.get(
-						`https://api.unsplash.com/search/collections?access_token=${accessToken}&page=${framesLoaded}&per_page=${perPage}&query=${q}`,
-					)
-				).data) as ISearchCollections;
-				setFrames({
-					...data,
-					results: [...frames.results, ...data.results],
+				// const data = (await (
+				// 	await axios.get(
+				// 		`https://api.unsplash.com/search/collections?access_token=${accessToken}&page=${page}&per_page=${perLoad}&query=${q}`,
+				// 	)
+				// ).data) as ISearchCollections;
+				// setCollections({
+				// 	...data,
+				// 	results: [...collections.results, ...data.results],
+				// });
+				// Вариант если api ограничивает запросы
+				let data: IAccountCollection[] = [];
+				for (let i = collections.results.length; i < page * perLoad; i++) {
+					data.push({
+						height: Math.random() * (6000 - 4000) + 4000,
+						cover_photo: {
+							color: `rgba(${Math.random() * 125}, ${Math.random() * 125}, ${
+								Math.random() * 125
+							}, ${Math.random() + 0.2})`,
+							blur_hash: "LB84i6~q-;t7ofRjM{fQxuofayWB",
+						},
+						total_photos: Math.floor(Math.random() * 8000),
+						id: page * i,
+						private: Math.random() >= 0.5 ? true : false,
+					} as unknown as IAccountCollection);
+				}
+				setCollections({
+					...collections,
+					results: [...collections.results, ...data],
 				});
 			} catch (err: unknown) {
 				const error = err as AxiosError;
@@ -70,14 +72,31 @@ export default function useSearchCollections(options: {
 				setLoad(false);
 			}
 		},
-		[framesLoaded],
+		[options?.page, options?.perLoad],
 	);
 
 	useEffect(() => {
-		if (!!accessToken && !!options?.post && !!options?.q) {
-			getCollectionsInfo(accessToken, options?.q, options?.perLoad);
+		if (
+			// !!accessToken &&
+			!!options?.post &&
+			!!options?.q &&
+			!!options?.page
+		) {
+			getCollectionsInfo(
+				options?.page,
+				accessToken,
+				options?.q,
+				options?.perLoad,
+			);
 		}
-	}, [accessToken, framesLoaded, options?.q, options?.perLoad, options?.post, getCollectionsInfo]);
+	}, [
+		accessToken,
+		options?.page,
+		options?.q,
+		options?.perLoad,
+		options?.post,
+		getCollectionsInfo,
+	]);
 
-	return { frames, load };
+	return { collections, load };
 }

@@ -8,30 +8,32 @@ import { ISearchFrames } from "../../interface";
 export default function SearchParams({
 	active,
 	setActive,
-  framesData
+	framesData,
+	setDataLoaded,
 }: {
+	setDataLoaded: (value: number) => void;
 	active: string;
 	setActive: (value: string) => void;
-  framesData: ISearchFrames
+	framesData: ISearchFrames;
 }) {
 	return (
 		<div className='search'>
 			<div className='search__choose'>
 				<div
 					className={`${active === "photos" ? "search__active" : ""}`}
-					onClick={() => setActive("photos")}
+					onClick={() => {setActive("photos"); setDataLoaded(1)}}
 				>
 					Photos
 				</div>
 				<div
 					className={`${active === "collections" ? "search__active" : ""}`}
-					onClick={() => setActive("collections")}
+					onClick={() => {setActive("collections"); setDataLoaded(1)}}
 				>
 					Collections
 				</div>
 				<div
 					className={`${active === "users" ? "search__active" : ""}`}
-					onClick={() => setActive("users")}
+					onClick={() => {setActive("users"); setDataLoaded(1)}}
 				>
 					Users
 				</div>

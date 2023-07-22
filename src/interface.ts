@@ -235,7 +235,7 @@ export interface ISearchCollections {
 	results: IAccountCollection[],
 }
 
-export interface ISearchAccounts {
+export interface ISearchUsers {
 	total: number,
 	total_pages: number,
 	results: IAccountPublicData[],

@@ -3,6 +3,8 @@ import { NavLink } from "react-router-dom";
 import useCreateCollection from "../../hooks/post/useCreateCollection";
 import { IAccountCollection, ICollectionFormTitles, ICollectionProps } from "../../interface";
 import useUnpdateCollection from "../../hooks/put/useUpdateCollection";
+import cross from "../../images/black_bold_cross.png"
+import Image from './Image';
 
 export default function CollectionForm({
 	setShow,
@@ -32,6 +34,7 @@ export default function CollectionForm({
 
 	return (
 		<div className='create-collection'>
+			<Image onClick={() => setShow(false)} className='create-collection__back' src={cross}></Image>
 			<div className='create-collection__form'>
 				<p className='create-collection__top-text'>{titles.mainTitle}</p>
 				<div className='create-collection__name'>

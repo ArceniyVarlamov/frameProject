@@ -4,6 +4,7 @@ import { useEffect, useCallback } from "react";
 import { useDispatch } from "react-redux";
 import {
 	IAccountPublicData,
+	IData,
 	ISearchCollections,
 	ISearchFrames,
 } from "../../interface";
@@ -17,6 +18,7 @@ import {
 
 export default function useSearchFrames(options: {
 	perLoad: number;
+	page: number;
 	q: string | undefined | null;
 	collections?: string | undefined | null;
 	post?: boolean;
@@ -34,39 +36,41 @@ export default function useSearchFrames(options: {
 
 	const dispatch = useDispatch();
 
-	const { framesLoaded, framesRedirect } = useFramesStoreInfo();
-
-	useEffect(() => {
-		if (framesRedirect) {
-			dispatch(resetFramesLoaded());
-			dispatch(resetFramesRedirect());
-			setFrames({
-				...frames,
-				results: frames.results.slice(
-					frames.results.length - framesLoaded * options?.perLoad,
-				),
-			});
-		}
-	}, [framesRedirect]);
-
 	const getPhotoInfo = useCallback(
 		async (
 			accessToken: string,
 			q: string,
-			perPage: number,
+			page: number,
+			perLoad: number,
 			orderBy: string | undefined,
 		) => {
 			try {
-				const data = (await (
-					await axios.get(
-						`https://api.unsplash.com/search/photos?access_token=${accessToken}&page=${framesLoaded}&query=${q}&per_page=${perPage}&order_by=${
-							orderBy ? orderBy : ""
-						}`,
-					)
-				).data) as ISearchFrames;
+				// const data = (await (
+				// 	await axios.get(
+				// 		`https://api.unsplash.com/search/photos?access_token=${accessToken}&page=${page}&query=${q}&per_page=${perLoad}&order_by=${
+				// 			orderBy ? orderBy : ""
+				// 		}`,
+				// 	)
+				// ).data) as ISearchFrames;
+				// setFrames({
+				// 	...data,
+				// 	results: [...frames.results, ...data.results],
+				// });
+				// Вариант если api ограничивает запросы
+				let data: IData[] = [];
+				for (let i = frames.results.length; i < page * perLoad; i++) {
+					data.push({
+						height: Math.random() * (6000 - 4000) + 4000,
+						color: `rgba(${Math.random() * 125}, ${Math.random() * 125}, ${
+							Math.random() * 125
+						}, ${Math.random() + 0.2})`,
+						blur_hash: "LB84i6~q-;t7ofRjM{fQxuofayWB",
+						id: page * i,
+					} as unknown as IData);
+				}
 				setFrames({
-					...data,
-					results: [...frames.results, ...data.results],
+					...frames,
+					results: [...frames.results, ...data],
 				});
 			} catch (err: unknown) {
 				const error = err as AxiosError;
@@ -75,28 +79,45 @@ export default function useSearchFrames(options: {
 				setLoad(false);
 			}
 		},
-		[framesLoaded],
+		[options?.page,
+			options?.perLoad,],
 	);
 
 	const getFramesCollection = useCallback(
 		async (
 			accessToken: string,
 			q: string,
+			page: number,
 			perLoad: number,
 			orderBy: string | undefined,
 			collections: string,
 		) => {
 			try {
-				const data = await (
-					await axios.get(
-						`https://api.unsplash.com/search/photos?access_token=${accessToken}&page=${framesLoaded}&query=${q}&per_page=${perLoad}&order_by=${
-							orderBy ? orderBy : ""
-						}&$collections=${collections.split(" ").join(",")}`,
-					)
-				).data;
+				// const data = await (
+				// 	await axios.get(
+				// 		`https://api.unsplash.com/search/photos?access_token=${accessToken}&page=${page}&query=${q}&per_page=${perLoad}&order_by=${
+				// 			orderBy ? orderBy : ""
+				// 		}&$collections=${collections.split(" ").join(",")}`,
+				// 	)
+				// ).data;
+				// setFrames({
+				// 	...data,
+				// 	results: [...frames.results, ...data.results],
+				// });
+				let data: IData[] = [];
+				for (let i = frames.results.length; i < page * perLoad; i++) {
+					data.push({
+						height: Math.random() * (6000 - 4000) + 4000,
+						color: `rgba(${Math.random() * 125}, ${Math.random() * 125}, ${
+							Math.random() * 125
+						}, ${Math.random() + 0.2})`,
+						blur_hash: "LB84i6~q-;t7ofRjM{fQxuofayWB",
+						id: page * i,
+					} as unknown as IData);
+				}
 				setFrames({
-					...data,
-					results: [...frames.results, ...data.results],
+					...frames,
+					results: [...frames.results, ...data],
 				});
 			} catch (err: unknown) {
 				const error = err as AxiosError;
@@ -105,37 +126,38 @@ export default function useSearchFrames(options: {
 				setLoad(false);
 			}
 		},
-		[framesLoaded],
+		[options?.page,
+			options?.perLoad,],
 	);
 
 	useEffect(() => {
 		if (
-			!!accessToken &&
+			// !!accessToken &&
 			!!options?.post &&
 			!!options?.q &&
 			!!!options?.collections
-		) {
-			getPhotoInfo(accessToken, options?.q, options?.perLoad, options?.orderBy);
-		} else if (!!accessToken && !!options?.q && !!options?.collections) {
+			) {
+			getPhotoInfo(
+				accessToken,
+				options?.q,
+				options?.page,
+				options?.perLoad,
+				options?.orderBy,
+			);
+		} else if (
+			// !!accessToken &&
+			!!options?.q &&
+			!!options?.collections) {
 			getFramesCollection(
 				accessToken,
 				options?.q,
+				options?.page,
 				options?.perLoad,
 				options?.orderBy,
 				options?.collections,
 			);
 		}
-	}, [
-		accessToken,
-		options?.collections,
-		options?.orderBy,
-		framesLoaded,
-		getPhotoInfo,
-		getFramesCollection,
-		options?.q,
-		options?.perLoad,
-		options?.post,
-	]);
+	}, [options?.q, options?.page, options?.perLoad, options?.orderBy, options?.collections, options?.post, getPhotoInfo, accessToken, getFramesCollection]);
 
 	return { frames, load };
 }

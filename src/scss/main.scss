@@ -1927,6 +1927,58 @@ input :active,
 	}
 }
 
+.users {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	&__user {
+		width: 95%;
+		margin: 0 auto;
+		cursor: zoom-in;
+		color: $black-color;
+		text-decoration: none;
+		height: 10vmax;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		&:hover {
+			background-color: $grey250-color;
+		}
+	}
+	&__about {
+		display: flex;
+		align-items: center;
+		gap: 2vmax;
+	}
+	&__img {
+		height: 5vmax;
+		width: 5vmax;
+		object-fit: cover;
+	}
+	&__info {
+		font-size: 2vmax;
+	}
+	&__username {
+		font-weight: 500;
+	}
+	&__bio {
+		font-weight: 600;
+	}
+	&__subscribe {
+		cursor: pointer;
+		outline: 0.2vmax solid $black-color;
+		font-weight: 500;
+		font-size: 1.5vmax;
+		transition: 0.2s linear;
+		padding: 1vmax 2vmax;
+		&:hover {
+			color: $main-color;
+			outline: 0.2vmax solid $main-color;
+		}
+	}
+}
+
 @media (max-width: 867px) {
 	:root {
 		--header-height: 8vmax;

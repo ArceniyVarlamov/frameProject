@@ -29,30 +29,40 @@ export default function useSearchUsers(options: {
 	const [load, setLoad] = useState<boolean>(false);
 
 	const dispatch = useDispatch();
-
+	
 	const getUsersInfo = useCallback(
+		
 		async (page: number, accessToken: string, q: string, perLoad: number) => {
 			try {
-				const data = (await (
-					await axios.get(
-						`https://api.unsplash.com/search/users?access_token=${accessToken}&page=${page}&per_page=${perLoad}&query=${q}`,
-					)
-				).data) as ISearchUsers;
-				setUsers({
-					...data,
-					results: [...users.results, ...data.results],
-				});
-				// Вариант если api ограничивает запросы
-				// let data: IAccountPublicData[] = [];
-				// for (let i = users.results.length; i < page * perLoad; i++) {
-				// 	data.push({
-				// 		name: 'numb',
-				// 	} as unknown as IAccountPublicData);
-				// }
+				
+				// const data = (await (
+				// 	await axios.get(
+				// 		`https://api.unsplash.com/search/users?access_token=${accessToken}&page=${page}&per_page=${perLoad}&query=${q}`,
+				// 	)
+				// ).data) as ISearchUsers;
 				// setUsers({
-				// 	...users,
-				// 	results: [...users.results, ...data],
+				// 	...data,
+				// 	results: [...users.results, ...data.results],
 				// });
+				// Вариант если api ограничивает запросы
+				let data: IAccountPublicData[] = [];
+				for (let i = users.results.length; i < page * perLoad; i++) {
+					data.push({
+						username: 'user',
+						profile_image: {
+							small:
+								"https://images.unsplash.com/profile-1667813367880-34470d08af1eimage?ixlib=rb-4.0.3&crop=faces&fit=crop&w=32&h=32",
+							medium:
+								"https://images.unsplash.com/profile-1667813367880-34470d08af1eimage?ixlib=rb-4.0.3&crop=faces&fit=crop&w=64&h=64",
+							large:
+								"https://images.unsplash.com/profile-1667813367880-34470d08af1eimage?ixlib=rb-4.0.3&crop=faces&fit=crop&w=128&h=128",
+						},
+					} as unknown as IAccountPublicData);
+				}
+				setUsers({
+					...users,
+					results: [...users.results, ...data],
+				});
 			} catch (err: unknown) {
 				const error = err as AxiosError;
 				addError(dispatch, `${error.message} while getting account data`);
@@ -64,8 +74,12 @@ export default function useSearchUsers(options: {
 	);
 
 	useEffect(() => {
+		console.log(!!options?.post,
+			!!options?.q,
+			!!options?.page);
+		
 		if (
-			!!accessToken &&
+			// !!accessToken &&
 			!!options?.post &&
 			!!options?.q &&
 			!!options?.page
